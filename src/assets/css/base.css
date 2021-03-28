@@ -1,0 +1,95 @@
+* {
+    transition: background 0.2s;
+}
+
+:root {
+    --content-width: 1024px;
+    --content-pandding: none;
+    --normal-distance: 1rem;
+    font-size: 16px;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+body {
+    font-family: "Helvetica", "Tahoma", "Arial", "Rotobo", "PingFang SC", "PingFang TC", "PingFang HK", "Noto SansCJK", "Microsoft YaHei", "SimSun", "宋体", "Heiti", "黑体", "sans-serif";
+}
+
+a {
+    color: inherit;
+}
+
+input {
+    color: inherit;
+}
+input:focus {
+    outline: none;
+}
+
+::selection {
+    color: inherit;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* 背景资源 */
+.sprites-res {
+    background-size: 640px 480px;
+    background-repeat: no-repeat;
+    background-image: url(../img/sprites.svg);
+}
+
+.card-0 {
+    border-radius: 8px;
+    border: rgba(0, 0, 0, 0.06) 0.06rem solid;
+}
+
+.card-1 {
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, .2) 0 2px 5px;
+}
+
+.card-2 {
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, .2) 0 5px 12px;
+}
+
+
+
+/* 超大屏幕 */
+@media (min-width: 1600px) {
+    :root {
+        --content-width: 1200px;
+    }
+}
+
+/* 中等屏幕 */
+@media (max-width: 1200px) {
+    :root {
+        --content-width: 720px;
+    }
+}
+
+/* 平板屏幕 */
+@media (max-width: 840px) {
+    :root {
+        --content-width: 500px;
+    }
+}
+
+/* 大手机屏幕 */
+@media (max-width: 532px) {
+    :root {
+        --content-width: 100%;
+        --content-pandding: 0 16px;
+        --normal-distance: 0.6rem;
+        font-size: 14px;
+    }
+}
+
+/* 小手机屏幕 */
+@media (max-width: 330px) {
+}

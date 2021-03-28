@@ -1,0 +1,263 @@
+[
+    {
+        "name": "常用",
+        "websites": [
+            {
+                "title": "哔哩哔哩",
+                "subtitle": "bilibili.com",
+                "bgcolor": "#27A3D6",
+                "icon": "bilibili.svg",
+                "url": "https://www.bilibili.com/"
+            },
+            {
+                "title": "YouTube",
+                "subtitle": "youtube.com",
+                "bgcolor": "#F00",
+                "icon": "youtube.svg",
+                "url": "https://www.youtube.com/"
+            },
+            {
+                "title": "淘宝",
+                "subtitle": "taobao.com",
+                "bgcolor": "#FF421A",
+                "icon": "taobao_2.svg",
+                "url": "https://www.taobao.com/"
+            },
+            {
+                "title": "京东",
+                "subtitle": "jd.com",
+                "bgcolor": "#f10215",
+                "icon": "jd_2.svg",
+                "url": "https://www.jd.com/"
+            },
+            {
+                "title": "百度网盘",
+                "subtitle": "yun.baidu.com",
+                "bgcolor": "#3b8cff",
+                "icon": "baidupan_2.svg",
+                "url": "https://yun.baidu.com/"
+            },
+            {
+                "title": "百度翻译",
+                "subtitle": "fanyi.baidu.com",
+                "bgcolor": "#1488f5",
+                "icon": "baidufanyi.svg",
+                "url": "https://fanyi.baidu.com/"
+            }
+        ]
+    },
+    {
+        "name": "学术",
+        "websites": [
+            {
+                "title": "Google",
+                "subtitle": "google.com",
+                "bgcolor": "#fff",
+                "icon": "google.svg",
+                "url": "https://www.google.com/"
+            },
+            {
+                "title": "维基百科",
+                "subtitle": "zh.wikipedia.org",
+                "bgcolor": "#fff",
+                "icon": "wikipedia.svg",
+                "url": "https://zh.wikipedia.org/"
+            },
+            {
+                "title": "WolframAlpha",
+                "subtitle": "wolframalpha.com",
+                "bgcolor": "#fff",
+                "icon": "wolframalpha.svg",
+                "url": "https://www.wolframalpha.com/"
+            },
+            {
+                "title": "Z-Library",
+                "subtitle": "zh.z-lib.org",
+                "bgcolor": "#fff",
+                "icon": "zlibrary_3.svg",
+                "url": "https://zh.z-lib.org/"
+            }
+        ]
+    },
+    {
+        "name": "开发文档",
+        "websites": [
+            {
+                "title": "Java SE",
+                "subtitle": "docs.oracle.com",
+                "bgcolor": "#5382A1",
+                "icon": "java.svg",
+                "url": "https://docs.oracle.com/javase/"
+            },
+            {
+                "title": "Tomcat 9",
+                "subtitle": "tomcat.apache.org",
+                "bgcolor": "#5382A1",
+                "icon": "tomcat.svg",
+                "url": "http://tomcat.apache.org/tomcat-9.0-doc/"
+            },
+            {
+                "title": "Spring 5.2.6 RE",
+                "subtitle": "docs.spring.io",
+                "bgcolor": "#ffffff",
+                "icon": "spring.svg",
+                "url": "https://docs.spring.io/spring/docs/5.2.6.RELEASE/spring-framework-reference/"
+            },
+            {
+                "title": "MyBatis",
+                "subtitle": "mybatis.org",
+                "bgcolor": "#ffffff",
+                "icon": "mybatis.svg",
+                "url": "https://mybatis.org/mybatis-3/zh/"
+            },
+            {
+                "title": "Android",
+                "subtitle": "developer.android.com",
+                "bgcolor": "#6AB344",
+                "icon": "android.svg",
+                "url": "https://developer.android.com/develop/index.html"
+            },
+            {
+                "title": "PHP",
+                "subtitle": "php.net",
+                "bgcolor": "#8892BF",
+                "icon": "php.svg",
+                "url": "https://php.net/manual/zh/"
+            },
+            {
+                "title": "HTML",
+                "subtitle": "w3.org",
+                "bgcolor": "#E44D26",
+                "icon": "html5.svg",
+                "url": "https://www.w3.org/html/"
+            },
+            {
+                "title": "CSS",
+                "subtitle": "w3.org",
+                "bgcolor": "#1471B6",
+                "icon": "css3.svg",
+                "url": "https://www.w3.org/Style/CSS/"
+            },
+            {
+                "title": "ESMAScript",
+                "subtitle": "tc39.github.io",
+                "bgcolor": "#EE8421",
+                "icon": "esma_1.svg",
+                "url": "https://tc39.github.io/ecma262/"
+            },
+            {
+                "title": "Python",
+                "subtitle": "docs.python.org",
+                "bgcolor": "#fff",
+                "icon": "python.svg",
+                "url": "https://docs.python.org/zh-cn/"
+            },
+            {
+                "title": "MySQL",
+                "subtitle": "dev.mysql.com",
+                "bgcolor": "#00758f",
+                "icon": "mysql.svg",
+                "url": "https://dev.mysql.com/doc/refman/8.0/en/"
+            },
+            {
+                "title": "Swift",
+                "subtitle": "swift.org",
+                "bgcolor": "#f05138",
+                "icon": "swift.svg",
+                "url": "https://swift.org/documentation/"
+            }
+        ]
+    },
+    {
+        "name": "参考",
+        "websites": [
+            {
+                "title": "Java EE 5",
+                "subtitle": "docs.oracle.com",
+                "bgcolor": "#5382A1",
+                "icon": "java.svg",
+                "url": "https://docs.oracle.com/javaee/5/tutorial/doc/"
+            },
+            {
+                "title": "Java EE 7",
+                "subtitle": "docs.oracle.com",
+                "bgcolor": "#5382A1",
+                "icon": "java.svg",
+                "url": "https://docs.oracle.com/javaee/7/tutorial/"
+            },
+            {
+                "title": "MvnRepository",
+                "subtitle": "mvnrepository.com",
+                "bgcolor": "#fff",
+                "icon": "maven.svg",
+                "url": "https://mvnrepository.com/"
+            },
+            {
+                "title": "Spring 4 中文文档",
+                "subtitle": "waylau.gitbooks.io",
+                "bgcolor": "#fff",
+                "icon": "spring.svg",
+                "url": "https://waylau.gitbooks.io/spring-framework-4-reference/"
+            },
+            {
+                "title": "Kotlin 中文文档",
+                "subtitle": "hltj.gitbooks.io",
+                "bgcolor": "#fff",
+                "icon": "kotlin_2.svg",
+                "url": "https://hltj.gitbooks.io/kotlin-reference-chinese/"
+            },
+            {
+                "title": "W3School",
+                "subtitle": "w3school.com.cn",
+                "bgcolor": "#fff",
+                "icon": "w3school_2.svg",
+                "url": "https://www.w3school.com.cn/index.html"
+            }
+		]
+    },
+    {
+        "name": "社区",
+        "websites": [
+            {
+                "title": "GitHub",
+                "subtitle": "github.com",
+                "bgcolor": "#24292e",
+                "icon": "github.svg",
+                "url": "https://github.com/"
+            },
+            {
+                "title": "StackOverflow",
+                "subtitle": "stackoverflow.com",
+                "bgcolor": "#fff",
+                "icon": "stackoverflow.svg",
+                "url": "https://stackoverflow.com/"
+            },
+            {
+                "title": "v2ex",
+                "subtitle": "v2ex.com",
+                "bgcolor": "#fff",
+                "icon": "v2ex.svg",
+                "url": "https://www.v2ex.com/"
+            },
+            {
+                "title": "RARBG Movies",
+                "subtitle": "rarbgprx.org",
+                "bgcolor": "#49639D",
+                "url": "https://rarbgprx.org/torrents.php?category=movies"
+            },
+            {
+                "title": "Sub HD",
+                "subtitle": "subhd.tv",
+                "bgcolor": "#3a5795",
+                "url": "https://subhd.tv/"
+            },
+            {
+                "title": "Pinterst",
+                "subtitle": "www.pinterest.com",
+                "bgcolor": "#fff",
+                "icon": "pinterst.svg",
+                "url": "https://www.pinterest.com/"
+            }
+        ]
+    }
+]

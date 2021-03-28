@@ -1,28 +1,164 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div id="app">
+        <div class="header-warrpar">
+            <header>
+                <div class="logo-warppar">
+                    <logo></logo>
+                </div>
+                <div class="search-warppar">
+                    <search-bar></search-bar>
+                </div>
+            </header>
+        </div>
+        <div class="favorites-warppar">
+            <favorte-list></favorte-list>
+        </div>
+        <foot></foot>
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Logo from '@/components/logo';
+import SearchBar from '@/components/search-bar';
+import FavorteList from '@/components/favorite-list';
+import Foot from '@/components/foot';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+    components: { Logo, SearchBar, FavorteList, Foot },
 }
 </script>
 
 <style>
+::-webkit-input-placeholder {
+    color: inherit;
+    opacity: 0.5;
+}
+::-moz-placeholder {
+    color: inherit;
+    opacity: 0.5;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+    --color: rgba(0, 0, 0, 0.86);
+    --bg-color: #f5f5f5; /*white*/
+    /*--bg-color: #fff2cf;*/ /*yellow*/
+    /*--primary-color: #324362;*/ /*blue*/
+    /*--primary-color: #61abbe;*/ /*sky*/
+    /*--primary-color: #a7bfd8;*/ /*snow*/
+    /*--primary-color: #808e9b;*/ /*gray*/
+    /*--primary-color: #ffce64;*/ /*yellow*/
+    /*--primary-color: #e41427;*/ /*red*/
+    --primary-color: #96be61; /*green*/
+    --hover-bg-color: rgba(0, 0, 0, 0.05);
+    
+    color: var(--color);
+    background-color: var(--primary-color);
+    -webkit-tap-highlight-color: transparent;
+
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#app > * {
+    flex-shrink: 0;
+}
+
+.header-warrpar {
+	width: var(--content-width);
+    margin: 0 auto;
+}
+header {
+	padding: var(--content-pandding);
+	margin: 6rem auto 7rem;
+}
+
+.logo-warppar {
+    display: flex;
+    justify-content: center;
+}
+
+.search-warppar {
+    width: unset;
+    margin-top: 3rem;
+    position: relative;
+}
+
+.favorites-warppar {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    border-radius: 16px 16px 0 0;
+    background: var(--bg-color);
+}
+
+/* 大手机屏幕 */
+@media (max-width: 532px) {
+	.search-warppar {
+		margin-top: 1rem;
+	}
+}
+
+/* 暗色模式 */
+@media (prefers-color-scheme: dark) {
+	#app {
+		--color: rgba(255, 255, 255, 0.55);
+		--bg-color: #171717;
+		--primary-color: #577d23; /*green*/
+		--hover-bg-color: rgba(255, 255, 255, 0.05);
+		background-color: #222222;
+	}
+
+	::selection {
+		background-color: rgba(255, 255, 255, 0.2);
+	}
+
+	::-webkit-input-placeholder {
+		opacity: 0.75;
+	}
+	::-moz-placeholder {
+		opacity: 0.75;
+	}
+
+	img {
+        filter: brightness(0.7);
+	}
+
+	/* 背景资源 */
+	.sprites-res {
+		filter: invert(1);
+	}
+}
+
+
+
+/******** 强制暗色模式 ********/
+
+#app.dark-scheme {
+	--color: rgba(255, 255, 255, 0.55);
+	--bg-color: #171717;
+	--primary-color: #577d23; /*green*/
+	--hover-bg-color: rgba(255, 255, 255, 0.05);
+	background-color: #222222;
+}
+#app.dark-scheme ::selection {
+	background-color: rgba(255, 255, 255, 0.2);
+}
+
+#app.dark-scheme ::-webkit-input-placeholder {
+	opacity: 0.75;
+}
+#app.dark-scheme ::-moz-placeholder {
+	opacity: 0.75;
+}
+
+#app.dark-scheme img {
+    filter: brightness(0.7);
+}
+
+/* 背景资源 */
+#app.dark-scheme .sprites-res {
+	filter: invert(1);
 }
 </style>

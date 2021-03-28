@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+<style type="text/css">
+	.st0{fill:#E44D26;}
+	.st1{fill:#FC5832;}
+	.st2{fill:#EBEBEB;}
+	.st3{fill:#FFFFFF;}
+</style>
+<g id="html5">
+	<path class="st0" d="M17.5,86L10.3,5h79.4l-7.2,81L50,95L17.5,86z"/>
+	<path class="st1" d="M50,88.1l26.3-7.3l6.2-69.2H50V88.1z"/>
+	<path class="st2" d="M50,41.7H36.9l-0.9-10.2H50v-9.9H25.1l0.2,2.7l2.4,27.4H50V41.7z M50,67.5L50,67.5l-11.1-3l-0.7-7.9h-10
+		l1.4,15.6L50,77.8l0,0V67.5z"/>
+	<path class="st3" d="M50,41.7v9.9h12.2L61,64.5l-11.1,3v10.3l20.4-5.6l0.1-1.7l2.3-26.2l0.2-2.7h-2.7L50,41.7z M50,21.6v9.9h24
+		l0.2-2.2l0.5-5l0.2-2.7L50,21.6z"/>
+</g>
+</svg>
