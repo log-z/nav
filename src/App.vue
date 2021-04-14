@@ -1,9 +1,9 @@
 <template>
-    <div id="app">
+    <div class="vue-app" :scheme="scheme.name">
         <div class="header-warrpar">
             <header>
                 <div class="logo-warppar">
-                    <logo></logo>
+                    <logo @mouseover.native="toggleScheme" @mouseout.native="clearToggleScheme"></logo>
                 </div>
                 <div class="search-warppar">
                     <search-bar></search-bar>
@@ -25,6 +25,24 @@ import Foot from '@/components/foot';
 
 export default {
     components: { Logo, SearchBar, FavorteList, Foot },
+    data: function() {
+        return {
+            scheme: {
+                name: 'light',
+                _timeout: null,
+            },
+        }
+    },
+    methods: {
+        toggleScheme: function() {
+            this.scheme._timeout = setTimeout(() => {
+                this.scheme.name = this.scheme.name == 'light' ? 'dark' : 'light';
+            }, 1000);
+        },
+        clearToggleScheme: function() {
+            clearTimeout(this.scheme._timeout);
+        },
+    }
 }
 </script>
 
@@ -38,7 +56,7 @@ export default {
     opacity: 0.5;
 }
 
-#app {
+.vue-app {
     --color: rgba(0, 0, 0, 0.86);
     --bg-color: #f5f5f5; /*white*/
     /*--bg-color: #fff2cf;*/ /*yellow*/
@@ -61,7 +79,7 @@ export default {
     overflow: hidden;
 }
 
-#app > * {
+.vue-app > * {
     flex-shrink: 0;
 }
 
@@ -102,7 +120,7 @@ header {
 
 /* 暗色模式 */
 @media (prefers-color-scheme: dark) {
-	#app {
+	.vue-app {
 		--color: rgba(255, 255, 255, 0.55);
 		--bg-color: #171717;
 		--primary-color: #577d23; /*green*/
@@ -135,30 +153,30 @@ header {
 
 /******** 强制暗色模式 ********/
 
-#app.dark-scheme {
+.vue-app[scheme=dark] {
 	--color: rgba(255, 255, 255, 0.55);
 	--bg-color: #171717;
 	--primary-color: #577d23; /*green*/
 	--hover-bg-color: rgba(255, 255, 255, 0.05);
 	background-color: #222222;
 }
-#app.dark-scheme ::selection {
+.vue-app[scheme=dark]e ::selection {
 	background-color: rgba(255, 255, 255, 0.2);
 }
 
-#app.dark-scheme ::-webkit-input-placeholder {
+.vue-app[scheme=dark] ::-webkit-input-placeholder {
 	opacity: 0.75;
 }
-#app.dark-scheme ::-moz-placeholder {
+.vue-app[scheme=dark] ::-moz-placeholder {
 	opacity: 0.75;
 }
 
-#app.dark-scheme img {
+.vue-app[scheme=dark] img {
     filter: brightness(0.7);
 }
 
 /* 背景资源 */
-#app.dark-scheme .sprites-res {
+.vue-app[scheme=dark] .sprites-res {
 	filter: invert(1);
 }
 </style>

@@ -60,7 +60,7 @@ export default {
 <style>
 /* 收藏卡片 */
 .website {
-    --icon-size: 2.6rem;
+    --icon-size: 2.8rem;
     margin: 0;
     margin-right: var(--normal-distance);
     margin-bottom: var(--normal-distance);

@@ -31,7 +31,7 @@ footer .info {
 }
 
 /* 强制暗色模式 */
-#app.dark-scheme footer {
+.vue-app[scheme=dark] footer {
 	--bg-color: #131313;
 }
 </style>

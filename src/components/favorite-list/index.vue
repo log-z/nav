@@ -21,7 +21,6 @@ export default {
 <style>
 .favorite-list {
     --favorite-col-width: 25%;
-    --website-icon-size: 2.8rem;
     width: var(--content-width);
     padding: var(--content-pandding);
     margin-bottom: 2rem;

@@ -45,7 +45,7 @@ export default {
 }
 
 /* 强制暗色模式 */
-#app.dark-scheme #logo {
+.vue-app[scheme=dark] #logo {
 	fill: #000;
 }
 </style>
