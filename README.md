@@ -1,6 +1,10 @@
-# nav
+# Navigation Page
 
-## Project setup
+基于 Vue 构造的简单导航页。
+
+## 安装
+
+### Project setup
 ```
 npm install
 ```
