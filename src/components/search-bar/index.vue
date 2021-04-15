@@ -3,10 +3,13 @@
         <form :class="fromClass" @submit.prevent="submit">
             <search-input v-model.lazy="searchWord"
                 @input="input" @focus="focus" @blur="blur"
+                @eng-next="searchEngineNext" @eng-prev="searchEnginePrev"
                 @complete-next="completeNext" @complete-prev="completePrev">
             </search-input>
-            <engine-selector></engine-selector>
-            <action icon="submit"></action>
+            <engine-selector :engine="searchEngine" :event="searchEngineEvent"
+                @change="searchEngineChange">
+            </engine-selector>
+            <action icon="submit" @click="submit"></action>
         </form>
         <complete :list="complete" :event="completeEvent"
             @selecte="completeSelect" @change="completeChange">
@@ -27,6 +30,8 @@ export default {
     data: function() {
         return {
             searchWord: '',
+            searchEngine: 'baidu',
+            searchEngineEvent: new Vue(),
             complete: [],
             completeEvent: new Vue(),
             isFocus: true,
@@ -44,8 +49,8 @@ export default {
                 return
             }
 
-            searchEngine.complete('baidu', val, (data) => {
-                if (data.wd === this.searchWord) {
+            searchEngine.complete(this.searchEngine, val, (data) => {
+                if (data.wd === this.searchWord && data.eng === this.searchEngine) {
                     this.complete = [this.searchWord, ...data.list]
                 }
             })
@@ -59,8 +64,19 @@ export default {
             this.complete = [];
         },
         submit: function() {
-            let url = searchEngine.target('baidu', this.searchWord);
+            let url = searchEngine.target(this.searchEngine, this.searchWord);
             window.open(url).focus();
+        },
+        searchEngineNext: function() {
+            this.searchEngineEvent.$emit('next');
+        },
+        searchEnginePrev: function() {
+            this.searchEngineEvent.$emit('prev');
+        },
+        searchEngineChange: function(eng) {
+            this.searchEngine = eng;
+            this.complete = [];
+            this.input(this.searchWord);
         },
         completeNext: function() {
             this.completeEvent.$emit('next');

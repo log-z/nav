@@ -2,22 +2,22 @@ import axios from 'axios';
 import jsonpAdapter from 'axios-jsonp';
 
 function target(wd) {
-    return 'https://www.baidu.com/s?wd=' + encodeURIComponent(wd)
+    return 'https://www.google.com/search?q=' + encodeURIComponent(wd)
 }
 
 function complete(wd, callback) {
-    axios.get('https://www.baidu.com/sugrec', {
+    axios.get('https://www.google.com/complete/search', {
         params: {
-            prod: 'wise',
-            wd: wd,
+            client: 'psy-ab',
+            hl: 'zh-CN',
+            q: wd,
         },
         adapter: jsonpAdapter,
     }).then(resposnse => {
         callback({
-            eng: 'baidu',
-            wd: resposnse.data.q,
-            list: resposnse.data.g ?
-                resposnse.data.g.map(g => g.q) : [],
+            eng: 'google',
+            wd: resposnse.data[0],
+            list: resposnse.data[1].map(a => a[0]),
         })
     }).catch(error => console.error(error))
 }

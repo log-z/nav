@@ -1,10 +1,11 @@
 import engBaidu from './eng-baidu'
+import engGoogle from './eng-google'
+import engWikipedia from './eng-wikipedia'
 
 const ENGINES = {
-    baidu: {
-        target: engBaidu.target,
-        complete: engBaidu.complete,
-    },
+    baidu: engBaidu,
+    google: engGoogle,
+    wikipedia: engWikipedia,
 }
 
 function target(eng, wd) {

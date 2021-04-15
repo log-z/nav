@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div @click="$emit('click')">
         <div class="sprites-res icon icon-submit" v-if="icon == 'submit'"></div>
         <div class="sprites-res icon icon-baidu" v-if="icon == 'baidu'"></div>
         <div class="sprites-res icon icon-google" v-if="icon == 'google'"></div>
