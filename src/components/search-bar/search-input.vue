@@ -1,7 +1,12 @@
 <template>
-    <input class="input" type="text" :value="value" @input="onInput"
-    autocomplete="off" autofocus="autofocus" spellcheck="false"
-    placeholder="👴 来点什么？">
+    <input class="input" type="text" :value="value" @input="input"
+        @focus="$emit('focus')" @blur="$emit('blur')"
+        @keydown.down.exact.prevent="$emit('complete-next')"
+        @keydown.up.exact.prevent="$emit('complete-prev')"
+        @keydown.down.ctrl.exact.prevent="$emit('eng-next')"
+        @keydown.up.ctrl.exact.prevent="$emit('eng-prev')"
+        autocomplete="off" autofocus="autofocus" spellcheck="false"
+        placeholder="👴 来点什么？">
 </template>
 
 <script>
@@ -19,7 +24,7 @@ export default {
         }
     },
     methods: {
-        onInput: function(event) {
+        input: function(event) {
             this.$emit('input', event.target.value)
         }
     }
@@ -29,10 +34,10 @@ export default {
 <style scoped>
 .input {
     width: 0;
-    padding: 10px 18px;
+    padding: var(--v-spacing) var(--h-spacing);
     border: none;
     font-size: 1rem;
-    line-height: 20px;
+    line-height: 1.5rem;
     flex-grow: 1;
     background: transparent;
 }
