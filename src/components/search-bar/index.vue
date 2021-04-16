@@ -1,13 +1,13 @@
 <template>
     <div class="search">
         <form :class="fromClass" @submit.prevent="submit">
-            <search-input v-model.lazy="searchWord"
+            <search-input v-model.lazy="searchWord" :event="inputEvent"
                 @input="input" @focus="focus" @blur="blur"
-                @eng-next="searchEngineNext" @eng-prev="searchEnginePrev"
+                @eng-next="engineNext" @eng-prev="enginePrev"
                 @complete-next="completeNext" @complete-prev="completePrev">
             </search-input>
-            <engine-selector :engine="searchEngine" :event="searchEngineEvent"
-                @change="searchEngineChange">
+            <engine-selector :engine="engine" :event="engineEvent"
+                @change="engineChange">
             </engine-selector>
             <action icon="submit" @click="submit"></action>
         </form>
@@ -30,8 +30,8 @@ export default {
     data: function() {
         return {
             searchWord: '',
-            searchEngine: 'baidu',
-            searchEngineEvent: new Vue(),
+            inputEvent: new Vue(),
+            engineEvent: new Vue(),
             complete: [],
             completeEvent: new Vue(),
             isFocus: true,
@@ -40,6 +40,9 @@ export default {
     computed: {
         fromClass: function() {
             return this.isFocus ? 'card-2' : 'card-1';
+        },
+        engine: function() {
+            return this.$store.state.prefers.searchEngine;
         }
     },
     methods: {
@@ -49,8 +52,8 @@ export default {
                 return
             }
 
-            searchEngine.complete(this.searchEngine, val, (data) => {
-                if (data.wd === this.searchWord && data.eng === this.searchEngine) {
+            searchEngine.complete(this.engine, val, (data) => {
+                if (data.wd === this.searchWord && data.eng === this.engine) {
                     this.complete = [this.searchWord, ...data.list]
                 }
             })
@@ -64,19 +67,20 @@ export default {
             this.complete = [];
         },
         submit: function() {
-            let url = searchEngine.target(this.searchEngine, this.searchWord);
+            let url = searchEngine.target(this.engine, this.searchWord);
             window.open(url).focus();
         },
-        searchEngineNext: function() {
-            this.searchEngineEvent.$emit('next');
+        engineNext: function() {
+            this.engineEvent.$emit('next');
         },
-        searchEnginePrev: function() {
-            this.searchEngineEvent.$emit('prev');
+        enginePrev: function() {
+            this.engineEvent.$emit('prev');
         },
-        searchEngineChange: function(eng) {
-            this.searchEngine = eng;
+        engineChange: function(eng) {
+            this.$store.commit('prefers/searchEngine', eng);
             this.complete = [];
             this.input(this.searchWord);
+            this.inputEvent.$emit('focus');
         },
         completeNext: function() {
             this.completeEvent.$emit('next');
@@ -92,7 +96,7 @@ export default {
             this.submit();
         }
     },
-    created: function() {
+    mounted: function() {
         this.input = this.$_.debounce(this.input, 100);
     }
 }

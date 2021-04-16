@@ -1,11 +1,16 @@
 import Vue from 'vue'
-import App from './App.vue'
 import Lodash from 'lodash'
+
+import app from '@/App'
+import store from '@/store'
+
 import '@/assets/css/base.css'
 
-Vue.config.productionTip = false
-Vue.prototype.$_ = Lodash
+
+Vue.config.productionTip = false;
+Vue.prototype.$_ = Lodash;
 
 window.vueApp = new Vue({
-  render: h => h(App),
+  render: h => h(app),
+  store: store,
 }).$mount('#app')

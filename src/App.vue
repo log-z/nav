@@ -1,9 +1,9 @@
 <template>
-    <div class="vue-app" :scheme="scheme.name">
+    <div class="vue-app" :scheme="scheme">
         <div class="header-warrpar">
             <header>
                 <div class="logo-warppar">
-                    <logo @mouseover.native="toggleScheme" @mouseout.native="clearToggleScheme"></logo>
+                    <logo @mouseenter.native="toggleScheme" @mouseleave.native="clearToggleScheme"></logo>
                 </div>
                 <div class="search-warppar">
                     <search-bar></search-bar>
@@ -27,20 +27,23 @@ export default {
     components: { Logo, SearchBar, FavorteList, Foot },
     data: function() {
         return {
-            scheme: {
-                name: 'light',
-                _timeout: null,
-            },
+            timeout_scheme: null,
+        }
+    },
+    computed: {
+        scheme: function() {
+            return this.$store.state.prefers.colorScheme;
         }
     },
     methods: {
         toggleScheme: function() {
-            this.scheme._timeout = setTimeout(() => {
-                this.scheme.name = this.scheme.name == 'light' ? 'dark' : 'light';
+            this.timeout_scheme = setTimeout(() => {
+                let scheme = this.scheme == 'light' ? 'dark' : 'light';
+                this.$store.commit('prefers/colorScheme', scheme);
             }, 1000);
         },
         clearToggleScheme: function() {
-            clearTimeout(this.scheme._timeout);
+            clearTimeout(this.timeout_scheme);
         },
     }
 }

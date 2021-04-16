@@ -1,6 +1,6 @@
 <template>
-    <input class="input" type="text" :value="value" @input="input"
-        @focus="$emit('focus')" @blur="$emit('blur')"
+    <input class="input" type="text" ref="input" :value="value"
+        @input="input" @focus="$emit('focus')" @blur="$emit('blur')"
         @keydown.down.exact.prevent="$emit('complete-next')"
         @keydown.up.exact.prevent="$emit('complete-prev')"
         @keydown.down.ctrl.exact.prevent="$emit('eng-next')"
@@ -21,12 +21,21 @@ export default {
             default: function() {
                 return '';
             }
+        },
+        event: {
+            required: true,
         }
     },
     methods: {
         input: function(event) {
             this.$emit('input', event.target.value)
-        }
+        },
+        focus: function() {
+            this.$refs.input.focus();
+        },
+    },
+    created: function() {
+        this.event.$on('focus', this.focus);
     }
 }
 </script>
