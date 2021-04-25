@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+<style type="text/css">
+	.st0{fill:#CB3837;}
+</style>
+<g id="npm">
+	<g>
+		<rect x="45.1" y="42.5" class="st0" width="4.9" height="9.9"/>
+		<path class="st0" d="M5,32.5v30.1h25v5h20v-5h45V32.5H5z M30,57.5h-5V42.5h-5v14.9H10v-20h9.9H30V57.5z M55,57.5h-9.9v5H35.1v-25
+			h20V57.5z M90.1,57.5h-5V42.5h-5v14.9h-5V42.5h-5v14.9h-9.9v-20H70h20.2V57.5z"/>
+	</g>
+</g>
+</svg>
