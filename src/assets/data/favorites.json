@@ -85,10 +85,10 @@
                 "url": "http://tomcat.apache.org/tomcat-9.0-doc/"
             },
             {
-                "title": "Spring 5.2.6 RE",
-                "subtitle": "docs.spring.io",
+                "title": "Spring",
+                "subtitle": "spring.io",
                 "icon": "spring.svg",
-                "url": "https://docs.spring.io/spring/docs/5.2.6.RELEASE/spring-framework-reference/"
+                "url": "https://spring.io/projects/spring-boot"
             },
             {
                 "title": "MyBatis",
@@ -121,10 +121,16 @@
                 "url": "https://www.w3.org/Style/CSS/"
             },
             {
-                "title": "ESMAScript",
-                "subtitle": "tc39.github.io",
-                "icon": "esma_1.svg",
-                "url": "https://tc39.github.io/ecma262/"
+                "title": "MDN JavaScript",
+                "subtitle": "developer.mozilla.org",
+                "icon": "mdn.svg",
+                "url": "https://developer.mozilla.org/zh-CN/docs/Web/JavaScript"
+            },
+            {
+                "title": "Vue 3",
+                "subtitle": "v3.cn.vuejs.org",
+                "icon": "vue.svg",
+                "url": "https://v3.cn.vuejs.org/guide"
             },
             {
                 "title": "Python",
@@ -201,7 +207,7 @@
                 "title": "Redis 中文文档",
                 "subtitle": "www.redis.cn",
                 "icon": "redis.svg",
-                "url": "http://www.redis.cn/"
+                "url": "http://www.redis.cn/documentation.html"
             },
             {
                 "title": "W3School",
