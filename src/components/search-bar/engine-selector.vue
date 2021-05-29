@@ -5,8 +5,6 @@
 <script>
 import Action from './action';
 
-const ENGINES = ['baidu', 'google', 'wikipedia']
-
 export default {
     components: { Action },
     props: {
@@ -25,17 +23,22 @@ export default {
             eng: null,
         }
     },
+    computed: {
+        engineList: function() {
+            return this.$store.state.config.config.searchEngine.list;
+        }
+    },
     methods: {
         next: function() {
-            let i = (ENGINES.indexOf(this.eng) + 1) % ENGINES.length;
+            let i = (this.engineList.indexOf(this.eng) + 1) % this.engineList.length;
             if (i < 0) i = 0;
-            this.eng = ENGINES[i];
+            this.eng = this.engineList[i];
             this.notify();
         },
         prev: function() {
-            let i = (ENGINES.indexOf(this.eng) - 1) % ENGINES.length;
-            if (i < 0) i = ENGINES.length - 1;
-            this.eng = ENGINES[i];
+            let i = (this.engineList.indexOf(this.eng) - 1) % this.engineList.length;
+            if (i < 0) i = this.engineList.length - 1;
+            this.eng = this.engineList[i];
             this.notify();
         },
         notify: function() {

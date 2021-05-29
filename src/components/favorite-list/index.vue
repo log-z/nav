@@ -1,20 +1,19 @@
 <template>
     <div class="favorite-list">
-        <group v-for="fav in favorites" :key="fav.name" :info="fav"></group>
+        <group v-for="g in groups" :key="g.name" :info="g"></group>
     </div>
 </template>
 
 <script>
 import Group from './group';
-import Favorites from '@/assets/data/favorites.json'
 
 export default {
     components: { Group },
-    data: function() {
-        return {
-            favorites: Favorites,
+    computed: {
+        groups: function() {
+            return this.$store.state.config.config.favorites.groups;
         }
-    },
+    }
 }
 </script>
 

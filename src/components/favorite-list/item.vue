@@ -34,15 +34,22 @@ export default {
         }
     },
     watch: {
-        icon: function() {
+        website: function() {
             this.loadIconUrl()
         },
     },
     methods: {
         loadIconUrl: function() {
-            if (!this.website.icon) return;
-            import('@/assets/img/website-icon/' + this.website.icon)
-                .then(mod => this.iconUrl = mod.default)
+            const path = this.website.icon;
+            if (this.$_.isEmpty(path)) {
+                return;
+            } else if (/^(http[s]?:)?\/\//.test(path)) {
+                this.iconUrl = path;
+            } else {
+                const baseUrl = this.$store.getters['config/baseUrl'];
+                const prefix = this.$store.state.config.config.favorites.iconPrefix;
+                this.iconUrl = baseUrl + prefix + path;
+            }
         },
         active: function() {
             this.isActive = true;

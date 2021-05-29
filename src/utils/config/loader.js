@@ -117,7 +117,7 @@ function tryto(name, action) {
 
 export function loader(obj) {
     try {
-        return load(ROOT_MATEDATA, obj);
+        return load(ROOT_MATEDATA, obj ? obj : {});
     } catch (e) {
         console.error('Failed to load config: ' + (e.startsWith('.') ? e.substring(1) : e));
     }

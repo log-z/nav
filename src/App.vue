@@ -45,6 +45,11 @@ export default {
         clearToggleScheme: function() {
             clearTimeout(this.timeout_scheme);
         },
+    },
+    created: function() {
+        // Update your config
+        // this.$store.commit('config/url', 'https://gist.githubusercontent.com/log-Z/000f4e8ca92334e81de69c0207528450/raw/nav-config.json');
+        this.$store.dispatch('config/update');
     }
 }
 </script>
