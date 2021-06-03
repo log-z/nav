@@ -3,7 +3,8 @@ import { configLoader } from '@/utils/config';
 describe('Test config loader', () => {
     it('simple loader', () => {
         const conf = configLoader({
-            "name": "default",
+            "name": "test",
+            "description": "test",
             "searchEngine": {
                 "list": ["baidu", "google", "wikipedia"]
             },

@@ -20,6 +20,9 @@ jobs:
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v2
+
+    - name: 📄 Configure environment variables
+    - run: echo 'VUE_APP_DEFAULT_CONFIG_URL=${{ secrets.ENV_DEFAULT_CONFIG_URL }}' > .env
     
     - name: 🔨 Build Project Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2

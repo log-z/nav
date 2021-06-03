@@ -1,13 +1,16 @@
 <template>
     <footer>
-        <div class="info">
-            ©2017-2021 logz.ml
-        </div>
+        <div class="info">{{description}}</div>
     </footer>
 </template>
 
 <script>
 export default {
+    computed: {
+        description: function() {
+            return this.$store.state.config.config.description;
+        }
+    }
 }
 </script>
 

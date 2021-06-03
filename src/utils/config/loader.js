@@ -32,6 +32,7 @@ const FAVORITES_MATEDATA = {
 const ROOT_MATEDATA = {
     properties: {
         name: { type: String },
+        description: { type: String },
         searchEngine: SEARCH_ENGINE_MATEDATA,
         favorites: FAVORITES_MATEDATA,
     }

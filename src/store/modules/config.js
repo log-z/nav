@@ -5,7 +5,7 @@ import { configLoader } from '@/utils/config';
 export default {
     namespaced: true,
     state: {
-        url: 'https://gist.githubusercontent.com/log-Z/000f4e8ca92334e81de69c0207528450/raw/nav-config.json',
+        url: process.env.VUE_APP_DEFAULT_CONFIG_URL,
         config: configLoader(),
     },
     getters: {
