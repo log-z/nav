@@ -74,7 +74,8 @@ export default {
     /*--primary-color: #808e9b;*/ /*gray*/
     /*--primary-color: #ffce64;*/ /*yellow*/
     /*--primary-color: #e41427;*/ /*red*/
-    --primary-color: #96be61; /*green*/
+    /*--primary-color: #96be61;*/ /*green*/
+    --primary-color: #f1aa6d; /*sunset-glow*/
     --hover-bg-color: rgba(0, 0, 0, 0.05);
     
     color: var(--color);
@@ -131,7 +132,8 @@ header {
 	.vue-app {
 		--color: rgba(255, 255, 255, 0.55);
 		--bg-color: #171717;
-		--primary-color: #577d23; /*green*/
+		/*--primary-color: #577d23;*/ /*green*/
+		--primary-color: #904c11; /*sunset-glow*/
 		--hover-bg-color: rgba(255, 255, 255, 0.05);
 		background-color: #222222;
 	}
@@ -164,7 +166,8 @@ header {
 .vue-app[scheme=dark] {
 	--color: rgba(255, 255, 255, 0.55);
 	--bg-color: #171717;
-	--primary-color: #577d23; /*green*/
+	/*--primary-color: #577d23;*/ /*green*/
+	--primary-color: #904c11; /*sunset-glow*/
 	--hover-bg-color: rgba(255, 255, 255, 0.05);
 	background-color: #222222;
 }
