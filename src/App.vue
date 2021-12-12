@@ -70,12 +70,12 @@ export default {
     /*--bg-color: #fff2cf;*/ /*yellow*/
     /*--primary-color: #324362;*/ /*blue*/
     /*--primary-color: #61abbe;*/ /*sky*/
-    /*--primary-color: #a7bfd8;*/ /*snow*/
+    --primary-color: #a7bfd8; /*snow*/
     /*--primary-color: #808e9b;*/ /*gray*/
     /*--primary-color: #ffce64;*/ /*yellow*/
     /*--primary-color: #e41427;*/ /*red*/
     /*--primary-color: #96be61;*/ /*green*/
-    --primary-color: #f1aa6d; /*sunset-glow*/
+    /*--primary-color: #f1aa6d;*/ /*sunset-glow*/
     --hover-bg-color: rgba(0, 0, 0, 0.05);
     
     color: var(--color);
