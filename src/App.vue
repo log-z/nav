@@ -133,7 +133,8 @@ header {
 		--color: rgba(255, 255, 255, 0.55);
 		--bg-color: #171717;
 		/*--primary-color: #577d23;*/ /*green*/
-		--primary-color: #904c11; /*sunset-glow*/
+        /*--primary-color: #904c11;*/ /*sunset-glow*/
+        --primary-color: #515e6b; /*snow*/
 		--hover-bg-color: rgba(255, 255, 255, 0.05);
 		background-color: #222222;
 	}
@@ -167,7 +168,8 @@ header {
 	--color: rgba(255, 255, 255, 0.55);
 	--bg-color: #171717;
 	/*--primary-color: #577d23;*/ /*green*/
-	--primary-color: #904c11; /*sunset-glow*/
+	/*--primary-color: #904c11;*/ /*sunset-glow*/
+	--primary-color: #515e6b; /*snow*/
 	--hover-bg-color: rgba(255, 255, 255, 0.05);
 	background-color: #222222;
 }

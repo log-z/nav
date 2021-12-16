@@ -48,13 +48,14 @@ export default {
     methods: {
         input: function(val) {
             if (!val) {
-                this.complete = []
-                return
+                this.complete = [];
+                return;
             }
 
             searchEngine.complete(this.engine, val, (data) => {
                 if (data.wd === this.searchWord && data.eng === this.engine) {
-                    this.complete = [this.searchWord, ...data.list]
+                    let filter = v => Boolean(v);
+                    this.complete = [this.searchWord, ...data.list.filter(filter)];
                 }
             })
         },
