@@ -16,8 +16,8 @@ export default {
 
 <style>
 footer {
-    /*--bg-color: #eee;*/  /*gray*/
-    --bg-color: #ffecb8; /*yellow*/
+    --bg-color: #eee;  /*gray*/
+    /*--bg-color: #ffecb8;*/ /*yellow*/
     padding: 32px;
     background-color: var(--bg-color);
     text-align: center;
