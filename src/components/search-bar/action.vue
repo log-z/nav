@@ -5,6 +5,7 @@
         <div class="sprites-res icon icon-google" v-if="icon == 'google'"></div>
         <div class="sprites-res icon icon-dogedoge" v-if="icon == 'dogedoge'"></div>
         <div class="sprites-res icon icon-wikipedia" v-if="icon == 'wikipedia'"></div>
+        <div class="sprites-res icon icon-bing" v-if="icon == 'bing'"></div>
     </div>
 </template>
 
@@ -46,5 +47,8 @@ export default {
 }
 .icon-wikipedia {
 	background-position: -90px 0;
+}
+.icon-bing {
+	background-position: -120px 0;
 }
 </style>
