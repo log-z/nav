@@ -1,6 +1,6 @@
 # Navigation Page
 
-基于 Vue 构造的简单导航页。
+基于 Vue 构造的简单导航页。[演示](https://log-z.github.io/nav)
 
 ## 起步
 
