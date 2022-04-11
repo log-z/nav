@@ -26,7 +26,7 @@ npm run build
 ### 配置文件
 这是一个配置文件的示例，使用JSON格式存储。
 > 所有的配置项都是可选的，请去除注释后使用。
-```json
+```javascript
 {
     // 配置名称
     "name": "sample",
