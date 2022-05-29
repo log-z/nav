@@ -65,7 +65,8 @@ store.dispatch('config/update')
   /*--primary-color: #808e9b;*/ /*gray*/
   /*--primary-color: #ffce64;*/ /*yellow*/
   /*--primary-color: #e41427;*/ /*red*/
-  --primary-color: #96be61; /*green*/
+  /*--primary-color: #96be61;*/ /*green*/
+  --primary-color: #82b59d; /*pool*/
   /*--primary-color: #f1aa6d;*/ /*sunset-glow*/
   --hover-bg-color: rgba(0, 0, 0, 0.05);
   
@@ -123,7 +124,8 @@ header {
 	.vue-app {
 		--color: rgba(255, 255, 255, 0.55);
 		--bg-color: #171717;
-		--primary-color: #577d23; /*green*/
+		/*--primary-color: #577d23;*/ /*green*/
+		--primary-color: #2f7955; /*pool*/
     /*--primary-color: #904c11;*/ /*sunset-glow*/
     /*--primary-color: #515e6b;*/ /*snow*/
     /*--primary-color: #981622;*/ /*red*/
@@ -159,7 +161,8 @@ header {
 .vue-app[scheme=dark] {
 	--color: rgba(255, 255, 255, 0.55);
 	--bg-color: #171717;
-	--primary-color: #577d23; /*green*/
+	/*--primary-color: #577d23;*/ /*green*/
+	--primary-color: #2f7955; /*pool*/
 	/*--primary-color: #904c11;*/ /*sunset-glow*/
 	/*--primary-color: #515e6b;*/ /*snow*/
   /*--primary-color: #981622;*/ /*red*/
