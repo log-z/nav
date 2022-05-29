@@ -1,6 +1,6 @@
 # Navigation Page
 
-基于 Vue 构造的简单导航页。[演示](https://log-z.github.io/nav)
+基于 Vue3 构造的简单导航页。[演示](https://log-z.github.io/nav)
 
 ## 起步
 
@@ -14,13 +14,13 @@ npm install
 npm run serve
 ```
 
-### 编译生产环境包
+### 编译生产环境
 ```
 npm run build
 ```
 
 ## 配置
-配置和图标文件推荐使用 GitHub 的 [Gits](https://gist.github.com/) 或代码仓库存储，因为它们自带跨域支持。
+配置和图标文件推荐存放在 GitHub 的 [Gits](https://gist.github.com/) 或代码仓库，因为它们自带跨域支持。
 > 当然，你仍可以将它们放置在 `public` 目录下，只要能够被访问到也可。
 
 ### 配置文件

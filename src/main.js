@@ -1,16 +1,11 @@
-import Vue from 'vue'
-import Lodash from 'lodash'
+import { createApp } from 'vue'
+import App from './App.vue'
 
-import app from '@/App'
 import store from '@/store'
 
 import '@/assets/css/base.css'
 
 
-Vue.config.productionTip = false;
-Vue.prototype.$_ = Lodash;
-
-window.vueApp = new Vue({
-  render: h => h(app),
-  store: store,
-}).$mount('#app')
+const app = createApp(App)
+app.use(store)
+app.mount('#app')
