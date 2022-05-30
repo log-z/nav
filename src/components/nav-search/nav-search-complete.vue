@@ -1,6 +1,6 @@
 <template>
   <div
-    class="search-complete card-2"
+    class="nav-search-complete card-2"
     v-if="list.length > 1"
   >
     <ol>
@@ -8,7 +8,7 @@
         v-for="(item, index) in $_.drop(list)"
         :key="index + 1"
         :class="{'active': isActive(index + 1)}"
-        @mousedown="selecte(index + 1)"
+        @mousedown.left="selecte(index + 1)"
       >
         {{ item }}
       </li>
@@ -66,7 +66,7 @@ defineExpose({
 
 <style>
 /* 自动完成 */
-.search-complete {
+.nav-search-complete {
 	margin-top: var(--v-spacing);
 	position: absolute;
     top: 100%;
@@ -77,7 +77,7 @@ defineExpose({
 }
 
 /* 自动完成列表 */
-.search-complete>ol {
+.nav-search-complete > ol {
 	margin: var(--v-spacing) 0;
 	padding: 0;
 	list-style: none;
@@ -85,13 +85,13 @@ defineExpose({
 }
 
 /* 自动完成选项 */
-.search-complete>ol>li {
+.nav-search-complete > ol > li {
 	padding: var(--v-spacing) var(--h-spacing);
 	cursor: pointer;
-	transition: background 0.1s ease-out;
+	transition: background-color 0.1s ease-out;
 }
-.search-complete>ol>li.active,
-.search-complete>ol>li:hover {
+.nav-search-complete > ol > li.active,
+.nav-search-complete > ol > li:hover {
 	background: var(--hover-bg-color);
 }
 </style>

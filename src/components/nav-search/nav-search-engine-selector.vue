@@ -1,7 +1,9 @@
 <template>
-  <nav-search-action
-    :icon="status.eng"
-    @click.capture="next" />
+  <div class="nav-search-engine-selector">
+    <nav-search-action
+      :icon="status.eng"
+      @click="next" />
+  </div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="search">
+  <div class="nav-search">
     <form
       :class="fromClass"
       @submit.prevent="submit"
@@ -67,7 +67,11 @@ let input = $_.debounce((val) => {
   }
 
   searchEngine.complete(engine.value, val, (res) => {
-    if (res.wd === data.searchWord && res.eng === engine.value) {
+    if (
+      res.wd === data.searchWord &&
+      res.eng === engine.value &&
+      inputRef.value.hasFocus()
+    ) {
       data.complete = [
         data.searchWord,
         ...res.list.filter(v => Boolean(v))
@@ -115,13 +119,13 @@ const completeSelect = (val) => {
 </script>
 
 <style>
-.search {
+.nav-search {
   --v-spacing: 0.6rem;
   --h-spacing: 1rem;
 }
 
 /* 搜索框表单 */
-.search form {
+.nav-search > form {
   width: auto;
   min-height: unset;
   display: flex;
@@ -129,5 +133,9 @@ const completeSelect = (val) => {
   align-items: center;
   transition: box-shadow 0.3s, background-color 0.2s;
   background: var(--bg-color);
+}
+
+.nav-search-input {
+  flex-grow: 1;
 }
 </style>

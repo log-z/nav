@@ -1,21 +1,23 @@
 <template>
-  <input
-    class="input"
-    type="text"
-    autocomplete="off"
-    autofocus="autofocus"
-    spellcheck="false"
-    placeholder="👴 来点什么？"
-    ref="inputRef"
-    :value="modelValue"
-    @input="input"
-    @focus="emit('focus')"
-    @blur="emit('blur')"
-    @keydown.down.exact.prevent="emit('complete-next')"
-    @keydown.up.exact.prevent="emit('complete-prev')"
-    @keydown.down.ctrl.exact.prevent="emit('eng-next')"
-    @keydown.up.ctrl.exact.prevent="emit('eng-prev')"
-  >
+  <div class="nav-search-input">
+    <input
+      class="nav-search-input__input"
+      type="text"
+      autocomplete="off"
+      autofocus="autofocus"
+      spellcheck="false"
+      placeholder="👴 来点什么？"
+      ref="inputRef"
+      :value="modelValue"
+      @input="input"
+      @focus="emit('focus')"
+      @blur="emit('blur')"
+      @keydown.down.exact.prevent="emit('complete-next')"
+      @keydown.up.exact.prevent="emit('complete-prev')"
+      @keydown.down.ctrl.exact.prevent="emit('eng-next')"
+      @keydown.up.ctrl.exact.prevent="emit('eng-prev')"
+    >
+  </div>
 </template>
 
 <script>
@@ -51,23 +53,22 @@ const input = (event) => {
   emit('update:modelValue', val)
   emit('input', val)
 }
-const focus = () => {
-  inputRef.value.focus();
-}
+const focus = () => inputRef.value.focus()
+const hasFocus = () => inputRef.value == document.activeElement
 
 defineExpose({
-  focus
+  focus,
+  hasFocus,
 })
 </script>
 
-<style scoped>
-.input {
-  width: 0;
+<style>
+.nav-search-input__input {
+  width: 100%;
   padding: var(--v-spacing) var(--h-spacing);
   border: none;
   font-size: 1rem;
   line-height: 1.5rem;
-  flex-grow: 1;
   background: transparent;
 }
 </style>
