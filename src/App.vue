@@ -1,18 +1,18 @@
 <template>
   <div class="vue-app" :scheme="scheme">
-    <div class="header-warrpar">
+    <div class="vue-app__header-warrpar">
       <header>
-        <div class="logo-warppar">
+        <div class="vue-app__logo-warppar">
           <nav-logo
             @mouseenter="toggleScheme"
             @mouseleave="clearToggleScheme" />
         </div>
-        <div class="search-warppar">
+        <div class="vue-app__search-warppar">
           <nav-search />
         </div>
       </header>
     </div>
-    <div class="favorites-warppar">
+    <div class="vue-app__favorites-warppar">
       <nav-favorte-list />
     </div>
     <nav-foot />
@@ -84,27 +84,27 @@ store.dispatch('config/update')
   flex-shrink: 0;
 }
 
-.header-warrpar {
+.vue-app__header-warrpar {
 	width: var(--content-width);
   margin: 0 auto;
 }
-header {
+.vue-app__header-warrpar > header {
 	padding: var(--content-pandding);
 	margin: 6rem auto 7rem;
 }
 
-.logo-warppar {
+.vue-app__logo-warppar {
   display: flex;
   justify-content: center;
 }
 
-.search-warppar {
+.vue-app__search-warppar {
   width: unset;
   margin-top: 3rem;
   position: relative;
 }
 
-.favorites-warppar {
+.vue-app__favorites-warppar {
   flex-grow: 1;
   display: flex;
   justify-content: center;
@@ -114,7 +114,7 @@ header {
 
 /* 大手机屏幕 */
 @media (max-width: 532px) {
-	.search-warppar {
+	.vue-app__search-warppar {
 		margin-top: 1rem;
 	}
 }

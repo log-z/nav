@@ -1,6 +1,6 @@
 <template>
-  <footer>
-    <div class="info">{{description}}</div>
+  <footer class="nav-foot">
+    <div class="nav-foot__info">{{description}}</div>
   </footer>
 </template>
 
@@ -18,7 +18,7 @@ const description = ref(store.state.config.config.description)
 </script>
 
 <style>
-footer {
+.nav-foot {
   --bg-color: #eee;  /*gray*/
   /*--bg-color: #ffecb8;*/ /*yellow*/
   padding: 32px;
@@ -26,19 +26,19 @@ footer {
   text-align: center;
 }
 
-footer .info {
+.nav-foot__info {
   opacity: 0.5;
 }
 
 /* 暗色模式 */
 @media (prefers-color-scheme: dark) {
-	footer {
+	.nav-foot {
 		--bg-color: #131313;
 	}
 }
 
 /* 强制暗色模式 */
-.vue-app[scheme=dark] footer {
+.vue-app[scheme=dark] .nav-foot {
 	--bg-color: #131313;
 }
 </style>

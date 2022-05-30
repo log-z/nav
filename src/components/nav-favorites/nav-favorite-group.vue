@@ -1,6 +1,6 @@
 <template>
-  <div class="group">
-    <h2>{{ info.name }}</h2>
+  <div class="nav-favorite-group">
+    <h2 class="nav-favorite-group__title">{{ info.name }}</h2>
     <ul>
       <li
         v-for="item in info.websites"
@@ -34,12 +34,12 @@ import NavFavoriteItem from "./nav-favorite-item";
 
 <style>
 /* 收藏组标题 */
-.group {
+.nav-favorite-group {
 	--item-width: 25%;
 	padding: 16px 0;
 }
 
-h2 {
+.nav-favorite-group__title {
   --text-color: var(--primary-color);
   margin: 24px 0;
   color: var(--text-color);
@@ -50,7 +50,7 @@ h2 {
 }
 
 /* 收藏组标题 */
-h2:before {
+.nav-favorite-group__title:before {
   width: 0.4rem;
   height: 1.25rem;
   content: "";
@@ -62,7 +62,7 @@ h2:before {
 }
 
 /* 收藏列表 */
-.group ul {
+.nav-favorite-group ul {
 	padding: 0;
 	margin: 0;
 	margin-right: calc(0px - var(--normal-distance));
@@ -72,42 +72,42 @@ h2:before {
 }
 
 /* 收藏条目 */
-.group li {
+.nav-favorite-group li {
 	width: var(--item-width);
 	display: block;
 }
 
 /* 超大屏幕 */
 @media (min-width: 1600px) {
-	.group {
+	.nav-favorite-group {
 		--item-width: 20%;
 	}
 }
 
 /* 中等屏幕 */
 @media (max-width: 1200px) {
-	.group {
+	.nav-favorite-group {
 		--item-width: 33.333333%;
 	}
 }
 
 /* 平板屏幕 */
 @media (max-width: 840px) {
-	.group {
+	.nav-favorite-group {
 		--item-width: 50%;
 	}
 }
 
 /* 大手机屏幕 */
 @media (max-width: 532px) {
-	.group {
+	.nav-favorite-group {
 		--item-width: 50%;
 	}
 }
 
 /* 小手机屏幕 */
 @media (max-width: 330px) {
-	.group {
+	.nav-favorite-group {
 		--item-width: 100%;
 	}
 }

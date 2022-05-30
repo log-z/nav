@@ -1,5 +1,5 @@
 <template>
-  <div class="favorite-list">
+  <div class="nav-favorites">
     <nav-favorite-group
       v-for="g in groups"
       :key="g.name"
@@ -22,7 +22,7 @@ const groups = ref(store.state.config.config.favorites.groups)
 </script>
 
 <style>
-.favorite-list {
+.nav-favorites {
   --favorite-col-width: 25%;
   width: var(--content-width);
   padding: var(--content-pandding);

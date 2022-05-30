@@ -1,6 +1,6 @@
 <template>
   <a
-    class="website"
+    class="nav-favorite-item"
     :class="{ 'card-1': status.isActive }"
     :href="website.url"
     @mouseover="active"
@@ -9,21 +9,21 @@
     @touchend="cancel"
     @touchcancel="cancel"
   >
-    <div class="img">
+    <div class="nav-favorite-item__img">
       <img
-        class="icon"
+        class="nav-favorite-item__icon"
         :src="iconUrl"
         v-if="website.icon"
       >
-      <div v-if="!website.icon">
+      <div v-else>
         {{ website.title.charAt(0) }}
       </div>
     </div>
-    <div class="text">
-      <div class="title">
+    <div class="nav-favorite-item__text">
+      <div class="nav-favorite-item__title">
         {{ website.title }}
       </div>
-      <div class="subtitle">
+      <div class="nav-favorite-item__subtitle">
         {{ website.subtitle }}
       </div>
     </div>
@@ -83,7 +83,7 @@ const cancel = () => {
 
 <style>
 /* 收藏卡片 */
-.website {
+.nav-favorite-item {
   --icon-size: 2.8rem;
   margin: 0;
   margin-right: var(--normal-distance);
@@ -92,12 +92,12 @@ const cancel = () => {
   text-decoration: none;
   transition: box-shadow 0.3s, background-color 0.3s, border-radius 0.3s;
 }
-.website.card-1 {
+.nav-favorite-item.card-1 {
   background: var(--hover-bg-color);
 }
 
 /* 收藏卡片的图片 */
-.website>.img {
+.nav-favorite-item__img {
   width: var(--icon-size);
   height: var(--icon-size);
   margin: var(--normal-distance);
@@ -108,12 +108,12 @@ const cancel = () => {
   align-items: center;
 }
 
-.website img.icon {
+.nav-favorite-item__icon {
   height: 100%;
   width: 100%;
 }
 
-.website>.text {
+.nav-favorite-item__text {
   margin-right: 1rem;
   flex-grow: 1;
   align-self: center;
@@ -122,13 +122,13 @@ const cancel = () => {
 }
 
 /* 收藏卡片的名称 */
-.website .title {
+.nav-favorite-item__title {
   font-size: 1rem;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.website .subtitle {
+.nav-favorite-item__subtitle {
   margin-top: 0.1rem;
   font-size: 0.8rem;
   opacity: 0.7;
@@ -138,14 +138,14 @@ const cancel = () => {
 
 /* 平板屏幕 */
 @media (max-width: 840px) {
-	.website {
+	.nav-favorite-item__website {
 		--icon-size: 2.6rem;
 	}
 }
 
 /* 大手机屏幕 */
 @media (max-width: 532px) {
-	.website {
+	.nav-favorite-item__website {
 		--icon-size: 2.2rem;
 	}
 }
