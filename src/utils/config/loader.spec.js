@@ -6,7 +6,8 @@ describe('Test config loader', () => {
       "name": "test",
       "description": "test",
       "searchEngine": {
-        "list": ["baidu", "google", "wikipedia"]
+        "list": ["baidu", "google", "bing", "wikipedia"],
+        "placeholder": "👴 来点什么？"
       },
       "favorites": {
         "iconPrefix": "image:website-icon:",

@@ -1,22 +1,29 @@
 # Navigation Page
 
-基于 Vue3 构造的简单导航页。[演示](https://log-z.github.io/nav)
+基于 Vue3 构造的简单导航页，支持[零编码](#推荐方案)上线。[演示](https://log-z.github.io/nav)
 
 ## 起步
 
-### 安装依赖
+> 零编码时可跳过起步，自动化部署会帮你完成这些操作。
+
+安装依赖
 ```
 npm install
 ```
 
-### 运行开发环境
+运行开发环境
 ```
 npm run serve
 ```
 
-### 编译生产环境
+构建生产环境
 ```
 npm run build
+```
+
+单元测试
+```
+npm run test
 ```
 
 ## 配置
@@ -35,7 +42,9 @@ npm run build
     // 搜索引擎配置
     "searchEngine": {
         // 需要启用的搜索引擎，暂时只支持这几个
-        "list": ["baidu", "google", "bing", "wikipedia"]
+        "list": ["baidu", "google", "bing", "wikipedia"],
+        // 输入框占位文本
+        "placeholder": "👴来点什么？"
     },
     // 收藏配置
     "favorites": {
@@ -84,6 +93,7 @@ https://gist.githubusercontent.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10/raw/na
 ### 使用配置
 在 `.env` 文件中修改 `VUE_APP_DEFAULT_CONFIG_URL` 为自己的配置文件地址。
 
+> 使用自动化部署时，配置文件地址将被重新设定。
 
 ## 自动化部署
 使用 GitHub 提供的工作流服务，可以自动化部署到 GitHub Pages 或自己的服务器，非常方便。
@@ -103,3 +113,11 @@ https://gist.githubusercontent.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10/raw/na
 - FTP_HOST：FTP服务器地址
 - FTP_USERNAME：FTP用户名
 - FTP_PASSWORD：FTP密码
+
+## 推荐方案
+
+### 零编码：GitHub + Gits + GitHub Pages
+1. 将此代码仓库 fork 一份到你的账号中，得到独立的环境。
+2. 在 Gits 存放[配置信息](#配置)。
+3. 使用[自动化部署](#自动化部署)，部署到免费的 GitHub Pages 站点。
+4. 后续可在自己的代码仓库中拉取上游更新。

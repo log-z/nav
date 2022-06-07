@@ -6,8 +6,8 @@
       autocomplete="off"
       autofocus="autofocus"
       spellcheck="false"
-      placeholder="👴 来点什么？"
       ref="inputRef"
+      :placeholder="placeholder"
       :value="modelValue"
       @input="input"
       @focus="emit('focus')"
@@ -34,7 +34,10 @@ export default {
 }
 </script>
 <script setup>
-import { defineEmits, defineExpose, ref } from 'vue';
+import { computed, defineEmits, defineExpose, ref } from 'vue';
+import { useStore } from 'vuex';
+
+const store = useStore()
 
 const inputRef = ref()
 const emit = defineEmits([
@@ -47,6 +50,8 @@ const emit = defineEmits([
   'eng-prev',
   'update:modelValue',
 ])
+
+const placeholder = computed(() => store.state.config.config.searchEngine.placeholder)
 
 const input = (event) => {
   const val = event.target.value
