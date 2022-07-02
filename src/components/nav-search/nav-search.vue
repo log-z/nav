@@ -85,7 +85,7 @@ const focus = () => {
 }
 const blur = () => {
   data.isFocus = false;
-  data.complete = [];
+  data.complete = [data.searchWord];
 }
 const submit = () => {
   let url = searchEngine.target(engine.value, data.searchWord);
@@ -99,7 +99,7 @@ const enginePrev = () => {
 }
 const engineChange = (eng) => {
   store.commit('prefers/searchEngine', eng);
-  data.complete = [];
+  data.complete = [data.searchWord];
   input(data.searchWord);
   inputRef.value.focus();
 }

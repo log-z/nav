@@ -22,7 +22,7 @@ export default {
 }
 </script>
 <script setup>
-import { defineEmits, defineExpose, defineProps, reactive } from 'vue';
+import { defineEmits, defineExpose, defineProps, reactive, watch } from 'vue';
 import $_ from 'lodash'
 
 const props = defineProps({
@@ -38,6 +38,8 @@ const emit = defineEmits([ 'selecte', 'change' ])
 const status = reactive({
   active: 0
 })
+
+watch(props, () => status.active = 0)
 
 const selecte = (index) => {
     status.active = index;

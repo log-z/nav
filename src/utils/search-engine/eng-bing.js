@@ -15,16 +15,21 @@ function complete(wd, callback) {
     adapter: jsonpAdapter,
     callbackParamName: 'cb'
   }).then(resp => {
-    const list = resp.data.AS.Results
-      .map(r => r.Suggests)
-      .reduce(
-        (sa1, sa2) => sa1.concat(sa2),
-        []
-      )
-      .sort(
-        (s1, s2) => (s1.Sk > s2.Sk) ? 1 : -1
-      )
-      .map(s => s.Txt)
+    const asRes = resp.data.AS.Results
+    let list
+    if (!asRes) {
+      list = []
+    } else {
+      list = asRes.map(r => r.Suggests)
+        .reduce(
+          (sa1, sa2) => sa1.concat(sa2),
+          []
+        )
+        .sort(
+          (s1, s2) => (s1.Sk > s2.Sk) ? 1 : -1
+        )
+        .map(s => s.Txt)
+    }
 
     callback({
       eng: 'bing',
