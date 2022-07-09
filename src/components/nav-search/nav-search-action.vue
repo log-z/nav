@@ -1,27 +1,27 @@
 <template>
   <div class="nav-search-action">
     <div
-      class="sprites-res nav-search-action__icon nav-search-action__icon-submit"
+      class="nav-sprites-res nav-search-action__icon nav-search-action__icon-submit"
       v-if="icon == 'submit'"
     ></div>
     <div
-      class="sprites-res nav-search-action__icon nav-search-action__icon-baidu"
+      class="nav-sprites-res nav-search-action__icon nav-search-action__icon-baidu"
       v-if="icon == 'baidu'"
     ></div>
     <div
-      class="sprites-res nav-search-action__icon nav-search-action__icon-google"
+      class="nav-sprites-res nav-search-action__icon nav-search-action__icon-google"
       v-if="icon == 'google'"
     ></div>
     <div
-      class="sprites-res nav-search-action__icon nav-search-action__icon-dogedoge"
+      class="nav-sprites-res nav-search-action__icon nav-search-action__icon-dogedoge"
       v-if="icon == 'dogedoge'"
     ></div>
     <div
-      class="sprites-res nav-search-action__icon nav-search-action__icon-wikipedia"
+      class="nav-sprites-res nav-search-action__icon nav-search-action__icon-wikipedia"
       v-if="icon == 'wikipedia'"
     ></div>
     <div
-      class="sprites-res nav-search-action__icon nav-search-action__icon-bing"
+      class="nav-sprites-res nav-search-action__icon nav-search-action__icon-bing"
       v-if="icon == 'bing'"
     ></div>
   </div>

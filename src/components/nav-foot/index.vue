@@ -10,11 +10,11 @@ export default {
 }
 </script>
 <script setup>
-import { ref } from 'vue';
+import { computed } from 'vue';
 import { useStore } from 'vuex';
 
 const store = useStore()
-const description = ref(store.state.config.config.description)
+const description = computed(() => store.state.config.config.description)
 </script>
 
 <style>

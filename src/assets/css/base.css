@@ -36,23 +36,23 @@ input:focus {
 }
 
 /* 背景资源 */
-.sprites-res {
+.nav-sprites-res {
     background-size: 640px 480px;
     background-repeat: no-repeat;
     background-image: url(../img/sprites.svg);
 }
 
-.card-0 {
+.nav-card-0 {
     border-radius: 8px;
     border: rgba(0, 0, 0, 0.06) 0.06rem solid;
 }
 
-.card-1 {
+.nav-card-1 {
     border-radius: 8px;
     box-shadow: rgba(0, 0, 0, .2) 0 2px 5px;
 }
 
-.card-2 {
+.nav-card-2 {
     border-radius: 8px;
     box-shadow: rgba(0, 0, 0, .2) 0 5px 12px;
 }

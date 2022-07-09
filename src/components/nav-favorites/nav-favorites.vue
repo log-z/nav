@@ -13,12 +13,12 @@ export default {
 }
 </script>
 <script setup>
-import { ref } from 'vue';
+import { computed } from 'vue';
 import { useStore } from 'vuex';
 import NavFavoriteGroup from './nav-favorite-group';
 
 const store = useStore()
-const groups = ref(store.state.config.config.favorites.groups)
+const groups = computed(() => store.state.config.config.favorites.groups)
 </script>
 
 <style>

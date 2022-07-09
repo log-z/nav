@@ -57,7 +57,7 @@ const data = reactive({
   isFocus: true,
 })
 
-const fromClass = computed(() => data.isFocus ? 'card-2' : 'card-1')
+const fromClass = computed(() => data.isFocus ? 'nav-card-2' : 'nav-card-1')
 const engine = computed(() => store.state.prefers.searchEngine)
 
 let input = $_.debounce((val) => {

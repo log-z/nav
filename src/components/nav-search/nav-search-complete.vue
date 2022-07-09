@@ -1,6 +1,6 @@
 <template>
   <div
-    class="nav-search-complete card-2"
+    class="nav-search-complete nav-card-2"
     v-if="list.length > 1"
   >
     <ol>

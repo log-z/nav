@@ -1,7 +1,7 @@
 <template>
   <a
     class="nav-favorite-item"
-    :class="{ 'card-1': status.isActive }"
+    :class="{ 'nav-card-1': status.isActive }"
     :href="website.url"
     @mouseover="active"
     @mouseout="cancel"
@@ -92,7 +92,7 @@ const cancel = () => {
   text-decoration: none;
   transition: box-shadow 0.3s, background-color 0.3s, border-radius 0.3s;
 }
-.nav-favorite-item.card-1 {
+.nav-favorite-item.nav-card-1 {
   background: var(--hover-bg-color);
 }
 
