@@ -59,7 +59,7 @@ store.dispatch('config/update')
   --color: rgba(0, 0, 0, 0.86);
   --bg-color: #f5f5f5; /*white*/
   /*--bg-color: #fff2cf;*/ /*yellow*/
-  --primary-color: #5dabd9; /*blue*/
+  --primary-color: #75aad6; /*blue*/
   /*--primary-color: #61abbe;*/ /*sky*/
   /*--primary-color: #a7bfd8;*/ /*snow*/
   /*--primary-color: #808e9b;*/ /*gray*/
@@ -124,7 +124,7 @@ store.dispatch('config/update')
 	.vue-app {
 		--color: rgba(255, 255, 255, 0.55);
 		--bg-color: #171717;
-		--primary-color: #266e99; /*blue*/
+		--primary-color: #406d97; /*blue*/
     /*--primary-color: #515e6b;*/ /*snow*/
     /*--primary-color: #981622;*/ /*red*/
 		/*--primary-color: #577d23;*/ /*green*/
@@ -162,7 +162,7 @@ store.dispatch('config/update')
 .vue-app[scheme=dark] {
 	--color: rgba(255, 255, 255, 0.55);
 	--bg-color: #171717;
-		--primary-color: #266e99; /*blue*/
+		--primary-color: #406d97; /*blue*/
 	/*--primary-color: #515e6b;*/ /*snow*/
   /*--primary-color: #981622;*/ /*red*/
 	/*--primary-color: #577d23;*/ /*green*/
