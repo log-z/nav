@@ -1,6 +1,6 @@
 # Navigation Page
 
-基于 Vue3 构造的简单导航页，支持[零编码](#推荐方案)上线。[演示](https://log-z.github.io/nav)
+基于 Vue3 构造的简单导航页，支持[零编码](#推荐方案)发布上线。[演示](https://log-z.github.io/nav)
 
 ## 起步
 
@@ -76,7 +76,7 @@ npm run test
 https://gist.githubusercontent.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10/raw/08d82c7ae57a5572f98caced192366920788c8e0/nav-config-sample.json
 ```
 
-让我们去掉 `raw/` 之后的 Commit ID 得到最新地址。这样的好处是，无论文件被修改多少次都可以一直使用这个地址。
+让我们去掉 `raw/` 之后的 Commit ID 得到如下所示的最新地址。这样的好处是，无论文件被修改多少次都可以一直使用这个地址。
 ```
 https://gist.githubusercontent.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10/raw/nav-config-sample.json
 ```
@@ -93,21 +93,21 @@ https://gist.githubusercontent.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10/raw/na
 ### 使用配置
 在 `.env` 文件中修改 `VUE_APP_DEFAULT_CONFIG_URL` 为自己的配置文件地址。
 
-> 使用自动化部署时，配置文件地址将被重新设定。
+> 使用自动化部署时，你可以跳过这一步，配置文件地址将被重新设定。
 
 ## 自动化部署
 使用 GitHub 提供的工作流服务，可以自动化部署到 GitHub Pages 或自己的服务器，非常方便。
 
-为了能顺利运行，你需要在自己的代码仓库中配置一下 Actions secrets（位置是 Settings > Security > Secrets > Actions），添加一个 Repository secrets 。
-- ENV_DEFAULT_CONFIG_URL：自己的配置文件地址。
+为了能顺利运行，你需要在自己的代码仓库中配置一下私人的 Actions secrets（位置是 Settings > Security > Secrets > Actions），添加一个 Repository secrets 。
+- ENV_DEFAULT_CONFIG_URL：你自己的配置文件地址。
 
 我们已经在 `.github/workflows/` 目录下配置了两个工作流，下面依次说明。
 
 ### 部署到 GitHub Pages
-[github-pages.yml](.github/workflows/github-pages.yml) 无需任何额外配置。
+[deploy-to-github-pages.yml](.github/workflows/deploy-to-github-pages.yml) 无需任何额外配置。
 
-### 部署到服务器
-[my-server.yml](.github/workflows/my-server.yml) 还需配置FTP服务器信息。
+### 部署到 FTP 服务器
+[deploy-to-ftp.yml](.github/workflows/deploy-to-ftp.yml) 还需配置FTP服务器信息。请注意，默认会清空FTP根目录。
 
 在代码仓库的 Actions secrets 中配置，额外添加三个 Repository secrets 。
 - FTP_HOST：FTP服务器地址
@@ -117,7 +117,7 @@ https://gist.githubusercontent.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10/raw/na
 ## 推荐方案
 
 ### 零编码：GitHub + Gits + GitHub Pages
-1. 将此代码仓库 fork 一份到你的账号中，得到独立的环境。
+1. 将此代码仓库 fork 一份到你的账号中，得到独立的工作环境。
 2. 在 Gits 存放[配置信息](#配置)。
 3. 使用[自动化部署](#自动化部署)，部署到免费的 GitHub Pages 站点。
-4. 后续可在自己的代码仓库中拉取上游更新。
+4. 后续，可在自己的代码仓库中拉取上游更新。
