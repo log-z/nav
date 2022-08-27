@@ -119,5 +119,18 @@ https://gist.githubusercontent.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10/raw/na
 ### 零编码：GitHub + Gits + GitHub Pages
 1. 将此代码仓库 fork 一份到你的账号中，得到独立的工作环境。
 2. 在 Gits 存放[配置信息](#配置)。
-3. 使用[自动化部署](#自动化部署)，部署到免费的 GitHub Pages 站点。
-4. 后续，可在自己的代码仓库中拉取上游更新。
+3. 配置好[自动化部署](#自动化部署)，部署到免费的 GitHub Pages 站点。
+4. [启用工作流支持](#启用工作流支持)，第一次运行工作流请[手动触发](#手动运行工作流)。
+5. 后续，可在自己的代码仓库中拉取上游更新，工作流将自动运行。
+
+## 疑难解答
+### 启用工作流支持
+默认情况下，新代码仓库的工作流支持处于禁用状态，请到 Actions 中按照提示启用它。
+
+### 手动运行工作流
+对于我们提供的两个工作流，仅会在 master 分支更新后自动运行，如需立即运行请手动触发它。
+
+以“[部署到 GitHub Pages](#部署到-github-pages)”工作流为例。进入 Actions 页面，在左侧选择 `Deploy to GitHub Pages` 工作流，然后在右侧点击 `Run workflow` 按钮即可。
+
+### 禁用和启用工作流
+对于暂时不需要使用的工作流，可以将其禁用。参考官方文档：[禁用和启用工作流程](https://docs.github.com/cn/actions/managing-workflow-runs/disabling-and-enabling-a-workflow)
