@@ -59,15 +59,16 @@ store.dispatch('config/update')
   --color: rgba(0, 0, 0, 0.86);
   --bg-color: #f5f5f5; /*white*/
   /*--bg-color: #fff2cf;*/ /*yellow*/
-  --primary-color: #75aad6; /*blue*/
+  /*--primary-color: #75aad6;*/ /*blue*/
   /*--primary-color: #61abbe;*/ /*sky*/
   /*--primary-color: #a7bfd8;*/ /*snow*/
   /*--primary-color: #808e9b;*/ /*gray*/
-  /*--primary-color: #ffce64;*/ /*yellow*/
   /*--primary-color: #e41427;*/ /*red*/
+  --primary-color: #f18b6d; /*maple-leaf-red*/
+  /*--primary-color: #f1aa6d;*/ /*sunset-glow*/
+  /*--primary-color: #ffce64;*/ /*yellow*/
   /*--primary-color: #96be61;*/ /*green*/
   /*--primary-color: #82b59d;*/ /*pool*/
-  /*--primary-color: #f1aa6d;*/ /*sunset-glow*/
   --hover-bg-color: rgba(0, 0, 0, 0.05);
   
   color: var(--color);
@@ -124,12 +125,13 @@ store.dispatch('config/update')
 	.vue-app {
 		--color: rgba(255, 255, 255, 0.55);
 		--bg-color: #171717;
-		--primary-color: #406d97; /*blue*/
+		/*--primary-color: #406d97;*/ /*blue*/
     /*--primary-color: #515e6b;*/ /*snow*/
     /*--primary-color: #981622;*/ /*red*/
+    --primary-color: #a04226; /*maple-leaf-red*/
+    /*--primary-color: #904c11;*/ /*sunset-glow*/
 		/*--primary-color: #577d23;*/ /*green*/
 		/*--primary-color: #2f7955;*/ /*pool*/
-    /*--primary-color: #904c11;*/ /*sunset-glow*/
 		--hover-bg-color: rgba(255, 255, 255, 0.05);
 		background-color: #222222;
 	}
@@ -162,13 +164,14 @@ store.dispatch('config/update')
 .vue-app[scheme=dark] {
 	--color: rgba(255, 255, 255, 0.55);
 	--bg-color: #171717;
-		--primary-color: #406d97; /*blue*/
-	/*--primary-color: #515e6b;*/ /*snow*/
+  /*--primary-color: #406d97;*/ /*blue*/
+  /*--primary-color: #515e6b;*/ /*snow*/
   /*--primary-color: #981622;*/ /*red*/
-	/*--primary-color: #577d23;*/ /*green*/
-	/*--primary-color: #2f7955;*/ /*pool*/
-	/*--primary-color: #904c11;*/ /*sunset-glow*/
-	--hover-bg-color: rgba(255, 255, 255, 0.05);
+  --primary-color: #a04226; /*maple-leaf-red*/
+  /*--primary-color: #904c11;*/ /*sunset-glow*/
+  /*--primary-color: #577d23;*/ /*green*/
+  /*--primary-color: #2f7955;*/ /*pool*/
+  --hover-bg-color: rgba(255, 255, 255, 0.05);
 	background-color: #222222;
 }
 .vue-app[scheme=dark]e ::selection {
