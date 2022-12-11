@@ -18,8 +18,8 @@
         ref="engineSelectorRef"
         :engine="engine"
         @change="engineChange" />
-      <nav-search-action
-        icon="submit"
+      <CheveronRight
+        class="nav-search__submit"
         @click="submit" />
     </form>
     <nav-search-complete
@@ -40,7 +40,6 @@ import { computed, reactive, ref } from 'vue';
 import { useStore } from 'vuex';
 import $_ from 'lodash'
 import NavSearchInput from './nav-search-input';
-import NavSearchAction from './nav-search-action';
 import NavSearchEngineSelector from './nav-search-engine-selector';
 import NavSearchComplete from './nav-search-complete';
 import searchEngine from '@/utils/search-engine';
@@ -137,5 +136,19 @@ const completeSelect = (val) => {
 
 .nav-search-input {
   flex-grow: 1;
+}
+
+.nav-search__submit, .nav-search-engine-selector__action {
+  font-size: 1.7rem;
+  opacity: 0.3;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+.nav-search__submit:hover, .nav-search-engine-selector__action:hover {
+	opacity: 0.6;
+}
+.nav-search__submit {
+  font-size: 1.28rem;
+  padding-right: 0.6rem;
 }
 </style>

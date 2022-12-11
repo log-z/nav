@@ -35,13 +35,6 @@ input:focus {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
-/* 背景资源 */
-.nav-sprites-res {
-    background-size: 640px 480px;
-    background-repeat: no-repeat;
-    background-image: url(../img/sprites.svg);
-}
-
 .nav-card-0 {
     border-radius: 8px;
     border: rgba(0, 0, 0, 0.06) 0.06rem solid;

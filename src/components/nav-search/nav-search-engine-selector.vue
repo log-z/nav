@@ -1,8 +1,18 @@
 <template>
   <div class="nav-search-engine-selector">
-    <nav-search-action
-      :icon="status.eng"
-      @click="next" />
+    <nav-icon
+      class="nav-search-engine-selector__action"
+      @click="next"
+    >
+      <Baidu
+        v-if="status.eng == 'baidu'" />
+      <Google
+        v-if="status.eng == 'google'" />
+      <Bing
+        v-if="status.eng == 'bing'" />
+      <Wikipedia
+        v-if="status.eng == 'wikipedia'" />
+    </nav-icon>
   </div>
 </template>
 
@@ -15,7 +25,6 @@ export default {
 <script setup>
 import { computed, defineEmits, defineExpose, defineProps, reactive } from 'vue';
 import { useStore } from 'vuex';
-import navSearchAction from './nav-search-action';
 
 const store = useStore()
 const emit = defineEmits([ 'change' ])

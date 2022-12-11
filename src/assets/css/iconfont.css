@@ -1,0 +1,31 @@
+@font-face {
+  font-family: "iconfont";
+  src: url('../font/iconfont.ttf?t=1670735004500') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-google:before {
+  content: "\e601";
+}
+
+.icon-wikipedia:before {
+  content: "\e602";
+}
+
+.icon-baidu:before {
+  content: "\e603";
+}
+
+.icon-cheveron-right:before {
+  content: "\e604";
+}
+
+.icon-bing:before {
+  content: "\e605";
+}
