@@ -42,22 +42,22 @@ const status = reactive({
 watch(props, () => status.active = 0)
 
 const selecte = (index) => {
-    status.active = index;
-    emit('selecte', props.list[status.active]);
+  status.active = index;
+  emit('selecte', props.list[status.active]);
 }
 const isActive = (index) => {
-    return status.active == index;
+  return status.active == index;
 }
 const next = () => {
-    status.active = (status.active += 1) % props.list.length;
-    emit('change', props.list[status.active]);
+  status.active = (status.active += 1) % props.list.length;
+  emit('change', props.list[status.active]);
 }
 const prev = () => {
-    status.active = (status.active -= 1) % props.list.length;
-    if (status.active < 0) {
-      status.active = props.list.length - 1
-    }
-    emit('change', props.list[status.active]);
+  status.active = (status.active -= 1) % props.list.length;
+  if (status.active < 0) {
+    status.active = props.list.length - 1
+  }
+  emit('change', props.list[status.active]);
 }
 
 defineExpose({
@@ -71,10 +71,10 @@ defineExpose({
 .nav-search-complete {
 	margin-top: var(--v-spacing);
 	position: absolute;
-    top: 100%;
-    right: 0;
-    left: 0;
-    background: var(--bg-color);
+  top: 100%;
+  right: 0;
+  left: 0;
+  background: var(--bg-color);
 	z-index: 1;
 }
 

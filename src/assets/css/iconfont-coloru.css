@@ -1,0 +1,32 @@
+@font-face {
+  font-family: "iconfont-coloru"; /* Project id 3822871 */
+  /* Color fonts */
+  src: 
+    url('../font/iconfont-coloru.woff2') format('woff2'),
+    url('../font/iconfont-coloru.woff') format('woff'),
+    url('../font/iconfont-coloru.ttf') format('truetype');
+}
+
+.iconfont-coloru {
+  font-family: "iconfont-coloru" !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-cl-bing:before {
+  content: "\e802";
+}
+
+.icon-cl-google:before {
+  content: "\e803";
+}
+
+.icon-cl-wikipedia:before {
+  content: "\e804";
+}
+
+.icon-cl-baidu:before {
+  content: "\e805";
+}
+

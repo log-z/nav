@@ -69,7 +69,7 @@ defineExpose({
 
 <style>
 .nav-search-input__input {
-  width: 100%;
+  width: calc(100% - 2 * var(--h-spacing));
   padding: var(--v-spacing) var(--h-spacing);
   border: none;
   font-size: 1rem;

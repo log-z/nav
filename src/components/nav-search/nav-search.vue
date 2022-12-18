@@ -18,9 +18,12 @@
         ref="engineSelectorRef"
         :engine="engine"
         @change="engineChange" />
-      <CheveronRight
+      <nav-icon
         class="nav-search__submit"
-        @click="submit" />
+        @click="submit"
+      >
+        <CheveronRight/>
+      </nav-icon>
     </form>
     <nav-search-complete
       ref="completeRef"
@@ -121,6 +124,7 @@ const completeSelect = (val) => {
 .nav-search {
   --v-spacing: 0.6rem;
   --h-spacing: 1rem;
+  position: relative;
 }
 
 /* 搜索框表单 */
@@ -129,7 +133,7 @@ const completeSelect = (val) => {
   min-height: unset;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: stretch;
   transition: box-shadow 0.3s, background-color 0.2s;
   background: var(--bg-color);
 }
@@ -138,17 +142,21 @@ const completeSelect = (val) => {
   flex-grow: 1;
 }
 
-.nav-search__submit, .nav-search-engine-selector__action {
+.nav-search__submit,
+.nav-search-engine-selector__action {
   font-size: 1.7rem;
   opacity: 0.3;
-  cursor: pointer;
   transition: opacity 0.3s;
 }
-.nav-search__submit:hover, .nav-search-engine-selector__action:hover {
+.nav-search__submit:hover,
+.nav-search-engine-selector:hover .nav-search-engine-selector__action {
 	opacity: 0.6;
 }
 .nav-search__submit {
   font-size: 1.28rem;
-  padding-right: 0.6rem;
+  padding-right: calc(var(--h-spacing) / 2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 </style>

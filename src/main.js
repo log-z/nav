@@ -7,6 +7,7 @@ import '@/assets/css/base.css'
 
 // Import Icon-font
 import '@/assets/css/iconfont.css'
+import '@/assets/css/iconfont-coloru.css'
 import * as NavIconsVue from './icons-vue'
 
 
