@@ -70,7 +70,7 @@ let input = $_.debounce((val) => {
 
   searchEngine.complete(engine.value, val, (res) => {
     if (
-      res.wd === data.searchWord &&
+      res.wd?.toLowerCase() === data.searchWord.toLowerCase() &&
       res.eng === engine.value &&
       inputRef.value.hasFocus()
     ) {
