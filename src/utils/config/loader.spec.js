@@ -1,8 +1,9 @@
 import { configLoader } from '.';
+import { subscribeLoader as themeSubscribeLoader } from './loader-v2-theme'
 
 describe('Test config loader', () => {
-  test('simple loader', () => {
-    const conf = configLoader({
+  test('simple loader', async () => {
+    const conf = await configLoader({
       "name": "test",
       "description": "test",
       "searchEngine": {
@@ -30,8 +31,8 @@ describe('Test config loader', () => {
     expect(conf).not.toBeNull()
   })
 
-  test('simple loader V2', () => {
-    const conf = configLoader({
+  test('simple loader V2', async () => {
+    const conf = await configLoader({
       "version": "2",
       "name": "test",
       "description": "test",
@@ -41,10 +42,10 @@ describe('Test config loader', () => {
         },
         "active": "my.red",
         "custom": {
-          "primary.color": "#000",
-          "base.background.color": "#000",
-          "footer.background.color": "#000",
-          "hovering.background.color": "#000"
+          "light@primary.color": "#000",
+          "light@base.background.color": "#000",
+          "light@footer.background.color": "#000",
+          "light@highlight.background.color": "#000"
         }
       },
       "search": {
@@ -77,6 +78,29 @@ describe('Test config loader', () => {
         }]
       }
     });
+    expect(conf).not.toBeNull()
+  })
+
+  test('simple loader V2 theme subscribe', async () => {
+    const conf = await themeSubscribeLoader([
+      {
+        "name": "red",
+        "custom": {
+          "light@primary.color": "#eb7366",
+          "light@base.background.color": "#fff8f8",
+          "light@footer.background.color": "#fdefef",
+          "light@highlight.background.color": "#fddbd6"
+        }
+      }, {
+        "name": "green",
+        "custom": {
+          "light@primary.color": "#92bf9a",
+          "light@base.background.color": "#fdffe0",
+          "light@footer.background.color": "#92bf9a",
+          "light@highlight.background.color": "#f7f9d6"
+        }
+      }
+    ]);
     expect(conf).not.toBeNull()
   })
 })

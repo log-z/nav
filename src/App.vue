@@ -1,5 +1,9 @@
 <template>
-  <div class="vue-app" :scheme="scheme">
+  <div
+    class="vue-app"
+    :style="themeStyle"
+    :scheme="scheme"
+  >
     <div class="vue-app__header-warrpar">
       <header>
         <div class="vue-app__logo-warppar">
@@ -25,12 +29,41 @@ import NavLogo from './components/nav-logo';
 import NavSearch from './components/nav-search';
 import NavFavorteList from './components/nav-favorites';
 import NavFoot from './components/nav-foot';
-import { computed } from 'vue';
+import { computed, reactive } from 'vue';
 
 const store = useStore()
 
-const scheme = computed(() => store.state.prefers.colorScheme)
+// 主题样式
+const themeStyle = reactive({
+  '--primary-color': computed(() => {
+    let themeFinal = store.state.config.config.theme?._final
+    return scheme.value == 'dark' ?
+      themeFinal?.['dark@primary.color'] :
+      themeFinal?.['light@primary.color']
+  }),
+  '--bg-color': computed(() => {
+    let themeFinal = store.state.config.config.theme?._final
+    return scheme.value == 'dark' ?
+      themeFinal?.['dark@base.background.color'] :
+      themeFinal?.['light@base.background.color']
+  }),
+  '--footer-bg-color': computed(() => {
+    let themeFinal = store.state.config.config.theme?._final
+    return scheme.value == 'dark' ?
+      themeFinal?.['dark@footer.background.color'] :
+      themeFinal?.['light@footer.background.color']
+  }),
+  '--hover-bg-color': computed(() => {
+    let themeFinal = store.state.config.config.theme?._final
+    return scheme.value == 'dark' ?
+      themeFinal?.['dark@highlight.background.color'] :
+      themeFinal?.['light@highlight.background.color']
+  }),
+})
 
+// 强制配色方案
+const scheme = computed(() => store.state.prefers.colorScheme)
+// 强制切换配色方案
 let timeoutScheme = null
 const toggleScheme = () => {
   timeoutScheme = setTimeout(() => {
@@ -42,6 +75,7 @@ const clearToggleScheme = () => {
   clearTimeout(timeoutScheme);
 }
 
+// 拉取最新配置
 store.dispatch('config/update')
 </script>
 
@@ -69,6 +103,8 @@ store.dispatch('config/update')
   /*--primary-color: #ffce64;*/ /*yellow*/
   /*--primary-color: #96be61;*/ /*green*/
   /*--primary-color: #82b59d;*/ /*pool*/
+  --footer-bg-color: #eee;  /*gray*/
+  /*--footer-bg-color: #ffecb8;*/ /*yellow*/
   --hover-bg-color: rgba(0, 0, 0, 0.05);
   
   color: var(--color);
@@ -123,17 +159,18 @@ store.dispatch('config/update')
 /* 暗色模式 */
 @media (prefers-color-scheme: dark) {
 	.vue-app {
-		--color: rgba(255, 255, 255, 0.55);
-		--bg-color: #171717;
+		--color: rgba(255, 255, 255, 0.55) !important;
+		--bg-color: #171717 !important;
 		/*--primary-color: #406d97;*/ /*blue*/
     /*--primary-color: #515e6b;*/ /*snow*/
     /*--primary-color: #981622;*/ /*red*/
-    --primary-color: #a04226; /*maple-leaf-red*/
+    --primary-color: #a04226 !important; /*maple-leaf-red*/
     /*--primary-color: #904c11;*/ /*sunset-glow*/
 		/*--primary-color: #577d23;*/ /*green*/
 		/*--primary-color: #2f7955;*/ /*pool*/
-		--hover-bg-color: rgba(255, 255, 255, 0.05);
-		background-color: #222222;
+		--footer-bg-color: #131313 !important;
+		--hover-bg-color: rgba(255, 255, 255, 0.05) !important;
+    background-color: #222222;
 	}
 
 	::selection {
@@ -171,6 +208,7 @@ store.dispatch('config/update')
   /*--primary-color: #904c11;*/ /*sunset-glow*/
   /*--primary-color: #577d23;*/ /*green*/
   /*--primary-color: #2f7955;*/ /*pool*/
+  --footer-bg-color: #131313;
   --hover-bg-color: rgba(255, 255, 255, 0.05);
 	background-color: #222222;
 }

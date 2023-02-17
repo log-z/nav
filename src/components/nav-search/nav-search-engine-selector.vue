@@ -66,7 +66,10 @@ const status = reactive({
   eng: props.engine,
 })
 
-const engineList = computed(() => store.state.config.config.search.engine.active)
+const engineList = computed(() => {
+  let searchConfig = store.state.config.config.search
+  return searchConfig?.engine?.active === undefined ? [] : searchConfig.engine.active
+})
 const next = () => {
   let i = (engineList.value.indexOf(status.eng) + 1) % engineList.value.length;
   if (i < 0) i = 0;

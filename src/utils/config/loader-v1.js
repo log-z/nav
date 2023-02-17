@@ -41,13 +41,16 @@ const ROOT_MATEDATA = {
 
 
 import { parser } from './common'
+import { loader as themeLoader } from './loader-v2-theme'
 
 // 转换到V2版本
-function convertToV2 (rootConfig) {
+async function convertToV2 (rootConfig) {
   if (!rootConfig) {
     return rootConfig;
   }
 
+  rootConfig.version = '1'
+  rootConfig.theme = await themeLoader({})
   rootConfig.search = {
     engine: {
       active: rootConfig.searchEngine.list
@@ -58,7 +61,7 @@ function convertToV2 (rootConfig) {
   return rootConfig;
 }
 
-export function loader(obj) {
-  let rootConfig = parser(ROOT_MATEDATA, obj ? obj : {});
-  return convertToV2(rootConfig)
+export async function loader(obj) {
+  let rootConfig = await parser(ROOT_MATEDATA, obj ? obj : {});
+  return await convertToV2(rootConfig)
 }

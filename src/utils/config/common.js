@@ -2,7 +2,12 @@ import _ from 'lodash';
 
 const ANY_TOKEN = '*'
 
-function parse(matedata, obj) {
+async function parse(matedata, obj) {
+  // 0. 若指定了外部加载器，则使用它
+  if (matedata.loader && typeof matedata.loader === 'function') {
+    return await matedata.loader(obj)
+  }
+
   // 1. 必要值校验和默认值
   if (matedata.required && _.isEmpty(obj)) {
     throw `is required.`;
@@ -13,17 +18,21 @@ function parse(matedata, obj) {
       obj = [];
     } else if (!matedata.type || matedata.type === Object) {
       obj = {};
+    } else if (matedata.default === undefined) {
+      obj = undefined
     } else {
       obj = null;
     }
   }
 
   // 2. 类型校验
-  let type = (obj === null || obj === undefined) ? null : typeof obj;
+  let type = (obj === null) ? null : typeof obj;
   if ([String, Number, Boolean].includes(matedata.type)) {
-    // 2.1. 基本类型校验（String、Number、Boolean和null）
+    // 2.1. 基本类型校验（String、Number、Boolean、null和undefined）
     if (type === null) {
       return null;
+    } else if (type === 'undefined') {
+      return undefined;
     } else if (type === matedata.type.name.toLowerCase()) {
       return obj;
     } else {
@@ -47,55 +56,65 @@ function parse(matedata, obj) {
     }
 
     // 2.2.2. 数组元素校验：对象
-    return obj.map((ele, index) => {
+    let sub_config_promises = obj.map(async (ele, index) => {
       let sub_config = {};
       for (let ele_pname in matedata.element) {
         if (Object.hasOwnProperty.call(matedata.element, ele_pname)) {
-          let sub_matedata = matedata.element[ele_pname];
-          let sub_obj = ele[ele_pname];
-          sub_config[ele_pname] = tryto(`[${index}].${ele_pname}`, () => parse(sub_matedata, sub_obj));
+          let sub_matedata = matedata.element[ele_pname]
+          let sub_obj = ele[ele_pname]
+
+          let ele_pvalue = await tryto(`[${index}].${ele_pname}`, async () => await parse(sub_matedata, sub_obj))
+          if (ele_pvalue === undefined) continue
+          sub_config[ele_pname] = ele_pvalue
         }
       }
       return sub_config;
-    });
+    })
+    return await Promise.all(sub_config_promises)
   } else {
     // 2.3. 对象递归校验（Object）
     let config = {};
     // 2.3.1. 动态属性
     if (Object.hasOwnProperty.call(matedata.properties, ANY_TOKEN)) {
       let sub_matedata = matedata.properties[ANY_TOKEN]
-      for (let ele_pname in obj) {
-        if (Object.hasOwnProperty.call(obj, ele_pname)) {
-          let sub_obj = obj[ele_pname];
-          config[ele_pname] = tryto(ele_pname, () => parse(sub_matedata, sub_obj));
+      for (let pname in obj) {
+        if (Object.hasOwnProperty.call(obj, pname)) {
+          let sub_obj = obj[pname];
+
+          let pvalue = await tryto(pname, async () => await parse(sub_matedata, sub_obj))
+          if (pvalue === undefined) continue
+          config[pname] = pvalue
         }
       }
       return config
     }
 
     // 2.3.2. 固定属性
-    for (let ele_pname in matedata.properties) {
-      if (Object.hasOwnProperty.call(matedata.properties, ele_pname)) {
-        let sub_matedata = matedata.properties[ele_pname];
-        let sub_obj = obj[ele_pname];
-        config[ele_pname] = tryto(ele_pname, () => parse(sub_matedata, sub_obj));
+    for (let pname in matedata.properties) {
+      if (Object.hasOwnProperty.call(matedata.properties, pname)) {
+        let sub_matedata = matedata.properties[pname]
+        let sub_obj = obj[pname]
+
+        let pvalue = await tryto(pname, async () => await parse(sub_matedata, sub_obj))
+        if (pvalue === undefined) continue
+        config[pname] = pvalue
       }
     }
     return config;
   }
 }
 
-function tryto(name, action) {
+async function tryto(name, action) {
   try {
-    return action();
+    return await action();
   } catch (e) {
     throw e.startsWith('.') ? `.${name}${e}` : `.${name} ${e}`;
   }
 }
 
-export function parser(matedata, obj) {
+export async function parser(matedata, obj) {
   try {
-    return parse(matedata, obj ? obj : {});
+    return await parse(matedata, obj ? obj : {});
   } catch (e) {
     console.error('Failed to load config: ' + (e.startsWith('.') ? e.substring(1) : e));
   }

@@ -18,7 +18,10 @@ import { useStore } from 'vuex';
 import NavFavoriteGroup from './nav-favorite-group';
 
 const store = useStore()
-const groups = computed(() => store.state.config.config.favorites.groups)
+const groups = computed(() => {
+  let favorites = store.state.config.config.favorites
+  return favorites === undefined ? [] : favorites.groups
+})
 </script>
 
 <style>

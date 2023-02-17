@@ -51,7 +51,7 @@ const emit = defineEmits([
   'update:modelValue',
 ])
 
-const placeholder = computed(() => store.state.config.config.search.placeholder)
+const placeholder = computed(() => store.state.config.config.search?.placeholder)
 
 const input = (event) => {
   const val = event.target.value

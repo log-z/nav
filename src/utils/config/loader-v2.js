@@ -1,82 +1,79 @@
-const THEME_SUBSCRIBE_MATEDATA = {
-  type: Object,
-  default: { nav: process.env.VUE_APP_DEFAULT_THEME_URL },
-  properties: {
-    '*': { type: String, required: true },
+// 根元数据
+function root_matedata() {
+  return {
+    type: Object,
+    properties: {
+      version: { type: String },
+      name: { type: String },
+      description: { type: String },
+      theme: { loader: themeLoader },
+      search: search_matedata(),
+      favorites: favorites_matedata(),
+    }
   }
 }
-const THEME_CUSTOM_MATEDATA = {
-  type: Object,
-  properties: {
-    'primary.color': { type: String },
-    'base.background.color': { type: String },
-    'footer.background.color': { type: String },
-    'hovering.background.color': { type: String },
+
+// 元数据：搜索
+function search_matedata() {
+  return {
+    type: Object,
+    properties: {
+      engine: search_engin_matedata(),
+      placeholder: { type: String, default: '您来点什么？' },
+    }
   }
 }
-const THEME_MATEDATA = {
-  type: Object,
-  properties: {
-    subscribe: THEME_SUBSCRIBE_MATEDATA,
-    active: { type: String, default: 'nav.default' },
-    custom: THEME_CUSTOM_MATEDATA,
+// 元数据：搜索-引擎
+function search_engin_matedata() {
+  return {
+    type: Object,
+    properties: {
+      active: {
+        type: Array,
+        element: String,
+        default: [ 'baidu', 'google', 'bing', 'wikipedia' ],
+      },
+    }
   }
 }
-const SEARCH_ENGIN_MATEDATA = {
-  type: Object,
-  properties: {
-    active: {
-      type: Array,
-      element: String,
-      default: [ 'baidu', 'google', 'bing', 'wikipedia' ],
-    },
+
+// 元数据：收藏
+function favorites_matedata() {
+  return {
+    type: Object,
+    properties: {
+      iconPrefix: { type: String, default: '' },
+      groups: favorites_groups_matedata(),
+    }
   }
 }
-const SEARCH_MATEDATA = {
-  type: Object,
-  properties: {
-    engine: SEARCH_ENGIN_MATEDATA,
-    placeholder: { type: String, default: '您来点什么？' },
+// 元数据：收藏-分组
+function favorites_groups_matedata() {
+  return {
+    type: Array,
+    element: {
+      name: { type: String, required: true },
+      websites: favorites_websites_matedata(),
+    }
   }
-};
-const FAVORITES_WEBSITES_MATEDATA = {
-  type: Array,
-  element: {
-    title: { type: String, required: true },
-    subtitle: { type: String },
-    icon: { type: String },
-    url: { type: String, required: true },
-  },
-};
-const FAVORITES_GROUPS_MATEDATA = {
-  type: Array,
-  element: {
-    name: { type: String, required: true },
-    websites: FAVORITES_WEBSITES_MATEDATA,
-  },
-};
-const FAVORITES_MATEDATA = {
-  type: Object,
-  properties: {
-    iconPrefix: { type: String, default: '' },
-    groups: FAVORITES_GROUPS_MATEDATA,
-  },
-};
-const ROOT_MATEDATA = {
-  type: Object,
-  properties: {
-    version: { type: String },
-    name: { type: String },
-    description: { type: String },
-    theme: THEME_MATEDATA,
-    search: SEARCH_MATEDATA,
-    favorites: FAVORITES_MATEDATA,
+}
+// 元数据：收藏-分组-站点
+function favorites_websites_matedata() {
+  return {
+    type: Array,
+    element: {
+      title: { type: String, required: true },
+      subtitle: { type: String },
+      icon: { type: String },
+      url: { type: String, required: true },
+    }
   }
-};
+}
 
 
 import { parser } from './common'
+import { loader as themeLoader } from './loader-v2-theme'
 
-export function loader(obj) {
-  return parser(ROOT_MATEDATA, obj ? obj : {});
+export async function loader(obj) {
+  return await parser(root_matedata(), obj ? obj : {})
 }
