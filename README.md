@@ -91,7 +91,7 @@ https://gist.githubusercontent.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10/raw/na
 更多细节请参考 [演示配置Gits](https://gist.github.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10) ，代码仓库同理。
 
 ### 使用配置
-在 `.env` 文件中修改 `VUE_APP_DEFAULT_CONFIG_URL` 为自己的配置文件地址。
+在 `.env` 文件中修改 `VITE_DEFAULT_CONFIG_URL` 为自己的配置文件地址。
 
 > 使用自动化部署时，你可以跳过这一步，配置文件地址将被重新设定。
 

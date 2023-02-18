@@ -48,7 +48,7 @@ export default {
 </script>
 
 <script setup>
-import { computed, defineEmits, defineExpose, defineProps, reactive } from 'vue';
+import { computed, reactive } from 'vue';
 import { useStore } from 'vuex';
 
 const store = useStore()

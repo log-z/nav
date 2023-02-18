@@ -25,10 +25,10 @@
 
 <script setup>
 import { useStore } from 'vuex'
-import NavLogo from './components/nav-logo';
-import NavSearch from './components/nav-search';
-import NavFavorteList from './components/nav-favorites';
-import NavFoot from './components/nav-foot';
+import NavLogo from '@/components/nav-logo';
+import NavSearch from '@/components/nav-search';
+import NavFavorteList from '@/components/nav-favorites';
+import NavFoot from '@/components/nav-foot';
 import { computed, reactive } from 'vue';
 
 const store = useStore()

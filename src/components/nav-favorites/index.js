@@ -1,3 +1,3 @@
-import NavFavorites from './nav-favorites'
+import NavFavorites from './nav-favorites.vue'
 
 export default NavFavorites

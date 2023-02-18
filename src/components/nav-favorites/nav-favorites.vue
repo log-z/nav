@@ -15,7 +15,7 @@ export default {
 <script setup>
 import { computed } from 'vue';
 import { useStore } from 'vuex';
-import NavFavoriteGroup from './nav-favorite-group';
+import NavFavoriteGroup from './nav-favorite-group.vue';
 
 const store = useStore()
 const groups = computed(() => {

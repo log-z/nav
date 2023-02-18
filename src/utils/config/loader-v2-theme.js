@@ -18,7 +18,7 @@ function theme_subscribe_matedata() {
   return {
     type: Object,
     default: {
-      [DEFAULT_SUBSCRIBE_NAME]: process.env.VUE_APP_DEFAULT_THEME_URL
+      [DEFAULT_SUBSCRIBE_NAME]: import.meta.env.VITE_DEFAULT_THEME_URL
     },
     properties: {
       '*': { type: String, required: true },

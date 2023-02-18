@@ -4,7 +4,7 @@ import { configLoader } from '@/utils/config';
 export default {
   namespaced: true,
 state: () => ({
-    url: process.env.VUE_APP_DEFAULT_CONFIG_URL,
+    url: import.meta.env.VITE_DEFAULT_CONFIG_URL,
     config: {},
   }),
   getters: {
@@ -20,7 +20,7 @@ state: () => ({
   },
   actions: {
     update: function({commit}) {
-      let url = process.env.VUE_APP_DEFAULT_CONFIG_URL
+      let url = import.meta.env.VITE_DEFAULT_CONFIG_URL
       axios.get(url)
         .then(response => configLoader(response.data))
         .then(config => {

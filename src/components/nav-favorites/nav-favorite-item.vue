@@ -49,7 +49,7 @@ export default {
 }
 </script>
 <script setup>
-import { computed, defineProps, reactive } from 'vue'
+import { computed, reactive } from 'vue'
 import $_ from 'lodash'
 import { useStore } from 'vuex'
 import { httpAbsPath } from '@/utils/common'
