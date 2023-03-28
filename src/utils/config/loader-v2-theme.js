@@ -34,6 +34,10 @@ function theme_custom_matedata() {
       'light@base.background.color': { type: String },
       'light@footer.background.color': { type: String },
       'light@highlight.background.color': { type: String },
+      'dark@primary.color': { type: String },
+      'dark@base.background.color': { type: String },
+      'dark@footer.background.color': { type: String },
+      'dark@highlight.background.color': { type: String },
     }
   }
 }
