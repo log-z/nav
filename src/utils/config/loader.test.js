@@ -50,7 +50,11 @@ describe('Test config loader', () => {
           "light@primary.color": "#000",
           "light@base.background.color": "#000",
           "light@footer.background.color": "#000",
-          "light@highlight.background.color": "#000"
+          "light@highlight.background.color": "#000",
+          "dark@primary.color": "#000",
+          "dark@base.background.color": "#000",
+          "dark@footer.background.color": "#000",
+          "dark@highlight.background.color": "#000"
         }
       },
       "search": {
@@ -93,33 +97,38 @@ describe('Test config loader', () => {
  请求模拟
  */
 
-const themeSubscribeData = [
-  {
-    "name": "default",
-    "custom": {
-      "light@primary.color": "#eb7366",
-      "light@base.background.color": "#fff8f8",
-      "light@footer.background.color": "#fdefef",
-      "light@highlight.background.color": "#fddbd6"
+const themeSubscribeData = 
+{
+  "version": "2",
+  "name": "test-subscribe",
+  "contents": [
+    {
+      "name": "default",
+      "custom": {
+        "light@primary.color": "#eb7366",
+        "light@base.background.color": "#fff8f8",
+        "light@footer.background.color": "#fdefef",
+        "light@highlight.background.color": "#fddbd6",
+        "dark@primary.color": "#eb7366",
+        "dark@base.background.color": "#fff8f8",
+        "dark@footer.background.color": "#fdefef",
+        "dark@highlight.background.color": "#fddbd6"
+      }
+    }, {
+      "name": "red",
+      "custom": {
+        "light@primary.color": "#eb7366",
+        "light@base.background.color": "#fff8f8",
+        "light@footer.background.color": "#fdefef",
+        "light@highlight.background.color": "#fddbd6",
+        "dark@primary.color": "#eb7366",
+        "dark@base.background.color": "#fff8f8",
+        "dark@footer.background.color": "#fdefef",
+        "dark@highlight.background.color": "#fddbd6"
+      }
     }
-  }, {
-    "name": "red",
-    "custom": {
-      "light@primary.color": "#eb7366",
-      "light@base.background.color": "#fff8f8",
-      "light@footer.background.color": "#fdefef",
-      "light@highlight.background.color": "#fddbd6"
-    }
-  }, {
-    "name": "green",
-    "custom": {
-      "light@primary.color": "#92bf9a",
-      "light@base.background.color": "#fdffe0",
-      "light@footer.background.color": "#92bf9a",
-      "light@highlight.background.color": "#f7f9d6"
-    }
-  }
-]
+  ]
+}
 
 const restHandlers = [
   rest.get(import.meta.env.VITE_DEFAULT_THEME_URL, (req, res, ctx) => {

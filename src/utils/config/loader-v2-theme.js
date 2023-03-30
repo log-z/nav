@@ -42,6 +42,17 @@ function theme_custom_matedata() {
   }
 }
 
+// 元数据：订阅根元数据
+function theme_subscribe_root_matedata() {
+  return {
+    type: Object,
+    properties: {
+      version: { type: String },
+      name: { type: String },
+      contents: theme_subscribe_contents_matedata(),
+    }
+  }
+}
 // 元数据：订阅内容列表
 function theme_subscribe_contents_matedata() {
   return {
@@ -72,7 +83,8 @@ async function loadActiveSubscribe(config) {
   try {
     let resp = await axios.get(subscribe_path)
     // 获取订阅成功
-    let subscribe_contents = await subscribeLoader(resp.data)
+    let subscribe = await subscribeLoader(resp.data)
+    let subscribe_contents = subscribe.contents
     let subscribe_content = $_.find(subscribe_contents, sc => sc.name === theme_name)
     
     // 检查订阅内容
@@ -93,8 +105,8 @@ async function loadActiveSubscribe(config) {
   }
 }
 
-export async function subscribeLoader(list) {
-  return await parser(theme_subscribe_contents_matedata(), list)
+export async function subscribeLoader(config) {
+  return await parser(theme_subscribe_root_matedata(), config)
 }
 
 export async function loader(obj) {

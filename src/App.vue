@@ -92,7 +92,7 @@ store.dispatch('config/update')
 	--dark-bg-color: #171717;
   --dark-primary-color: #a04226; /*maple-leaf-red*/
   --dark-footer-bg-color: #131313;
-  --dark-hover-bg-color: rgba(255, 255, 255, 0.05);
+  --dark-hover-bg-color: rgb(255 255 255 / 5%);
 
   --color: var(--light-color);
   --bg-color: var(--light-bg-color);
