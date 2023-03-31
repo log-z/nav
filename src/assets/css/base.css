@@ -35,6 +35,15 @@ input:focus {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
+::-webkit-input-placeholder {
+    color: inherit;
+    opacity: 0.5;
+}
+::-moz-placeholder {
+    color: inherit;
+    opacity: 0.5;
+}
+
 .nav-card-0 {
     border-radius: 8px;
     border: rgba(0, 0, 0, 0.06) 0.06rem solid;

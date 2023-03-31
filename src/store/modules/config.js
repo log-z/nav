@@ -1,12 +1,11 @@
-import _ from 'lodash';
 import axios from 'axios';
 import { configLoader } from '@/utils/config';
 
 export default {
   namespaced: true,
 state: () => ({
-    url: process.env.VUE_APP_DEFAULT_CONFIG_URL,
-    config: configLoader(),
+    url: import.meta.env.VITE_DEFAULT_CONFIG_URL,
+    config: {},
   }),
   getters: {
     baseUrl: state => state.url.match(/^.*\//),
@@ -20,10 +19,14 @@ state: () => ({
     },
   },
   actions: {
-    update: function({commit, state}) {
-      if (_.isEmpty(state.url)) return;
-      axios.get(state.url)
-        .then(response => commit('config', configLoader(response.data)))
+    update: function({commit}) {
+      let url = import.meta.env.VITE_DEFAULT_CONFIG_URL
+      axios.get(url)
+        .then(response => configLoader(response.data))
+        .then(config => {
+          commit('config', config)
+          commit('url', url)
+        })
         .catch(error => console.error(error))
     }
   }

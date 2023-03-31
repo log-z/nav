@@ -49,9 +49,10 @@ export default {
 }
 </script>
 <script setup>
-import { computed, defineProps, reactive } from 'vue'
+import { computed, reactive } from 'vue'
 import $_ from 'lodash'
 import { useStore } from 'vuex'
+import { httpAbsPath } from '@/utils/common'
 
 const store = useStore()
 const props = defineProps()
@@ -64,13 +65,11 @@ const iconUrl = computed(() => {
   const path = props.website.icon;
   if ($_.isEmpty(path)) {
     return '#'
-  } else if (/^(http[s]?:)?\/\//.test(path)) {
-    return path
-  } else {
-    const baseUrl = store.getters['config/baseUrl'];
-    const prefix = store.state.config.config.favorites.iconPrefix
-    return baseUrl + prefix + path
   }
+  
+  const baseUrl = store.getters['config/baseUrl'];
+  const prefix = store.state.config.config.favorites.iconPrefix
+  return httpAbsPath(path, baseUrl + prefix)
 })
 
 const active = () => {

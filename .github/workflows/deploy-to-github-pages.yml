@@ -30,7 +30,7 @@ jobs:
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v2
-    - run: echo 'VUE_APP_DEFAULT_CONFIG_URL=${{ secrets.ENV_DEFAULT_CONFIG_URL }}' > .env
+    - run: echo 'VITE_DEFAULT_CONFIG_URL=${{ secrets.ENV_DEFAULT_CONFIG_URL }}' > .env
     
     - name: 🔨 Build Project Use Node.js 16.x
       uses: actions/setup-node@v2

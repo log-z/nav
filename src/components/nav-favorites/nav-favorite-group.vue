@@ -29,7 +29,7 @@ export default {
 }
 </script>
 <script setup>
-import NavFavoriteItem from "./nav-favorite-item";
+import NavFavoriteItem from "./nav-favorite-item.vue";
 </script>
 
 <style>

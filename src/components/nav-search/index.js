@@ -1,3 +1,3 @@
-import NavSearch from './nav-search'
+import NavSearch from './nav-search.vue'
 
 export default NavSearch

@@ -22,7 +22,7 @@ export default {
 }
 </script>
 <script setup>
-import { defineEmits, defineExpose, defineProps, reactive, watch } from 'vue';
+import { reactive, watch } from 'vue';
 import $_ from 'lodash'
 
 const props = defineProps({

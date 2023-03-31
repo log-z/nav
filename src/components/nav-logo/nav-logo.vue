@@ -41,7 +41,7 @@ export default {
 
 /* 暗色模式 */
 @media (prefers-color-scheme: dark) {
-	.nav-logo__svg {
+	.vue-app[scheme=auto] .nav-logo__svg {
 		fill: #000;
 	}
 }

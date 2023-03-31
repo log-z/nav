@@ -1,13 +1,26 @@
 <template>
-  <div class="vue-app" :scheme="scheme">
+  <div
+    class="vue-app"
+    :style="themeStyle"
+    :scheme="scheme.current"
+  >
     <div class="vue-app__header-warrpar">
       <header>
         <div class="vue-app__logo-warppar">
+          <!-- 配色方案提示器 -->
+          <div
+            class="vue-app__scheme-hint"
+            :class="{show: scheme.showHint}"
+          >
+            {{ scheme.current.toUpperCase() }}
+          </div>
+          <!-- LOGO -->
           <nav-logo
             @mouseenter="toggleScheme"
             @mouseleave="clearToggleScheme" />
         </div>
         <div class="vue-app__search-warppar">
+          <!-- 搜索 -->
           <nav-search />
         </div>
       </header>
@@ -21,55 +34,71 @@
 
 <script setup>
 import { useStore } from 'vuex'
-import NavLogo from './components/nav-logo';
-import NavSearch from './components/nav-search';
-import NavFavorteList from './components/nav-favorites';
-import NavFoot from './components/nav-foot';
-import { computed } from 'vue';
+import NavLogo from '@/components/nav-logo';
+import NavSearch from '@/components/nav-search';
+import NavFavorteList from '@/components/nav-favorites';
+import NavFoot from '@/components/nav-foot';
+import { computed, reactive } from 'vue';
 
 const store = useStore()
 
-const scheme = computed(() => store.state.prefers.colorScheme)
+// 主题样式
+const themeStyle = reactive({
+  conf: computed(() => store.state.config.config.theme?._final),
+  '--light-primary-color': computed(() => themeStyle.conf?.['light@primary.color']),
+  '--light-bg-color': computed(() => themeStyle.conf?.['light@base.background.color']),
+  '--light-footer-bg-color': computed(() => themeStyle.conf?.['light@footer.background.color']),
+  '--light-hover-bg-color': computed(() => themeStyle.conf?.['light@highlight.background.color']),
+  '--dark-primary-color': computed(() => themeStyle.conf?.['dark@primary.color']),
+  '--dark-bg-color': computed(() => themeStyle.conf?.['dark@base.background.color']),
+  '--dark-footer-bg-color': computed(() => themeStyle.conf?.['dark@footer.background.color']),
+  '--dark-hover-bg-color': computed(() => themeStyle.conf?.['dark@highlight.background.color']),
+})
 
+// 配色方案
+const schemes = ['auto', 'light', 'dark']
+const scheme = reactive({
+  current: computed(() => store.state.prefers.colorScheme),
+  showHint: false,
+})
+// 切换配色方案
 let timeoutScheme = null
 const toggleScheme = () => {
   timeoutScheme = setTimeout(() => {
-    const value = scheme.value == 'light' ? 'dark' : 'light'
-    store.commit('prefers/colorScheme', value)
+    let nextIdx = schemes.findIndex(s => s === scheme.current) + 1
+    const nextScheme = schemes[nextIdx % schemes.length]
+    store.commit('prefers/colorScheme', nextScheme)
+
+    scheme.showHint = true
+    setTimeout(() => {scheme.showHint = false}, 800)
   }, 1000)
 }
 const clearToggleScheme = () => {
   clearTimeout(timeoutScheme);
 }
 
+// 拉取最新配置
 store.dispatch('config/update')
 </script>
 
 <style>
-::-webkit-input-placeholder {
-  color: inherit;
-  opacity: 0.5;
-}
-::-moz-placeholder {
-  color: inherit;
-  opacity: 0.5;
-}
-
 .vue-app {
-  --color: rgba(0, 0, 0, 0.86);
-  --bg-color: #f5f5f5; /*white*/
-  /*--bg-color: #fff2cf;*/ /*yellow*/
-  /*--primary-color: #75aad6;*/ /*blue*/
-  /*--primary-color: #61abbe;*/ /*sky*/
-  /*--primary-color: #a7bfd8;*/ /*snow*/
-  /*--primary-color: #808e9b;*/ /*gray*/
-  /*--primary-color: #e41427;*/ /*red*/
-  --primary-color: #f18b6d; /*maple-leaf-red*/
-  /*--primary-color: #f1aa6d;*/ /*sunset-glow*/
-  /*--primary-color: #ffce64;*/ /*yellow*/
-  /*--primary-color: #96be61;*/ /*green*/
-  /*--primary-color: #82b59d;*/ /*pool*/
-  --hover-bg-color: rgba(0, 0, 0, 0.05);
+  --light-color: rgba(0, 0, 0, 0.86);
+  --light-bg-color: #f5f5f5;
+  --light-primary-color: #c3c3c3;
+  --light-footer-bg-color: #eee;
+  --light-hover-bg-color: rgba(0, 0, 0, 0.05);
+  --dark-color: rgba(255, 255, 255, 0.55);
+	--dark-bg-color: #171717;
+  --dark-primary-color: #5a5a5a;
+  --dark-footer-bg-color: #131313;
+  --dark-hover-bg-color: rgb(255 255 255 / 5%);
+
+  --color: var(--light-color);
+  --bg-color: var(--light-bg-color);
+  --primary-color: var(--light-primary-color);
+  --footer-bg-color: var(--light-footer-bg-color);
+  --hover-bg-color: var(--light-hover-bg-color);
   
   color: var(--color);
   background-color: var(--primary-color);
@@ -97,12 +126,30 @@ store.dispatch('config/update')
 .vue-app__logo-warppar {
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 .vue-app__search-warppar {
   width: unset;
   margin-top: 3rem;
   position: relative;
+}
+
+.vue-app__scheme-hint {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color);
+  font-size: 5rem;
+  font-weight: bold;
+  letter-spacing: 3rem;
+  padding-left: 3rem;
+  user-select: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+.vue-app__scheme-hint.show {
+  opacity: 0.1;
 }
 
 .vue-app__favorites-warppar {
@@ -122,38 +169,28 @@ store.dispatch('config/update')
 
 /* 暗色模式 */
 @media (prefers-color-scheme: dark) {
-	.vue-app {
-		--color: rgba(255, 255, 255, 0.55);
-		--bg-color: #171717;
-		/*--primary-color: #406d97;*/ /*blue*/
-    /*--primary-color: #515e6b;*/ /*snow*/
-    /*--primary-color: #981622;*/ /*red*/
-    --primary-color: #a04226; /*maple-leaf-red*/
-    /*--primary-color: #904c11;*/ /*sunset-glow*/
-		/*--primary-color: #577d23;*/ /*green*/
-		/*--primary-color: #2f7955;*/ /*pool*/
-		--hover-bg-color: rgba(255, 255, 255, 0.05);
-		background-color: #222222;
+	.vue-app[scheme=auto] {
+    --color: var(--dark-color);
+    --bg-color: var(--dark-bg-color);
+    --primary-color: var(--dark-primary-color);
+    --footer-bg-color: var(--dark-footer-bg-color);
+    --hover-bg-color: var(--dark-hover-bg-color);
+    background-color: #222222;
 	}
 
-	::selection {
+	.vue-app[scheme=auto] ::selection {
 		background-color: rgba(255, 255, 255, 0.2);
 	}
 
-	::-webkit-input-placeholder {
+	.vue-app[scheme=auto] ::-webkit-input-placeholder {
 		opacity: 0.75;
 	}
-	::-moz-placeholder {
+	.vue-app[scheme=auto] ::-moz-placeholder {
 		opacity: 0.75;
 	}
 
-	img {
+	.vue-app[scheme=auto] img {
     filter: brightness(0.7);
-	}
-
-	/* 背景资源 */
-	.nav-sprites-res {
-		filter: invert(1);
 	}
 }
 
@@ -162,19 +199,14 @@ store.dispatch('config/update')
 /******** 强制暗色模式 ********/
 
 .vue-app[scheme=dark] {
-	--color: rgba(255, 255, 255, 0.55);
-	--bg-color: #171717;
-  /*--primary-color: #406d97;*/ /*blue*/
-  /*--primary-color: #515e6b;*/ /*snow*/
-  /*--primary-color: #981622;*/ /*red*/
-  --primary-color: #a04226; /*maple-leaf-red*/
-  /*--primary-color: #904c11;*/ /*sunset-glow*/
-  /*--primary-color: #577d23;*/ /*green*/
-  /*--primary-color: #2f7955;*/ /*pool*/
-  --hover-bg-color: rgba(255, 255, 255, 0.05);
+  --color: var(--dark-color);
+  --bg-color: var(--dark-bg-color);
+  --primary-color: var(--dark-primary-color);
+  --footer-bg-color: var(--dark-footer-bg-color);
+  --hover-bg-color: var(--dark-hover-bg-color);
 	background-color: #222222;
 }
-.vue-app[scheme=dark]e ::selection {
+.vue-app[scheme=dark] ::selection {
 	background-color: rgba(255, 255, 255, 0.2);
 }
 
@@ -187,10 +219,5 @@ store.dispatch('config/update')
 
 .vue-app[scheme=dark] img {
   filter: brightness(0.7);
-}
-
-/* 背景资源 */
-.vue-app[scheme=dark] .nav-sprites-res {
-	filter: invert(1);
 }
 </style>

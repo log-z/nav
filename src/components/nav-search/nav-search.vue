@@ -42,9 +42,9 @@ export default {
 import { computed, reactive, ref } from 'vue';
 import { useStore } from 'vuex';
 import $_ from 'lodash'
-import NavSearchInput from './nav-search-input';
-import NavSearchEngineSelector from './nav-search-engine-selector';
-import NavSearchComplete from './nav-search-complete';
+import NavSearchInput from './nav-search-input.vue';
+import NavSearchEngineSelector from './nav-search-engine-selector.vue';
+import NavSearchComplete from './nav-search-complete.vue';
 import searchEngine from '@/utils/search-engine';
 
 const store = useStore()
@@ -70,7 +70,7 @@ let input = $_.debounce((val) => {
 
   searchEngine.complete(engine.value, val, (res) => {
     if (
-      res.wd === data.searchWord &&
+      res.wd?.toLowerCase() === data.searchWord.toLowerCase() &&
       res.eng === engine.value &&
       inputRef.value.hasFocus()
     ) {
