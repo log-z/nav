@@ -43,7 +43,7 @@ describe('Test config loader', () => {
       "description": "test",
       "theme": {
         "subscribe": {
-          "nav": "config:nav-theme-preset.json"
+          "nav": "config:nav-theme-v2-preset.json"
         },
         "active": "nav.red",
         "custom": {
