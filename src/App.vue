@@ -84,13 +84,13 @@ store.dispatch('config/update')
 <style>
 .vue-app {
   --light-color: rgba(0, 0, 0, 0.86);
-  --light-bg-color: #f5f5f5; /*white*/
-  --light-primary-color: #f18b6d; /*maple-leaf-red*/
-  --light-footer-bg-color: #eee;  /*gray*/
+  --light-bg-color: #f5f5f5;
+  --light-primary-color: #c3c3c3;
+  --light-footer-bg-color: #eee;
   --light-hover-bg-color: rgba(0, 0, 0, 0.05);
   --dark-color: rgba(255, 255, 255, 0.55);
 	--dark-bg-color: #171717;
-  --dark-primary-color: #a04226; /*maple-leaf-red*/
+  --dark-primary-color: #5a5a5a;
   --dark-footer-bg-color: #131313;
   --dark-hover-bg-color: rgb(255 255 255 / 5%);
 
