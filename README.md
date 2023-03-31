@@ -43,7 +43,7 @@
     // 4.1. 订阅集合
     "subscribe": {
       // 4.1.1. 订阅（订阅名: 地址），支持相对路径和绝对路径，这里演示相对路径
-      "nav": "config:nav-theme-preset.json"
+      "nav": "config:nav-theme-v2.json"
     },
     // 4.2. 选择主题（订阅名.主题名）
     "active": "nav.default",
@@ -89,15 +89,15 @@
 ### 配置文件地址
 在 Gits 中，它所提供的 Raw 地址是类似这样的。
 ```
-https://gist.githubusercontent.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10/raw/08d82c7ae57a5572f98caced192366920788c8e0/nav-config-sample.json
+https://gist.githubusercontent.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10/raw/505fb45967a7c8fccc79de9876472894b8b6883a/config:nav-config-v2-sample.json
 ```
 
 让我们去掉 `raw/` 之后的 Commit ID 得到如下所示的固定地址。这样的好处是，无论文件被修改多少次都可以一直使用这个地址。
 ```
-https://gist.githubusercontent.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10/raw/nav-config-sample.json
+https://gist.githubusercontent.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10/raw/config:nav-config-v2-sample.json
 ```
 
-更多细节请参考 [演示配置Gits](https://gist.github.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10) ，代码仓库同理。
+更多细节请参考 [演示配置Gits](https://gist.github.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10#file-config-nav-config-v2-sample-json) ，代码仓库同理。
 
 ### 图标
 是的，所有图标都需要你自己维护，这里我为大家准备了一些 [logos](https://github.com/log-Z/logos) 。强烈推荐使用SVG图片以获得最好效果。
@@ -106,7 +106,7 @@ https://gist.githubusercontent.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10/raw/na
 
 > 兼容性提示：因 Gits 仅支持纯文本文件，对于 PNG 和 JPG 等其他二进制图片请使用第三方图床或对象存储。[后续计划通过 Base64 编码为 Gits 提供二进制图片支持]
 
-更多细节请参考 [演示配置Gits](https://gist.github.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10) ，代码仓库同理。
+更多细节请参考 [演示配置Gits](https://gist.github.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10#file-config-nav-config-v2-sample-json) ，代码仓库同理。
 
 ### 使用配置
 在 `.env` 文件中修改 `VITE_DEFAULT_CONFIG_URL` 为自己的配置文件地址。
@@ -142,7 +142,7 @@ https://gist.githubusercontent.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10/raw/na
 > 除了版本号 `version` 之外，所有的配置项都是可选的，请去除注释后使用。
 
 ```javascript
-// config:nav-theme-preset.json
+// config:nav-theme-v2.json
 {
   // 1. 版本号V2
   "version": "2",
@@ -181,7 +181,7 @@ https://gist.githubusercontent.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10/raw/na
 }
 ```
 
-更多细节请参考 [演示配置Gits](https://gist.github.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10) ，代码仓库同理。
+更多细节请参考 [演示配置Gits](https://gist.github.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10#file-config-nav-theme-v2-preset-json) ，代码仓库同理。
 
 ### 开发
 安装依赖
