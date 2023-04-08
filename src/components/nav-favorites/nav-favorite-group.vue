@@ -43,7 +43,9 @@ import NavFavoriteItem from "./nav-favorite-item.vue";
   --text-color: var(--primary-color);
   margin: 24px 0;
   color: var(--text-color);
-  font-size: 1.6rem;
+  font-size: 1.8rem;
+  font-weight: normal;
+  font-family: 'smiley-sans';
   letter-spacing: 0.2rem;
   display: flex;
   align-items: center;
@@ -52,7 +54,7 @@ import NavFavoriteItem from "./nav-favorite-item.vue";
 /* 收藏组标题 */
 .nav-favorite-group__title:before {
   width: 0.4rem;
-  height: 1.25rem;
+  height: 0.4rem;
   content: "";
   display: block;
   margin-right: 0.5rem;
