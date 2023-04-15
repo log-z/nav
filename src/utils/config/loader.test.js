@@ -43,7 +43,7 @@ describe('Test config loader', () => {
       "description": "test",
       "theme": {
         "subscribe": {
-          "nav": "config:nav-theme-v2-preset.json"
+          "nav": import.meta.env.VITE_DEFAULT_THEME_URL
         },
         "active": "nav.red",
         "custom": {
