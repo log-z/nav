@@ -36,12 +36,12 @@ import NavFavoriteItem from "./nav-favorite-item.vue";
 /* 收藏组标题 */
 .nav-favorite-group {
 	--item-width: 25%;
-	padding: 16px 0;
+	padding: 2rem 0 0;
 }
 
 .nav-favorite-group__title {
   --text-color: var(--primary-color);
-  margin: 24px 0;
+  margin: 1.4rem 0;
   color: var(--text-color);
   font-size: 1.8rem;
   font-weight: normal;

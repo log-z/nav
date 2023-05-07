@@ -16,7 +16,7 @@
         v-if="website.icon"
       >
       <div v-else>
-        {{ website.title.charAt(0) }}
+        {{ website.title?.charAt(0) }}
       </div>
     </div>
     <div class="nav-favorite-item__text">
@@ -102,6 +102,7 @@ const cancel = () => {
   margin: var(--normal-distance);
   flex-shrink: 0;
   font-size: var(--icon-size);
+  font-family: 'smiley-sans';
   display: flex;
   justify-content: center;
   align-items: center;
