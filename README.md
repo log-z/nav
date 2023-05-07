@@ -8,14 +8,14 @@
 2. 在 Gits 存放[配置信息](#配置)。
 3. 配置好[自动化部署](#自动化部署)，以部署到免费的 GitHub Pages 站点。
 4. [启用工作流支持](#启用工作流支持)，第一次运行工作流请[手动触发](#手动运行工作流)。
-5. 后续，可在自己的代码仓库中拉取上游更新，工作流将自动运行。
+5. 后续，可在自己的代码仓库中[拉取上游更新](#拉取更新的正确姿势)，工作流将自动运行。`温馨提示这里有小技巧`
 
 ### 扩展方案：GitHub + 对象存储 + GitHub Pages
 1. 将此代码仓库 fork 一份到你的账号中，得到独立的工作环境。
 2. 在对象存储（如阿里云OSS）存放[配置信息](#配置)，请注意开启跨域访问。
 3. 配置好[自动化部署](#自动化部署)，以部署到免费的 GitHub Pages 站点。
 4. [启用工作流支持](#启用工作流支持)，第一次运行工作流请[手动触发](#手动运行工作流)。
-5. 后续，可在自己的代码仓库中拉取上游更新，工作流将自动运行。
+5. 后续，可在自己的代码仓库中[拉取上游更新](#拉取更新的正确姿势)，工作流将自动运行。`温馨提示这里有小技巧`
 
 ## 配置
 配置和图标文件推荐存放在 GitHub 的 [Gits](https://gist.github.com/) 或代码仓库，因为它们自带跨域支持。
@@ -215,3 +215,19 @@ npm run test
 
 ### 禁用和启用工作流
 对于暂时不需要使用的工作流，可以将其禁用。参考官方文档：[禁用和启用工作流程](https://docs.github.com/cn/actions/managing-workflow-runs/disabling-and-enabling-a-workflow)
+
+### 拉取更新的正确姿势
+你已经将此代码仓库 fork 到了自己的账号，那之后又该怎样拉取上游更新呢？
+
+首先，当在自己代码仓库（顶部）中看到类似下面的提示时，请留意是否有 `xxx commits behind` 的字样，这表示上游代码仓库的 master 分支有新变动。简单来说就是：你可以拉取上游更新了。
+```
+This branch is 2 commits ahead, 4 commits behind log-Z:master.    [ Contribute ] [ Sync fork ]
+```
+
+那么，开始拉取上游更新吧！
+
+错误做法：使用 `Sync fork` 直接同步。这会使得“[部署到 GitHub Pages](#部署到-github-pages)”的工作流不能正常工作，因为这种方式并不使用你的 [GITHUB_TOKEN](https://docs.github.com/zh/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token) 来操作你的 GitHub Pages ，导致了写入权限的缺失。
+
+正确做法：点击 `xxx commits behind` 的字样超链接，查看变动内容；接着点击 `Create pull request` 按钮去创建一个PR，记得填写标题；最后合并这个PR即可。
+
+> 这是由于工作流被自动触发时，它所使用的身份不一定是你的账号，其实是引起“触发事件”的账号。举个例子，若工作流被声明为推送后触发，那么引起“触发事件”的就是最近一次提交的那个人的账号。
