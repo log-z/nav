@@ -61,6 +61,16 @@ const input = (event) => {
 const focus = () => inputRef.value.focus()
 const hasFocus = () => inputRef.value == document.activeElement
 
+// 监听快捷键
+const SHORTCUT_KEY = '/'
+const IGNORE_ELEMENT = ['INPUT', 'TEXTAREA']
+document.addEventListener('keypress', (event) => {
+  if (event.key === SHORTCUT_KEY && !IGNORE_ELEMENT.includes(event.target.nodeName)) {
+    focus()
+    event.preventDefault()
+  }
+})
+
 defineExpose({
   focus,
   hasFocus,
