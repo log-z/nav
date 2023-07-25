@@ -1,12 +1,14 @@
 import engBaidu from './eng-baidu'
 import engGoogle from './eng-google'
 import engBing from './eng-bing'
+import engQiuwenbaike from './eng-qiuwenbaike'
 import engWikipedia from './eng-wikipedia'
 
 const ENGINES = {
   baidu: engBaidu,
   google: engGoogle,
   bing: engBing,
+  qiuwenbaike: engQiuwenbaike,
   wikipedia: engWikipedia,
 }
 

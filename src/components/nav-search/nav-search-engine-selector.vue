@@ -11,6 +11,8 @@
         v-if="status.eng == 'google'" />
       <Bing
         v-if="status.eng == 'bing'" />
+      <Qiuwenbaike
+        v-if="status.eng == 'qiuwenbaike'" />
       <Wikipedia
         v-if="status.eng == 'wikipedia'" />
     </nav-icon>
@@ -31,6 +33,9 @@
           </nav-icon>
           <nav-icon v-if="eng == 'bing'">
             <CLBing />
+          </nav-icon>
+          <nav-icon v-if="eng == 'qiuwenbaike'">
+            <CLQiuwenbaike />
           </nav-icon>
           <nav-icon v-if="eng == 'wikipedia'">
             <CLWikipedia />
