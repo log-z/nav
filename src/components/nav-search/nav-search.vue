@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-search">
+  <div class="nav-search" :class="rootClass">
     <form
       :class="fromClass"
       @submit.prevent="submit"
@@ -59,8 +59,10 @@ const data = reactive({
   isFocus: true,
 })
 
+const rootClass = computed(() => featureGlassmorphism.value ? 'glassmorphism' : null)
 const fromClass = computed(() => data.isFocus ? 'nav-card-2' : 'nav-card-1')
 const engine = computed(() => store.state.prefers.searchEngine)
+const featureGlassmorphism = computed(() => store.state.prefers.feature.glassmorphism)
 
 let input = $_.debounce((val) => {
   if (!val) {
@@ -126,6 +128,10 @@ const completeSelect = (val) => {
   --h-spacing: 1rem;
   position: relative;
 }
+.nav-search.glassmorphism {
+  --bg-color: rgb(245 245 245 / 70%);
+  --bg-filter: blur(20px) brightness(.9);
+}
 
 /* 搜索框表单 */
 .nav-search > form {
@@ -136,6 +142,9 @@ const completeSelect = (val) => {
   align-items: stretch;
   transition: box-shadow 0.3s, background-color 0.2s;
   background: var(--bg-color);
+}
+.nav-search.glassmorphism > form {
+  backdrop-filter: var(--bg-filter);
 }
 
 .nav-search-input {
@@ -158,5 +167,21 @@ const completeSelect = (val) => {
   cursor: pointer;
   display: flex;
   align-items: center;
+}
+
+
+/* 暗色模式 */
+@media (prefers-color-scheme: dark) {
+  .nav-search.glassmorphism {
+    --bg-color: rgb(22 22 22 / 50%);
+  }
+}
+
+
+
+/******** 强制暗色模式 ********/
+
+.vue-app[scheme=dark] .nav-search.glassmorphism {
+  --bg-color: rgb(22 22 22 / 50%);
 }
 </style>

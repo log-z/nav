@@ -130,6 +130,7 @@ defineExpose({
   height: 100%;
   padding: 0 var(--v-spacing);
   background-color: var(--bg-color);
+  backdrop-filter: var(--bg-filter);
   cursor: pointer;
   display: flex;
   align-items: center;
