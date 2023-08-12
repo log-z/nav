@@ -38,6 +38,7 @@ const toggleFeatureGlassmorphism = () => {
 .nav-foot__action {
   padding: 0.1rem 0.4em;
   margin-bottom: 0.8rem;
+  color: inherit;
   background: none;
   border: 1px solid var(--color);
   opacity: 0.5;
