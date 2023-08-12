@@ -75,6 +75,7 @@ defineExpose({
   right: 0;
   left: 0;
   background: var(--bg-color);
+  backdrop-filter: var(--bg-filter);
 	z-index: 1;
 }
 

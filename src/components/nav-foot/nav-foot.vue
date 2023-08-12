@@ -1,5 +1,10 @@
 <template>
   <footer class="nav-foot">
+    <!-- 切换毛玻璃特性 -->
+    <button class="nav-foot__action" @click.prevent="toggleFeatureGlassmorphism">
+      {{featureGlassmorphism ? '毛玻璃' : '纯色'}}
+    </button>
+    <!-- 描述信息 -->
     <div class="nav-foot__info">{{description}}</div>
   </footer>
 </template>
@@ -15,6 +20,12 @@ import { useStore } from 'vuex';
 
 const store = useStore()
 const description = computed(() => store.state.config.config.description)
+
+// 切换毛玻璃特性
+const featureGlassmorphism = computed(() => store.state.prefers.feature.glassmorphism)
+const toggleFeatureGlassmorphism = () => {
+  store.commit('prefers/featureGlassmorphism', !featureGlassmorphism.value)
+}
 </script>
 
 <style>
@@ -22,6 +33,17 @@ const description = computed(() => store.state.config.config.description)
   padding: 32px;
   background-color: var(--footer-bg-color);
   text-align: center;
+}
+
+.nav-foot__action {
+  padding: 0.1rem 0.4em;
+  margin-bottom: 0.8rem;
+  background: none;
+  border: 1px solid var(--color);
+  opacity: 0.5;
+}
+.nav-foot__action:hover {
+  background: var(--hover-bg-color);
 }
 
 .nav-foot__info {
