@@ -9,20 +9,33 @@
     @touchend="cancel"
     @touchcancel="cancel"
   >
-    <div class="nav-favorite-item__img">
-      <img
-        class="nav-favorite-item__icon"
-        :src="iconUrl"
-        v-if="website.icon"
-      >
-      <div v-else>
+    <!-- 图标部分 -->
+    <div class="nav-favorite-item__icon_wrapper">
+      <div v-if="website.icon">
+        <!-- 常规图标 -->
+        <img
+          class="nav-favorite-item__icon on-normal"
+          :src="iconUrl"
+        >
+        <!-- 暗色模式图标 -->
+        <img
+          class="nav-favorite-item__icon on-dark"
+          :src="iconUrlOnDark"
+        >
+      </div>
+        <!-- 大字图标 -->
+        <div v-else>
         {{ website.title?.charAt(0) }}
       </div>
     </div>
+
+    <!-- 文本部分 -->
     <div class="nav-favorite-item__text">
+      <!-- 标题 -->
       <div class="nav-favorite-item__title">
         {{ website.title }}
       </div>
+      <!-- 副标题 -->
       <div class="nav-favorite-item__subtitle">
         {{ website.subtitle }}
       </div>
@@ -61,12 +74,28 @@ const status = reactive({
   isActive: false,
 })
 
+// 图标URL（常规）
 const iconUrl = computed(() => {
   const path = props.website.icon;
   if ($_.isEmpty(path)) {
     return '#'
   }
   
+  const baseUrl = store.getters['config/baseUrl'];
+  const prefix = store.state.config.config.favorites.iconPrefix
+  return httpAbsPath(path, baseUrl + prefix)
+})
+// 图标URL（暗色模式）
+const iconUrlOnDark = computed(() => {
+  let path = props.website.iconOnDark;
+  if ($_.isEmpty(path)) {
+    // 降级到正常图标
+    path = props.website.icon;
+    if ($_.isEmpty(path)) {
+      return '#'
+    }
+  }
+
   const baseUrl = store.getters['config/baseUrl'];
   const prefix = store.state.config.config.favorites.iconPrefix
   return httpAbsPath(path, baseUrl + prefix)
@@ -95,8 +124,8 @@ const cancel = () => {
   background: var(--hover-bg-color);
 }
 
-/* 收藏卡片的图片 */
-.nav-favorite-item__img {
+/* 收藏卡片的图标包装 */
+.nav-favorite-item__icon_wrapper {
   width: var(--icon-size);
   height: var(--icon-size);
   margin: var(--normal-distance);
@@ -108,11 +137,17 @@ const cancel = () => {
   align-items: center;
 }
 
+/* 收藏卡片的图标 */
 .nav-favorite-item__icon {
+  display: block;
   height: 100%;
   width: 100%;
 }
+.nav-favorite-item__icon.on-dark {
+  display: none;
+}
 
+/* 收藏卡片的文本部分 */
 .nav-favorite-item__text {
   margin-right: 1rem;
   flex-grow: 1;
@@ -121,13 +156,14 @@ const cancel = () => {
   white-space: nowrap;
 }
 
-/* 收藏卡片的名称 */
+/* 收藏卡片的标题 */
 .nav-favorite-item__title {
   font-size: 1rem;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
+/* 收藏卡片的副标题 */
 .nav-favorite-item__subtitle {
   margin-top: 0.1rem;
   font-size: 0.8rem;
@@ -149,4 +185,26 @@ const cancel = () => {
 		--icon-size: 2.2rem;
 	}
 }
+
+/* 暗色模式 */
+@media (prefers-color-scheme: dark) {
+  .vue-app[scheme=auto] .nav-favorite-item__icon.on-normal {
+    display: none;
+	}
+	.vue-app[scheme=auto] .nav-favorite-item__icon.on-dark {
+    display: block;
+	}
+}
+
+
+
+/******** 强制暗色模式 ********/
+
+.vue-app[scheme=dark] .nav-favorite-item__icon.on-normal {
+  display: none;
+}
+.vue-app[scheme=dark] .nav-favorite-item__icon.on-dark {
+  display: block;
+}
+
 </style>

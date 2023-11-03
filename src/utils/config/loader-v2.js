@@ -65,6 +65,7 @@ function favorites_websites_matedata() {
       title: { type: String, required: true },
       subtitle: { type: String },
       icon: { type: String },
+      iconOnDark: { type: String },
       url: { type: String, required: true },
     }
   }
