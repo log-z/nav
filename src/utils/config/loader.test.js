@@ -76,6 +76,7 @@ describe('Test config loader', () => {
             "title": "YouTube",
             "subtitle": "youtube.com",
             "icon": "youtube.svg",
+            "iconOnDark": "youtube_on_dark.svg",
             "url": "https://www.youtube.com/"
           }]
         }]

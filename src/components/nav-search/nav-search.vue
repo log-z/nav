@@ -172,7 +172,7 @@ const completeSelect = (val) => {
 
 /* 暗色模式 */
 @media (prefers-color-scheme: dark) {
-  .nav-search.glassmorphism {
+  .vue-app[scheme=auto] .nav-search.glassmorphism {
     --bg-color: rgb(22 22 22 / 50%);
   }
 }
