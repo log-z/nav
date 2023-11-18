@@ -105,14 +105,14 @@ describe('Test config loader', () => {
         nav: ${import.meta.env.VITE_DEFAULT_THEME_URL}
       active: nav.red
       custom:
-        light@primary.color: "#000"
-        light@base.background.color: "#000"
-        light@footer.background.color: "#000"
-        light@highlight.background.color: "#000"
-        dark@primary.color: "#000"
-        dark@base.background.color: "#000"
-        dark@footer.background.color: "#000"
-        dark@highlight.background.color: "#000"
+        light@primary.color: '#000'
+        light@base.background.color: '#000'
+        light@footer.background.color: '#000'
+        light@highlight.background.color: '#000'
+        dark@primary.color: '#000'
+        dark@base.background.color: '#000'
+        dark@footer.background.color: '#000'
+        dark@highlight.background.color: '#000'
     search:
       placeholder: 👴 来点什么？
       engine:
@@ -122,7 +122,7 @@ describe('Test config loader', () => {
         - bing
         - wikipedia
     favorites:
-      iconPrefix: "image:website-icon:"
+      iconPrefix: 'image:website-icon:'
       groups:
       - name: 常用
         websites:
@@ -185,24 +185,24 @@ const themeSubscribeYaml = `
   contents:
   - name: default
     custom:
-      light@primary.color: "#eb7366"
-      light@base.background.color: "#fff8f8"
-      light@footer.background.color: "#fdefef"
-      light@highlight.background.color: "#fddbd6"
-      dark@primary.color: "#eb7366"
-      dark@base.background.color: "#fff8f8"
-      dark@footer.background.color: "#fdefef"
-      dark@highlight.background.color: "#fddbd6"
+      light@primary.color: '#eb7366'
+      light@base.background.color: '#fff8f8'
+      light@footer.background.color: '#fdefef'
+      light@highlight.background.color: '#fddbd6'
+      dark@primary.color: '#eb7366'
+      dark@base.background.color: '#fff8f8'
+      dark@footer.background.color: '#fdefef'
+      dark@highlight.background.color: '#fddbd6'
   - name: red
     custom:
-      light@primary.color: "#eb7366"
-      light@base.background.color: "#fff8f8"
-      light@footer.background.color: "#fdefef"
-      light@highlight.background.color: "#fddbd6"
-      dark@primary.color: "#eb7366"
-      dark@base.background.color: "#fff8f8"
-      dark@footer.background.color: "#fdefef"
-      dark@highlight.background.color: "#fddbd6"
+      light@primary.color: '#eb7366'
+      light@base.background.color: '#fff8f8'
+      light@footer.background.color: '#fdefef'
+      light@highlight.background.color: '#fddbd6'
+      dark@primary.color: '#eb7366'
+      dark@base.background.color: '#fff8f8'
+      dark@footer.background.color: '#fdefef'
+      dark@highlight.background.color: '#fddbd6'
 `
 
 describe('Test theme subscribe loader', () => {
@@ -216,7 +216,6 @@ describe('Test theme subscribe loader', () => {
   test('simple loader V2 theme subscribe [YAML]', async () => {
     const data = source.fromYaml(themeSubscribeYaml)
     const themeSubscribe = await loadThemeSubscribe(data)
-    console.log(themeSubscribe)
     expect(themeSubscribe).toMatchObject(themeSubscribeData)
   })
 })
