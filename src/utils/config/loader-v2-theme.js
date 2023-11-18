@@ -66,8 +66,8 @@ function theme_subscribe_contents_matedata() {
 
 
 import $_ from 'lodash'
-import axios from 'axios';
 import store from '@/store'
+import source from './source';
 import { parser } from './common'
 import { httpAbsPath } from '@/utils/common'
 
@@ -81,9 +81,9 @@ async function loadActiveSubscribe(config) {
   subscribe_path = httpAbsPath(subscribe_path, base_url)
 
   try {
-    let resp = await axios.get(subscribe_path)
-    // 获取订阅成功
-    let subscribe = await subscribeLoader(resp.data)
+    // 获取订阅
+    let data = await source.fromUrl(subscribe_path)
+    let subscribe = await loadSubscribe(data)
     let subscribe_contents = subscribe.contents
     let subscribe_content = $_.find(subscribe_contents, sc => sc.name === theme_name)
     
@@ -105,11 +105,11 @@ async function loadActiveSubscribe(config) {
   }
 }
 
-export async function subscribeLoader(config) {
+export async function loadSubscribe(config) {
   return await parser(theme_subscribe_root_matedata(), config)
 }
 
-export async function loader(obj) {
+export async function load(obj) {
   let config = await parser(root_matedata(), obj ? obj : {})
   config._final = await loadActiveSubscribe(config)
   return config

@@ -6,7 +6,7 @@ function root_matedata() {
       version: { type: String },
       name: { type: String },
       description: { type: String },
-      theme: { loader: themeLoader },
+      theme: { loader: loadTheme },
       search: search_matedata(),
       favorites: favorites_matedata(),
     }
@@ -31,7 +31,7 @@ function search_engin_matedata() {
       active: {
         type: Array,
         element: String,
-        default: [ 'baidu', 'google', 'bing', 'wikipedia' ],
+        default: [ 'baidu', 'google', 'bing', 'qiuwenbaike', 'wikipedia' ],
       },
     }
   }
@@ -73,8 +73,8 @@ function favorites_websites_matedata() {
 
 
 import { parser } from './common'
-import { loader as themeLoader } from './loader-v2-theme'
+import { load as loadTheme } from './loader-v2-theme'
 
-export async function loader(obj) {
+export async function load(obj) {
   return await parser(root_matedata(), obj ? obj : {})
 }
