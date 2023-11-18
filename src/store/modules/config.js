@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { configLoader } from '@/utils/config';
+import loader from '@/utils/config';
 
 export default {
   namespaced: true,
@@ -21,8 +20,7 @@ state: () => ({
   actions: {
     update: function({commit}) {
       let url = import.meta.env.VITE_DEFAULT_CONFIG_URL
-      axios.get(url)
-        .then(response => configLoader(response.data))
+      loader.loadFromUrl(url)
         .then(config => {
           commit('config', config)
           commit('url', url)

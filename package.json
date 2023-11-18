@@ -16,7 +16,8 @@
     "lodash": "^4.17.21",
     "vue": "^3.2.47",
     "vuex": "^4.1.0",
-    "vuex-persistedstate": "^4.1.0"
+    "vuex-persistedstate": "^4.1.0",
+    "yaml": "^2.3.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",

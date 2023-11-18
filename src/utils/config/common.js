@@ -2,6 +2,33 @@ import _ from 'lodash';
 
 const ANY_TOKEN = '*'
 
+/**
+ * 检查是否为空
+ * @param val 值
+ */
+function isEmpty(val) {
+  if (val === null) {
+    return true
+  }
+
+  switch (typeof val) {
+    case 'undefined':
+      return true
+    case 'number':
+    case 'bigint':
+    case 'boolean':
+      return false
+  }
+
+  return Object.keys(val).length === 0
+}
+
+/**
+ * 解释配置
+ * @param matedata 配置片段的元数据
+ * @param obj 配置片段
+ * @returns 有效的配置片段
+ */
 async function parse(matedata, obj) {
   // 0. 若指定了外部加载器，则使用它
   if (matedata.loader && typeof matedata.loader === 'function') {
@@ -9,9 +36,9 @@ async function parse(matedata, obj) {
   }
 
   // 1. 必要值校验和默认值
-  if (matedata.required && _.isEmpty(obj)) {
+  if (matedata.required && isEmpty(obj)) {
     throw `is required.`;
-  } else if (!matedata.required && _.isEmpty(obj)) {
+  } else if (!matedata.required && isEmpty(obj)) {
     if (matedata.default !== null && matedata.default !== undefined) {
       obj = matedata.default;
     } else if (matedata.type === Array) {
@@ -35,8 +62,12 @@ async function parse(matedata, obj) {
       return undefined;
     } else if (type === matedata.type.name.toLowerCase()) {
       return obj;
-    } else {
-      throw `${obj} is not a ${matedata.type}, type "${type}".`;
+    }
+    
+    try {
+      return new matedata.type(obj).valueOf()
+    } catch (e) {
+      throw `can not cast \`${obj}\` from [${type}] to [${matedata.type}].`;
     }
   } else if (matedata.type === Array) {
     // 2.2. 数组校验（Array）
