@@ -144,6 +144,7 @@ store.dispatch('config/update')
   font-weight: bold;
   letter-spacing: 3rem;
   padding-left: 3rem;
+  -webkit-user-select: none;
   user-select: none;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;

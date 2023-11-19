@@ -171,11 +171,16 @@ https://gist.githubusercontent.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10/raw/co
 更多细节请参考 [演示配置Gits](https://gist.github.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10#file-config-nav-config-v2-sample-json) ，代码仓库同理。
 
 ### 图标
-是的，所有图标都需要你自己维护，这里我为大家准备了一些 [logos](https://github.com/log-Z/logos) 。强烈推荐使用SVG图片以获得最好效果。
+是的，所有图标都需要你自己维护。太复杂了？太耗时了？那就干脆不指定图标，把这些事情留到以后再做吧，默认会使用站点标题的第一个字作为图标展示。为方便大家，这里我也准备了一些 [logos](https://github.com/log-Z/logos) ，强烈推荐使用SVG图片以获得最好效果。
 
 > 在 Gits 中，推荐把图标和配置文件放在一起，图标文件名可通过前缀区分开。
 
-> 兼容性提示：因 Gits 仅支持纯文本文件，对于 PNG 和 JPG 等其他二进制图片请使用第三方图床或对象存储。[后续计划通过 Base64 编码为 Gits 提供二进制图片支持]
+> 兼容性提示：因 Gits 仅支持纯文本文件，对于 PNG 和 JPG 等其他二进制图片，请经过 [Base64](https://tool.chinaz.com/tools/imgtobase) 编码后保存为 `.base64` 扩展名的文本文件，或者使用第三方图床和对象存储。
+>
+> 例子：二进制图片 `sample.jpg` 转换为 Base64 文本文件 `sample.jpg.base64` 后内容大致如下
+> ```
+> data:image/jpeg;base64,/9j/2wCEAAgGBgcGBQgHB......
+> ```
 
 更多细节请参考 [演示配置Gits](https://gist.github.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10#file-config-nav-config-v2-sample-json) ，代码仓库同理。
 

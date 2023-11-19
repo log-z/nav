@@ -1,7 +1,7 @@
 <template>
   <a
     class="nav-favorite-item"
-    :class="{ 'nav-card-1': status.isActive }"
+    :class="{ 'nav-card-1': state.isActive }"
     :href="website.url"
     @mouseover="active"
     @mouseout="cancel"
@@ -15,16 +15,16 @@
         <!-- 常规图标 -->
         <img
           class="nav-favorite-item__icon on-normal"
-          :src="iconUrl"
+          :src="checkNotBase64(iconUrl) ? iconUrl : state.iconB64"
         >
         <!-- 暗色模式图标 -->
         <img
           class="nav-favorite-item__icon on-dark"
-          :src="iconUrlOnDark"
+          :src="checkNotBase64(iconUrlOnDark) ? iconUrlOnDark : state.iconB64OnDark"
         >
       </div>
-        <!-- 大字图标 -->
-        <div v-else>
+      <!-- 大字图标 -->
+      <div v-else>
         {{ website.title?.charAt(0) }}
       </div>
     </div>
@@ -62,18 +62,22 @@ export default {
 }
 </script>
 <script setup>
-import { computed, reactive } from 'vue'
+import { computed, onMounted, reactive, watch } from 'vue'
 import $_ from 'lodash'
 import { useStore } from 'vuex'
 import { httpAbsPath } from '@/utils/common'
+import axios from 'axios'
 
 const store = useStore()
 const props = defineProps()
 
-const status = reactive({
+const state = reactive({
   isActive: false,
+  iconB64: null,
+  iconB64OnDark: null,
 })
 
+// 图标URL
 // 图标URL（常规）
 const iconUrl = computed(() => {
   const path = props.website.icon;
@@ -101,11 +105,48 @@ const iconUrlOnDark = computed(() => {
   return httpAbsPath(path, baseUrl + prefix)
 })
 
+// 图标Base64探测
+// 检查图标是否为Base64扩展名的文件
+const BASE64_FILE_EXTENSION = '.base64'
+function checkNotBase64(url) {
+  const path = url.split('?')[0]
+  return !path.endsWith(BASE64_FILE_EXTENSION)
+}
+// 刷新图标Base64（常规）
+const refreshIconB64 = (url) => {
+  if (checkNotBase64(url)) {
+    state.iconB64 = null
+    return
+  }
+  axios.get(url)
+    .then(resp => {
+      state.iconB64 = resp.data
+    })
+}
+// 刷新图标Base64（暗色模式）
+const refreshIconB64OnDark = (url) => {
+  if (checkNotBase64(url)) {
+    state.iconB64OnDark = null
+    return
+  }
+  axios.get(url)
+    .then(resp => {
+      state.iconB64OnDark = resp.data
+    })
+}
+// 持续探测及初始化
+watch(iconUrl, refreshIconB64)
+watch(iconUrlOnDark, refreshIconB64OnDark)
+onMounted(() => {
+  refreshIconB64(iconUrl.value)
+  refreshIconB64OnDark(iconUrlOnDark.value)
+})
+
 const active = () => {
-  status.isActive = true
+  state.isActive = true
 }
 const cancel = () => {
-  status.isActive = false
+  state.isActive = false
 }
 </script>
 
