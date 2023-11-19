@@ -175,7 +175,7 @@ https://gist.githubusercontent.com/log-Z/c5271da181ebb0338ec8d360e1fe7d10/raw/co
 
 > 在 Gits 中，推荐把图标和配置文件放在一起，图标文件名可通过前缀区分开。
 
-> 兼容性提示：因 Gits 仅支持纯文本文件，对于 PNG 和 JPG 等其他二进制图片，请经过 Base64 编码后保存为 `.base64` 扩展名的文本文件，或者使用第三方图床和对象存储。
+> 兼容性提示：因 Gits 仅支持纯文本文件，对于 PNG 和 JPG 等其他二进制图片，请经过 [Base64](https://tool.chinaz.com/tools/imgtobase) 编码后保存为 `.base64` 扩展名的文本文件，或者使用第三方图床和对象存储。
 >
 > 例子：二进制图片 `sample.jpg` 转换为 Base64 文本文件 `sample.jpg.base64` 后内容大致如下
 > ```
