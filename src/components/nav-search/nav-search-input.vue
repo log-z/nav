@@ -1,6 +1,7 @@
 <template>
   <div class="nav-search-input">
     <input
+      name="nav-search-input"
       class="nav-search-input__input"
       type="text"
       autocomplete="off"
