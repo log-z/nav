@@ -13,6 +13,7 @@
       @input="input"
       @focus="emit('focus')"
       @blur="emit('blur')"
+      @keydown.escape.exact.prevent="inputRef.blur() && emit('blur')"
       @keydown.down.exact.prevent="emit('complete-next')"
       @keydown.up.exact.prevent="emit('complete-prev')"
       @keydown.down.ctrl.exact.prevent="emit('eng-next')"
@@ -63,10 +64,10 @@ const focus = () => inputRef.value.focus()
 const hasFocus = () => inputRef.value == document.activeElement
 
 // 监听快捷键
-const SHORTCUT_KEY = '/'
+const SHORTCUT_KEYS = ['Escape', '/']
 const IGNORE_ELEMENT = ['INPUT', 'TEXTAREA']
-document.addEventListener('keypress', (event) => {
-  if (event.key === SHORTCUT_KEY && !IGNORE_ELEMENT.includes(event.target.nodeName)) {
+document.addEventListener('keydown', (event) => {
+  if (SHORTCUT_KEYS.includes(event.key) && !IGNORE_ELEMENT.includes(event.target.nodeName)) {
     focus()
     event.preventDefault()
   }
