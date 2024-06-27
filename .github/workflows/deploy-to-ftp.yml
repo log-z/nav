@@ -18,7 +18,7 @@ jobs:
       uses: actions/checkout@v4
     - run: bash .github/workflows/env-builder.sh ${{ secrets.ENV_DEFAULT_CONFIG_URL }} > .env.local
     
-    - name: 🔨 Build Project Use Node.js 16
+    - name: 🔨 Build Project Use Node.js 20
       uses: actions/setup-node@v4
       with:
         node-version: 20
