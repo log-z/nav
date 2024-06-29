@@ -16,13 +16,13 @@
         <img
           class="nav-favorite-item__icon on-normal"
           :src="checkNotBase64(iconUrl) ? iconUrl : state.iconB64"
-          :alt="website.title"
+          alt=""
         >
         <!-- 暗色模式图标 -->
         <img
           class="nav-favorite-item__icon on-dark"
           :src="checkNotBase64(iconUrlOnDark) ? iconUrlOnDark : state.iconB64OnDark"
-          :alt="website.title"
+          alt=""
         >
       </div>
       <!-- 大字图标 -->
