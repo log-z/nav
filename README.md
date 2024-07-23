@@ -2,6 +2,9 @@
 
 基于 Vue3 构造的简单导航页，支持零编码发布上线。[演示](https://log-z.github.io/nav)
 
+快捷操作速览：
+<video src="https://github.com/user-attachments/assets/cb9acb77-a514-4c83-ba7e-5784e949a11d">
+
 ## 起步
 ### 推荐方案：GitHub + Gits + GitHub Pages
 1. 将此代码仓库 fork 一份到你的账号中，得到独立的工作环境。
