@@ -1,4 +1,4 @@
-import { rest } from 'msw'
+import { http, HttpResponse } from 'msw'
 import { setupServer } from 'msw/node'
 import { afterAll, beforeAll, afterEach, describe, expect, test } from 'vitest'
 import loader from '.';
@@ -225,13 +225,13 @@ describe('Test theme subscribe loader', () => {
  请求拦截与模拟
  */
 
-const restHandlers = [
-  rest.get(import.meta.env.VITE_DEFAULT_THEME_URL, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(themeSubscribeData))
+const httpHandlers = [
+  http.get(import.meta.env.VITE_DEFAULT_THEME_URL, () => {
+    return HttpResponse.json(themeSubscribeData)
   }),
 ]
 
-const server = setupServer(...restHandlers)
+const server = setupServer(...httpHandlers)
 
 beforeAll(() => server.listen({}))
 afterAll(() => server.close())
