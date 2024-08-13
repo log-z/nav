@@ -13,12 +13,12 @@ jobs:
 
     steps:
     - name: 🚚 Get latest code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - run: bash .github/workflows/env-builder.sh ${{ secrets.ENV_DEFAULT_CONFIG_URL }} > .env.local
     
-    - name: 🔨 Build Project Use Node.js 16
-      uses: actions/setup-node@v3
+    - name: 🔨 Build Project Use Node.js 20
+      uses: actions/setup-node@v4
       with:
-        node-version: 16
+        node-version: 20
     - run: npm ci
     - run: npm run test
