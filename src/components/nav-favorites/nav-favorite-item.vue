@@ -39,8 +39,8 @@
       </div>
       <!-- 副标题 -->
       <div
-        class="nav-favorite-item__subtitle"
         v-if="website.subtitle"
+        class="nav-favorite-item__subtitle"
       >
         {{ website.subtitle }}
       </div>
@@ -50,7 +50,7 @@
 
 <script>
 export default {
-  name: 'navFavoriteItem',
+  name: 'NavFavoriteItem',
   props: {
     website: {
       type: Object,

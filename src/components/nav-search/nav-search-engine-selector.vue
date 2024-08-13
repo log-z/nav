@@ -6,22 +6,28 @@
       @click="next"
     >
       <Baidu
-        v-if="status.eng == 'baidu'" />
+        v-if="status.eng == 'baidu'"
+      />
       <Google
-        v-if="status.eng == 'google'" />
+        v-if="status.eng == 'google'"
+      />
       <Bing
-        v-if="status.eng == 'bing'" />
+        v-if="status.eng == 'bing'"
+      />
       <Qiuwenbaike
-        v-if="status.eng == 'qiuwenbaike'" />
+        v-if="status.eng == 'qiuwenbaike'"
+      />
       <Wikipedia
-        v-if="status.eng == 'wikipedia'" />
+        v-if="status.eng == 'wikipedia'"
+      />
     </nav-icon>
     <!-- 气泡 -->
     <div class="nav-search-engine-selector__popover">
       <div class="nav-search-engine-selector__popover-wrapper nav-card-2">
-        <div class="nav-search-engine-selector__popover_item"
+        <div
           v-for="eng in engineList"
           :key="eng"
+          class="nav-search-engine-selector__popover_item"
           :class="{active: eng == status.eng}"
           @click="select(eng)"
         >
@@ -48,7 +54,7 @@
 
 <script>
 export default {
-  name: 'navSearchEngineSelector'
+  name: 'NavSearchEngineSelector'
 }
 </script>
 

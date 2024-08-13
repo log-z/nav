@@ -1,13 +1,13 @@
 <template>
   <div class="nav-search-input">
     <input
+      ref="inputRef"
       name="nav-search-input"
       class="nav-search-input__input"
       type="text"
       autocomplete="off"
       autofocus="autofocus"
       spellcheck="false"
-      ref="inputRef"
       :placeholder="placeholder"
       :value="modelValue"
       @input="input"
@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: 'navSearchInput',
+  name: 'NavSearchInput',
   props: {
     modelValue: {
       type: String,

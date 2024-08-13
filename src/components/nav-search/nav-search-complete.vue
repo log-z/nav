@@ -1,7 +1,7 @@
 <template>
   <div
-    class="nav-search-complete nav-card-2"
     v-if="list.length > 1"
+    class="nav-search-complete nav-card-2"
   >
     <ol>
       <li
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'navSearchComplete',
+  name: 'NavSearchComplete',
 }
 </script>
 <script setup>

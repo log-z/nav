@@ -1,9 +1,9 @@
 <template>
-  <span class="iconfont icon-cheveron-right"></span>
+  <span class="iconfont icon-cheveron-right" />
 </template>
 
 <script>
 export default {
-  name: 'navIconCheveronRight'
+  name: 'NavIconCheveronRight'
 }
 </script>

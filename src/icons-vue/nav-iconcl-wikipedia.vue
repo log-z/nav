@@ -1,9 +1,9 @@
 <template>
-  <span class="iconfont-coloru icon-cl-wikipedia"></span>
+  <span class="iconfont-coloru icon-cl-wikipedia" />
 </template>
 
 <script>
 export default {
-  name: 'navIconclWikipedia'
+  name: 'NavIconclWikipedia'
 }
 </script>
