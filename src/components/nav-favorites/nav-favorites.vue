@@ -3,13 +3,14 @@
     <nav-favorite-group
       v-for="g in groups"
       :key="g.name"
-      :info="g" />
+      :info="g"
+    />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'navFavorites'
+  name: 'NavFavorites'
 }
 </script>
 <script setup>

@@ -1,6 +1,8 @@
 <template>
   <div class="nav-favorite-group">
-    <h2 class="nav-favorite-group__title">{{ info.name }}</h2>
+    <h2 class="nav-favorite-group__title">
+      {{ info.name }}
+    </h2>
     <ul>
       <li
         v-for="item in info.websites"
@@ -14,7 +16,7 @@
 
 <script>
 export default {
-  name: 'navFavoriteGroup',
+  name: 'NavFavoriteGroup',
   props: {
     info: {
       type: Object,

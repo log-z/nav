@@ -1,9 +1,9 @@
 <template>
-  <span class="iconfont-coloru icon-cl-bing"></span>
+  <span class="iconfont-coloru icon-cl-bing" />
 </template>
 
 <script>
 export default {
-  name: 'navIconclBing'
+  name: 'NavIconclBing'
 }
 </script>

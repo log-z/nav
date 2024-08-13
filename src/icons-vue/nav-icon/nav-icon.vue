@@ -1,19 +1,19 @@
 <template>
   <div class="nav-icon">
-    <slot></slot>
+    <slot />
   </div>
 </template>
+
+<script>
+export default {
+  name: 'NavIcon'
+}
+</script>
+<script setup>
+</script>
 
 <style>
 .nav-icon > span {
   display: block;
 }
 </style>
-
-<script>
-export default {
-  name: 'navIcon'
-}
-</script>
-<script setup>
-</script>

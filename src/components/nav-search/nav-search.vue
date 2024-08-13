@@ -1,41 +1,47 @@
 <template>
-  <div class="nav-search" :class="rootClass">
+  <div
+    class="nav-search"
+    :class="rootClass"
+  >
     <form
       :class="fromClass"
       @submit.prevent="submit"
     >
       <nav-search-input
-        v-model="data.searchWord"
         ref="inputRef"
+        v-model="data.searchWord"
         @input="input"
         @focus="focus"
         @blur="blur"
         @eng-next="engineNext"
         @eng-prev="enginePrev"
         @complete-next="completeNext"
-        @complete-prev="completePrev" />
+        @complete-prev="completePrev"
+      />
       <nav-search-engine-selector
         ref="engineSelectorRef"
         :engine="engine"
-        @change="engineChange" />
+        @change="engineChange"
+      />
       <nav-icon
         class="nav-search__submit"
         @click="submit"
       >
-        <CheveronRight/>
+        <CheveronRight />
       </nav-icon>
     </form>
     <nav-search-complete
       ref="completeRef"
       :list="data.complete"
       @selecte="completeSelect"
-      @change="completeChange" />
+      @change="completeChange"
+    />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'navSearch'
+  name: 'NavSearch'
 }
 </script>
 <script setup>

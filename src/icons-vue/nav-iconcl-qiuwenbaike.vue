@@ -1,9 +1,9 @@
 <template>
-  <span class="iconfont-coloru icon-cl-qiuwenbaike"></span>
+  <span class="iconfont-coloru icon-cl-qiuwenbaike" />
 </template>
 
 <script>
 export default {
-  name: 'navIconclQiuwenbaike'
+  name: 'NavIconclQiuwenbaike'
 }
 </script>

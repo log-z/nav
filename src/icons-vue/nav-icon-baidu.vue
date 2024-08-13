@@ -1,9 +1,9 @@
 <template>
-  <span class="iconfont icon-baidu"></span>
+  <span class="iconfont icon-baidu" />
 </template>
 
 <script>
 export default {
-  name: 'navIconBaidu'
+  name: 'NavIconBaidu'
 }
 </script>

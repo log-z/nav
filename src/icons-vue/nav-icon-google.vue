@@ -1,9 +1,9 @@
 <template>
-  <span class="iconfont icon-google"></span>
+  <span class="iconfont icon-google" />
 </template>
 
 <script>
 export default {
-  name: 'navIconGoogle'
+  name: 'NavIconGoogle'
 }
 </script>

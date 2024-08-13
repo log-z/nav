@@ -1,9 +1,9 @@
 <template>
-  <span class="iconfont icon-wikipedia"></span>
+  <span class="iconfont icon-wikipedia" />
 </template>
 
 <script>
 export default {
-  name: 'navIconWikipedia'
+  name: 'NavIconWikipedia'
 }
 </script>

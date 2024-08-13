@@ -1,17 +1,22 @@
 <template>
   <footer class="nav-foot">
     <!-- 切换毛玻璃特性 -->
-    <button class="nav-foot__action" @click.prevent="toggleFeatureGlassmorphism">
-      {{featureGlassmorphism ? '毛玻璃' : '纯色'}}
+    <button
+      class="nav-foot__action"
+      @click.prevent="toggleFeatureGlassmorphism"
+    >
+      {{ featureGlassmorphism ? '毛玻璃' : '纯色' }}
     </button>
     <!-- 描述信息 -->
-    <div class="nav-foot__info">{{description}}</div>
+    <div class="nav-foot__info">
+      {{ description }}
+    </div>
   </footer>
 </template>
 
 <script>
 export default {
-  name: 'navFoot'
+  name: 'NavFoot'
 }
 </script>
 <script setup>

@@ -17,7 +17,8 @@
           <!-- LOGO -->
           <nav-logo
             @mouseenter="toggleScheme"
-            @mouseleave="clearToggleScheme" />
+            @mouseleave="clearToggleScheme"
+          />
         </div>
         <div class="vue-app__search-warppar">
           <!-- 搜索 -->

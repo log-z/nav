@@ -1,9 +1,9 @@
 <template>
-  <span class="iconfont icon-qiuwenbaike"></span>
+  <span class="iconfont icon-qiuwenbaike" />
 </template>
 
 <script>
 export default {
-  name: 'navIconQiuwenbaike'
+  name: 'NavIconQiuwenbaike'
 }
 </script>
