@@ -1,6 +1,7 @@
+import { setActivePinia, createPinia } from 'pinia'
 import { http, HttpResponse } from 'msw'
 import { setupServer } from 'msw/node'
-import { afterAll, beforeAll, afterEach, describe, expect, test } from 'vitest'
+import { afterAll, beforeAll, beforeEach, afterEach, describe, expect, test } from 'vitest'
 import loader from '.';
 import source from './source';
 import { loadSubscribe as loadThemeSubscribe } from './loader-v2-theme'
@@ -236,3 +237,12 @@ const server = setupServer(...httpHandlers)
 beforeAll(() => server.listen({}))
 afterAll(() => server.close())
 afterEach(() => server.resetHandlers())
+
+
+/*
+ 初始化Pinia
+ */
+
+beforeEach(() => {
+  setActivePinia(createPinia())
+})
