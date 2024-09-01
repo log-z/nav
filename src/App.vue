@@ -34,18 +34,20 @@
 </template>
 
 <script setup>
-import { useStore } from 'vuex'
-import NavLogo from '@/components/nav-logo';
-import NavSearch from '@/components/nav-search';
-import NavFavorteList from '@/components/nav-favorites';
-import NavFoot from '@/components/nav-foot';
-import { computed, reactive } from 'vue';
+import { computed, reactive } from 'vue'
+import NavLogo from '@/components/nav-logo'
+import NavSearch from '@/components/nav-search'
+import NavFavorteList from '@/components/nav-favorites'
+import NavFoot from '@/components/nav-foot'
+import { useConfigStore } from '@/stores/config'
+import { usePrefersStore } from '@/stores/prefers'
 
-const store = useStore()
+const configStore = useConfigStore()
+const prefersStore = usePrefersStore()
 
 // 主题样式
 const themeStyle = reactive({
-  conf: computed(() => store.state.config.config.theme?._final),
+  conf: computed(() => configStore.config.theme?._final),
   '--light-primary-color': computed(() => themeStyle.conf?.['light@primary.color']),
   '--light-bg-color': computed(() => themeStyle.conf?.['light@base.background.color']),
   '--light-footer-bg-color': computed(() => themeStyle.conf?.['light@footer.background.color']),
@@ -59,7 +61,7 @@ const themeStyle = reactive({
 // 配色方案
 const schemes = ['auto', 'light', 'dark']
 const scheme = reactive({
-  current: computed(() => store.state.prefers.colorScheme),
+  current: computed(() => prefersStore.colorScheme),
   showHint: false,
 })
 // 切换配色方案
@@ -68,7 +70,7 @@ const toggleScheme = () => {
   timeoutScheme = setTimeout(() => {
     let nextIdx = schemes.findIndex(s => s === scheme.current) + 1
     const nextScheme = schemes[nextIdx % schemes.length]
-    store.commit('prefers/colorScheme', nextScheme)
+    prefersStore.colorScheme = nextScheme
 
     scheme.showHint = true
     setTimeout(() => {scheme.showHint = false}, 800)
@@ -79,7 +81,7 @@ const clearToggleScheme = () => {
 }
 
 // 拉取最新配置
-store.dispatch('config/update')
+configStore.update()
 </script>
 
 <style>

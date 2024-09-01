@@ -1,6 +1,6 @@
 {
   "name": "nav",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "private": true,
   "scripts": {
     "dev": "vite",
@@ -14,9 +14,9 @@
     "axios": "^1.7.4",
     "axios-jsonp": "^1.0.4",
     "lodash": "^4.17.21",
+    "pinia": "^2.2.2",
+    "pinia-plugin-persistedstate": "^3.2.3",
     "vue": "^3.4.37",
-    "vuex": "^4.1.0",
-    "vuex-persistedstate": "^4.1.0",
     "yaml": "^2.5.0"
   },
   "devDependencies": {

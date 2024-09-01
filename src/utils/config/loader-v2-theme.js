@@ -66,9 +66,9 @@ function theme_subscribe_contents_matedata() {
 
 
 import $_ from 'lodash'
-import store from '@/store'
 import source from './source';
 import { parser } from './common'
+import { useConfigStore } from '@/stores/config'
 import { httpAbsPath } from '@/utils/common'
 
 // 加载订阅的主题
@@ -77,7 +77,8 @@ async function loadActiveSubscribe(config) {
   let subscribe_path = config.subscribe[subscribe_name]
   
   // 相对路径转为绝对路径
-  let base_url = store.getters['config/baseUrl'];
+  const configStore = useConfigStore()
+  let base_url = configStore.baseUrl
   subscribe_path = httpAbsPath(subscribe_path, base_url)
 
   try {

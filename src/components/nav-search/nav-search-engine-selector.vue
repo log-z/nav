@@ -60,9 +60,10 @@ export default {
 
 <script setup>
 import { computed, reactive } from 'vue';
-import { useStore } from 'vuex';
+import { useConfigStore } from '@/stores/config'
 
-const store = useStore()
+const configStore = useConfigStore()
+
 const emit = defineEmits([ 'change' ])
 const props = defineProps({
   engine: {
@@ -78,7 +79,7 @@ const status = reactive({
 })
 
 const engineList = computed(() => {
-  let searchConfig = store.state.config.config.search
+  let searchConfig = configStore.config.search
   return searchConfig?.engine?.active === undefined ? [] : searchConfig.engine.active
 })
 const next = () => {

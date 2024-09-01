@@ -46,14 +46,14 @@ export default {
 </script>
 <script setup>
 import { computed, reactive, ref } from 'vue';
-import { useStore } from 'vuex';
 import $_ from 'lodash'
 import NavSearchInput from './nav-search-input.vue';
 import NavSearchEngineSelector from './nav-search-engine-selector.vue';
 import NavSearchComplete from './nav-search-complete.vue';
+import { usePrefersStore } from '@/stores/prefers'
 import searchEngine from '@/utils/search-engine';
 
-const store = useStore()
+const prefersStore = usePrefersStore()
 
 const inputRef = ref()
 const engineSelectorRef = ref()
@@ -67,8 +67,8 @@ const data = reactive({
 
 const rootClass = computed(() => featureGlassmorphism.value ? 'glassmorphism' : null)
 const fromClass = computed(() => data.isFocus ? 'nav-card-2' : 'nav-card-1')
-const engine = computed(() => store.state.prefers.searchEngine)
-const featureGlassmorphism = computed(() => store.state.prefers.feature.glassmorphism)
+const engine = computed(() => prefersStore.searchEngine)
+const featureGlassmorphism = computed(() => prefersStore.feature.glassmorphism)
 
 let input = $_.debounce((val) => {
   if (!val) {
@@ -108,8 +108,8 @@ const enginePrev = () => {
   engineSelectorRef.value.prev();
 }
 const engineChange = (eng) => {
-  store.commit('prefers/searchEngine', eng);
-  data.complete = [data.searchWord];
+  prefersStore.searchEngine = eng
+  data.complete = [data.searchWord]
   input(data.searchWord);
   inputRef.value.focus();
 }

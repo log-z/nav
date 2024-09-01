@@ -37,9 +37,9 @@ export default {
 </script>
 <script setup>
 import { computed, ref } from 'vue';
-import { useStore } from 'vuex';
+import { useConfigStore } from '@/stores/config'
 
-const store = useStore()
+const configStore = useConfigStore()
 
 const inputRef = ref()
 const emit = defineEmits([
@@ -53,7 +53,7 @@ const emit = defineEmits([
   'update:modelValue',
 ])
 
-const placeholder = computed(() => store.state.config.config.search?.placeholder)
+const placeholder = computed(() => configStore.config.search?.placeholder)
 
 const input = (event) => {
   const val = event.target.value

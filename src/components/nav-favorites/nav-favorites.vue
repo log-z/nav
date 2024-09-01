@@ -15,12 +15,13 @@ export default {
 </script>
 <script setup>
 import { computed } from 'vue';
-import { useStore } from 'vuex';
 import NavFavoriteGroup from './nav-favorite-group.vue';
+import { useConfigStore } from '@/stores/config'
 
-const store = useStore()
+const configStore = useConfigStore()
+
 const groups = computed(() => {
-  let favorites = store.state.config.config.favorites
+  let favorites = configStore.config.favorites
   return favorites === undefined ? [] : favorites.groups
 })
 </script>

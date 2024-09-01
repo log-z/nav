@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import App from './App.vue'
-import store from '@/store'
 
 // Import Base CSS
 import '@/assets/css/base.css'
@@ -11,8 +12,11 @@ import '@/assets/css/iconfont-coloru.css'
 import * as NavIconsVue from './icons-vue'
 
 
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
+
 const app = createApp(App)
-app.use(store)
+app.use(pinia)
 
 // Global import Icon-font Component
 for (const [key, component] of Object.entries(NavIconsVue)) {

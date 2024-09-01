@@ -21,15 +21,19 @@ export default {
 </script>
 <script setup>
 import { computed } from 'vue';
-import { useStore } from 'vuex';
+import { useConfigStore } from '@/stores/config'
+import { usePrefersStore } from '@/stores/prefers'
 
-const store = useStore()
-const description = computed(() => store.state.config.config.description)
+const configStore = useConfigStore()
+const prefersStore = usePrefersStore()
+
+// 描述信息
+const description = computed(() => configStore.config.description)
 
 // 切换毛玻璃特性
-const featureGlassmorphism = computed(() => store.state.prefers.feature.glassmorphism)
+const featureGlassmorphism = computed(() => prefersStore.feature.glassmorphism)
 const toggleFeatureGlassmorphism = () => {
-  store.commit('prefers/featureGlassmorphism', !featureGlassmorphism.value)
+  prefersStore.feature.glassmorphism = !featureGlassmorphism.value
 }
 </script>
 
