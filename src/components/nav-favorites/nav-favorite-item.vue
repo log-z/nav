@@ -69,11 +69,12 @@ export default {
 <script setup>
 import { computed, onMounted, reactive, watch } from 'vue'
 import $_ from 'lodash'
-import { useStore } from 'vuex'
-import { httpAbsPath } from '@/utils/common'
 import axios from 'axios'
+import { useConfigStore } from '@/stores/config'
+import { httpAbsPath } from '@/utils/common'
 
-const store = useStore()
+const configStore = useConfigStore()
+
 const props = defineProps()
 
 const state = reactive({
@@ -90,8 +91,8 @@ const iconUrl = computed(() => {
     return '#'
   }
   
-  const baseUrl = store.getters['config/baseUrl'];
-  const prefix = store.state.config.config.favorites.iconPrefix
+  const baseUrl = configStore.baseUrl
+  const prefix = configStore.config.favorites.iconPrefix
   return httpAbsPath(path, baseUrl + prefix)
 })
 // 图标URL（暗色模式）
@@ -105,8 +106,8 @@ const iconUrlOnDark = computed(() => {
     }
   }
 
-  const baseUrl = store.getters['config/baseUrl'];
-  const prefix = store.state.config.config.favorites.iconPrefix
+  const baseUrl = configStore.baseUrl
+  const prefix = configStore.config.favorites.iconPrefix
   return httpAbsPath(path, baseUrl + prefix)
 })
 

@@ -1,18 +1,24 @@
 <template>
   <div
-    v-if="list.length > 1"
     class="nav-search-complete nav-card-2"
+    :class="rootClass"
+    :style="rootStyle"
   >
-    <ol>
-      <li
-        v-for="(item, index) in $_.drop(list)"
-        :key="index + 1"
-        :class="{'active': isActive(index + 1)}"
-        @mousedown.left="selecte(index + 1)"
-      >
-        {{ item }}
-      </li>
-    </ol>
+    <div
+      ref="listWarpper"
+      class="nav-search-complete__list-warpper"
+    >
+      <ol>
+        <li
+          v-for="(item, index) in $_.drop(list)"
+          :key="index + IDX_BEGIN"
+          :class="{'active': isActive(index + IDX_BEGIN)}"
+          @mousedown.left="selecte(index + IDX_BEGIN)"
+        >
+          {{ item }}
+        </li>
+      </ol>
+    </div>
   </div>
 </template>
 
@@ -22,9 +28,12 @@ export default {
 }
 </script>
 <script setup>
-import { reactive, watch } from 'vue';
+import { computed, reactive, ref, watch } from 'vue';
 import $_ from 'lodash'
 
+const IDX_BEGIN = 1
+
+const listWarpper = ref();
 const props = defineProps({
   list: {
     type: Array,
@@ -34,6 +43,14 @@ const props = defineProps({
   },
 })
 const emit = defineEmits([ 'selecte', 'change' ])
+
+const isHidden = () => props.list.length <= IDX_BEGIN
+const rootClass = reactive({
+  hidden: computed(isHidden)
+})
+const rootStyle = reactive({
+  height: computed(() => isHidden() ? '0' : listWarpper.value?.offsetHeight + 'px')
+})
 
 const status = reactive({
   active: 0
@@ -77,24 +94,32 @@ defineExpose({
   background: var(--bg-color);
   backdrop-filter: var(--bg-filter);
 	z-index: 1;
+  overflow: hidden;
+  transition: height 0.15s ease-out, opacity 0.15s ease-out;
+}
+/* 自动完成 - 隐藏状态 */
+.nav-search-complete.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* 自动完成列表 */
-.nav-search-complete > ol {
-	margin: var(--v-spacing) 0;
-	padding: 0;
+.nav-search-complete__list-warpper > ol {
+	margin: 0;
+	padding: var(--v-spacing) 0;
 	list-style: none;
 	text-align: left;
 }
 
 /* 自动完成选项 */
-.nav-search-complete > ol > li {
+.nav-search-complete__list-warpper > ol > li {
 	padding: var(--v-spacing) var(--h-spacing);
 	cursor: pointer;
+  line-height: 1.3rem;
 	transition: background-color 0.1s ease-out;
 }
-.nav-search-complete > ol > li.active,
-.nav-search-complete > ol > li:hover {
+.nav-search-complete__list-warpper > ol > li.active,
+.nav-search-complete__list-warpper > ol > li:hover {
 	background: var(--hover-bg-color);
 }
 </style>
