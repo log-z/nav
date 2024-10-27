@@ -6,6 +6,7 @@
   --content-width: 1024px;
   --content-pandding: none;
   --normal-distance: 1rem;
+  --border-radius: 8px;
   font-size: 16px;
 }
 
@@ -45,17 +46,17 @@ input:focus {
 }
 
 .nav-card-0 {
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   border: rgba(0, 0, 0, 0.06) 0.06rem solid;
 }
 
 .nav-card-1 {
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   box-shadow: rgba(0, 0, 0, .2) 0 2px 5px;
 }
 
 .nav-card-2 {
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   box-shadow: rgba(0, 0, 0, .2) 0 5px 12px;
 }
 
