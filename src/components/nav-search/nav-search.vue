@@ -148,15 +148,17 @@ const completeSelect = (val) => {
   align-items: stretch;
   transition: box-shadow 0.3s, background-color 0.2s;
 }
-.nav-search.glassmorphism > form::before {
+.nav-search > form::before {
   content: "";
   position: absolute;
   width: 100%;
   height: 100%;
-  z-index: 0;
   background: var(--bg-color);
+  border-radius: var(--border-radius);
+  z-index: 0;
+}
+.nav-search.glassmorphism > form::before {
   backdrop-filter: var(--bg-filter);
-  border-radius: var(--border-radius)
 }
 
 .nav-search > form > * {
