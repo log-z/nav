@@ -147,10 +147,20 @@ const completeSelect = (val) => {
   flex-direction: row;
   align-items: stretch;
   transition: box-shadow 0.3s, background-color 0.2s;
-  background: var(--bg-color);
 }
-.nav-search.glassmorphism > form {
+.nav-search.glassmorphism > form::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: var(--bg-color);
   backdrop-filter: var(--bg-filter);
+  border-radius: var(--border-radius)
+}
+
+.nav-search > form > * {
+  z-index: 1;
 }
 
 .nav-search-input {

@@ -22,7 +22,9 @@
       />
     </nav-icon>
     <!-- 气泡 -->
-    <div class="nav-search-engine-selector__popover">
+    <div class="nav-search-engine-selector__popover"
+      :class="{peeking: status.peekPopover}"
+    >
       <div class="nav-search-engine-selector__popover-wrapper nav-card-2">
         <div
           v-for="eng in engineList"
@@ -76,6 +78,7 @@ const props = defineProps({
 
 const status = reactive({
   eng: props.engine,
+  peekPopover: false,
 })
 
 const engineList = computed(() => {
@@ -87,19 +90,30 @@ const next = () => {
   if (i < 0) i = 0;
   status.eng = engineList.value[i];
   notify();
+  peekPopover()
 }
 const prev = () => {
   let i = (engineList.value.indexOf(status.eng) - 1) % engineList.value.length;
   if (i < 0) i = engineList.value.length - 1;
   status.eng = engineList.value[i];
   notify();
+  peekPopover()
 }
 const select = (eng) => {
   status.eng = eng;
   notify();
+  peekPopover()
 }
 const notify = () => {
   emit('change', status.eng);
+}
+
+// 使气泡浮现，并停留片刻
+let peekPopoverTimeoutId = null
+const peekPopover = () => {
+  status.peekPopover = true
+  clearTimeout(peekPopoverTimeoutId)
+  peekPopoverTimeoutId = setTimeout(() => status.peekPopover = false, 1000)
 }
 
 defineExpose({
@@ -124,12 +138,10 @@ defineExpose({
   top: calc(0px - var(--v-popover) - var(--v-spacing));
   padding-bottom: var(--v-spacing);
   cursor: auto;
-  opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease-in-out;
 }
-.nav-search-engine-selector:hover .nav-search-engine-selector__popover {
-  opacity: 100;
+.nav-search-engine-selector:hover .nav-search-engine-selector__popover,
+.nav-search-engine-selector__popover.peeking {
   pointer-events: auto;
 }
 
@@ -141,11 +153,17 @@ defineExpose({
   cursor: pointer;
   display: flex;
   align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.nav-search-engine-selector:hover .nav-search-engine-selector__popover-wrapper,
+.nav-search-engine-selector__popover.peeking .nav-search-engine-selector__popover-wrapper {
+  opacity: 100;
 }
 
 .nav-search-engine-selector__popover_item {
   padding: 0 0.2rem;
-  opacity: 0.5;
+  opacity: 0.7;
   filter: grayscale(50%);
   transition: transform 0.1s ease-in-out, filter 0.1s ease-in-out;
 }
