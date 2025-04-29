@@ -69,9 +69,9 @@ export default {
 <script setup>
 import { computed, onMounted, reactive, watch } from 'vue'
 import $_ from 'lodash'
-import axios from 'axios'
 import { useConfigStore } from '@/stores/config'
 import { httpAbsPath } from '@/utils/common'
+import { imgApi, ghCli, isGithubUrl } from '@/utils/request'
 
 const configStore = useConfigStore()
 
@@ -81,35 +81,84 @@ const state = reactive({
   isActive: false,
   iconB64: null,
   iconB64OnDark: null,
+  iconBlobUrl: null,
+  iconBlobUrlOnDark: null,
 })
 
 // 图标URL
+// 图标URL默认值
+const DEFAULT_ICON_URL = '#'
 // 图标URL（常规）
 const iconUrl = computed(() => {
-  const path = props.website.icon;
-  if ($_.isEmpty(path)) {
-    return '#'
+  const path = state.iconBlobUrl || props.website.icon;
+  if ($_.isEmpty(path) || path === DEFAULT_ICON_URL) {
+    return DEFAULT_ICON_URL
+  }
+  if (path.startsWith('blob:')) {
+    return path
   }
   
   const baseUrl = configStore.baseUrl
   const prefix = configStore.config.favorites.iconPrefix
-  return httpAbsPath(path, baseUrl + prefix)
+  const url = httpAbsPath(path, baseUrl + prefix)
+  return fetchIconUrl(url, false)
 })
 // 图标URL（暗色模式）
 const iconUrlOnDark = computed(() => {
-  let path = props.website.iconOnDark;
-  if ($_.isEmpty(path)) {
+  let path = state.iconBlobUrlOnDark || props.website.iconOnDark;
+  if ($_.isEmpty(path) || path === DEFAULT_ICON_URL) {
     // 降级到正常图标
-    path = props.website.icon;
+    path = state.iconBlobUrl || props.website.icon;
     if ($_.isEmpty(path)) {
-      return '#'
+      return DEFAULT_ICON_URL
     }
+  }
+  if (path.startsWith('blob:')) {
+    return path
   }
 
   const baseUrl = configStore.baseUrl
   const prefix = configStore.config.favorites.iconPrefix
-  return httpAbsPath(path, baseUrl + prefix)
+  const url = httpAbsPath(path, baseUrl + prefix)
+  return fetchIconUrl(url, true)
 })
+
+// 对某些站点特殊处理图标URL
+const ghIconCache = {}
+function fetchIconUrl(url, onDark) {
+
+  // 特殊处理 GitHub URL
+  // 避免 GitHub 阻止使用中文语言的浏览器请求
+  // 先通过 XHR 请求图标，然后转换为 BlobUrl 进行展示
+  if (isGithubUrl(url) && checkNotBase64(url)) {
+    const cacheUrl = ghIconCache[url]
+    if (cacheUrl) {
+      return cacheUrl
+    }
+
+    ghCli.get(url)
+      .then(resp => {
+        const blob = new Blob([resp.data], { type: resp.headers['content-type'] })
+        const blobUrl = URL.createObjectURL(blob)
+        ghIconCache[url] = blobUrl
+        if (onDark) {
+          state.iconBlobUrlOnDark = blobUrl
+        } else {
+          state.iconBlobUrl = blobUrl
+        }
+      })
+      .catch(() => {
+        if (onDark) {
+          state.iconBlobUrlOnDark = DEFAULT_ICON_URL
+        } else {
+          state.iconBlobUrl = DEFAULT_ICON_URL
+        }
+      })
+    return DEFAULT_ICON_URL
+  }
+
+  return url
+}
 
 // 图标Base64探测
 // 检查图标是否为Base64扩展名的文件
@@ -124,7 +173,7 @@ const refreshIconB64 = (url) => {
     state.iconB64 = null
     return
   }
-  axios.get(url)
+  imgApi(url)
     .then(resp => {
       state.iconB64 = resp.data
     })
@@ -135,7 +184,7 @@ const refreshIconB64OnDark = (url) => {
     state.iconB64OnDark = null
     return
   }
-  axios.get(url)
+  imgApi(url)
     .then(resp => {
       state.iconB64OnDark = resp.data
     })
