@@ -5,7 +5,8 @@ import YAML from 'yaml'
 const request = axios.create({
   headers: {
     get: {
-      'Accept': 'text/plain'
+      'Accept': 'text/plain',
+      'Accept-Language': '',  // 避免 GitHub 阻止使用中文语言的浏览器请求
     }
   },
   transformResponse: httpTransformResponse,
