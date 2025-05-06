@@ -72,6 +72,7 @@ import $_ from 'lodash'
 import { useConfigStore } from '@/stores/config'
 import { httpAbsPath } from '@/utils/common'
 import { imgApi, ghCli, isGithubUrl } from '@/utils/request'
+import loadingIcon from '@/assets/img/none.svg'
 
 const configStore = useConfigStore()
 
@@ -154,7 +155,7 @@ function fetchIconUrl(url, onDark) {
           state.iconBlobUrl = DEFAULT_ICON_URL
         }
       })
-    return DEFAULT_ICON_URL
+    return loadingIcon
   }
 
   return url
