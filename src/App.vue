@@ -91,11 +91,11 @@ configStore.update()
   --light-primary-color: #c3c3c3;
   --light-footer-bg-color: #eee;
   --light-hover-bg-color: rgba(0, 0, 0, 0.05);
-  --dark-color: rgba(255, 255, 255, 0.55);
-	--dark-bg-color: #171717;
+  --dark-color: #bcbec4;
+	--dark-bg-color: #1e1f22;
   --dark-primary-color: #5a5a5a;
-  --dark-footer-bg-color: #131313;
-  --dark-hover-bg-color: rgb(255 255 255 / 5%);
+  --dark-footer-bg-color: #191a1c;
+  --dark-hover-bg-color: rgb(255 255 255 / 14%);
 
   --color: var(--light-color);
   --bg-color: var(--light-bg-color);
@@ -149,11 +149,11 @@ configStore.update()
   padding-left: 3rem;
   -webkit-user-select: none;
   user-select: none;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+  filter: opacity(0) blur(10px);
+  transition: filter 0.5s ease-in-out;
 }
 .vue-app__scheme-hint.show {
-  opacity: 0.1;
+  filter: opacity(10%) blur(0);
 }
 
 .vue-app__favorites-warppar {
@@ -179,7 +179,7 @@ configStore.update()
     --primary-color: var(--dark-primary-color);
     --footer-bg-color: var(--dark-footer-bg-color);
     --hover-bg-color: var(--dark-hover-bg-color);
-    background-color: #222222;
+    background-color: #2B2D30;
 	}
 
 	.vue-app[scheme=auto] ::selection {
@@ -194,7 +194,7 @@ configStore.update()
 	}
 
 	.vue-app[scheme=auto] img {
-    filter: brightness(0.7);
+    filter: brightness(0.9);
 	}
 }
 
@@ -208,7 +208,7 @@ configStore.update()
   --primary-color: var(--dark-primary-color);
   --footer-bg-color: var(--dark-footer-bg-color);
   --hover-bg-color: var(--dark-hover-bg-color);
-	background-color: #222222;
+	background-color: #2B2D30;
 }
 .vue-app[scheme=dark] ::selection {
 	background-color: rgba(255, 255, 255, 0.2);
@@ -222,6 +222,6 @@ configStore.update()
 }
 
 .vue-app[scheme=dark] img {
-  filter: brightness(0.7);
+  filter: brightness(0.9);
 }
 </style>
