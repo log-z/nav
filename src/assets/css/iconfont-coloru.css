@@ -34,3 +34,34 @@
   content: "\e805";
 }
 
+
+/* 暗色模式 */
+@media (prefers-color-scheme: dark) {
+  .vue-app[scheme=auto] .icon-cl-qiuwenbaike:before {
+    content: "\e60c";
+  }
+
+  .vue-app[scheme=auto] .icon-cl-wikipedia:before {
+    content: "\e60d";
+  }
+
+  .vue-app[scheme=auto] .icon-cl-baidu:before {
+    filter: brightness(200%);
+  }
+}
+
+
+
+/******** 强制暗色模式 ********/
+
+.vue-app[scheme=dark] .icon-cl-qiuwenbaike:before {
+  content: "\e60c";
+}
+
+.vue-app[scheme=dark] .icon-cl-wikipedia:before {
+  content: "\e60d";
+}
+
+.vue-app[scheme=dark] .icon-cl-baidu:before {
+  filter: brightness(200%);
+}

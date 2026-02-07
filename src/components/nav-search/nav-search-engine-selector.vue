@@ -163,8 +163,7 @@ defineExpose({
 
 .nav-search-engine-selector__popover_item {
   padding: 0 0.2rem;
-  opacity: 0.7;
-  filter: grayscale(50%);
+  filter: opacity(80%);
   transition: transform 0.1s ease-in-out, filter 0.1s ease-in-out;
 }
 .nav-search-engine-selector__popover_item:hover,
@@ -172,7 +171,6 @@ defineExpose({
   transform: scale(1.3);
 }
 .nav-search-engine-selector__popover_item.active {
-  filter: unset;
-  opacity: 1;
+  filter: opacity(100%);
 }
 </style>
