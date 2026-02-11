@@ -11,7 +11,7 @@
     "test-watch": "vitest --dom"
   },
   "dependencies": {
-    "axios": "^1.12.1",
+    "axios": "^1.13.5",
     "axios-jsonp": "^1.0.4",
     "lodash": "^4.17.23",
     "pinia": "^3.0.3",
