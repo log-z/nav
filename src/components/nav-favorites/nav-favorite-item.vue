@@ -12,9 +12,9 @@
     <!-- 图标部分 -->
     <div class="nav-favorite-item__icon_wrapper">
       <div v-if="website.icon">
-        <!-- 常规图标 -->
+        <!-- 亮色模式图标 -->
         <img
-          class="nav-favorite-item__icon on-normal"
+          class="nav-favorite-item__icon on-light"
           :src="checkNotBase64(iconUrl) ? iconUrl : state.iconB64"
           alt=""
         >
@@ -202,8 +202,11 @@ const cancel = () => {
   height: 100%;
   width: 100%;
 }
+.nav-favorite-item__icon.on-light {
+  display: var(--light-display);
+}
 .nav-favorite-item__icon.on-dark {
-  display: none;
+  display: var(--dark-display);
 }
 
 /* 收藏卡片的文本部分 */
@@ -244,26 +247,4 @@ const cancel = () => {
 		--icon-size: 2.2rem;
 	}
 }
-
-/* 暗色模式 */
-@media (prefers-color-scheme: dark) {
-  .vue-app[scheme=auto] .nav-favorite-item__icon.on-normal {
-    display: none;
-	}
-	.vue-app[scheme=auto] .nav-favorite-item__icon.on-dark {
-    display: block;
-	}
-}
-
-
-
-/******** 强制暗色模式 ********/
-
-.vue-app[scheme=dark] .nav-favorite-item__icon.on-normal {
-  display: none;
-}
-.vue-app[scheme=dark] .nav-favorite-item__icon.on-dark {
-  display: block;
-}
-
 </style>
