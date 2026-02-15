@@ -12,12 +12,12 @@ function complete(wd, callback) {
       wd: wd,
     },
     adapter: jsonpAdapter,
-  }).then(resposnse => {
+  }).then(response => {
     callback({
       eng: 'baidu',
-      wd: resposnse.data.q,
-      list: resposnse.data.g ?
-        resposnse.data.g.map(g => g.q) : [],
+      wd: response.data.q,
+      list: response.data.g ?
+        response.data.g.map(g => g.q) : [],
     })
   }).catch(error => console.error(error))
 }

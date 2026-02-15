@@ -27,7 +27,7 @@
       </header>
     </div>
     <div class="vue-app__favorites-warppar">
-      <nav-favorte-list />
+      <nav-favorites />
     </div>
     <nav-foot />
   </div>
@@ -37,7 +37,7 @@
 import { computed, reactive } from 'vue'
 import NavLogo from '@/components/nav-logo'
 import NavSearch from '@/components/nav-search'
-import NavFavorteList from '@/components/nav-favorites'
+import NavFavorites from '@/components/nav-favorites'
 import NavFoot from '@/components/nav-foot'
 import { useConfigStore } from '@/stores/config'
 import { usePrefersStore } from '@/stores/prefers'
@@ -46,16 +46,18 @@ const configStore = useConfigStore()
 const prefersStore = usePrefersStore()
 
 // 主题样式
-const themeStyle = reactive({
-  conf: computed(() => configStore.config.theme?._final),
-  '--light-primary-color': computed(() => themeStyle.conf?.['light@primary.color']),
-  '--light-bg-color': computed(() => themeStyle.conf?.['light@base.background.color']),
-  '--light-footer-bg-color': computed(() => themeStyle.conf?.['light@footer.background.color']),
-  '--light-hover-bg-color': computed(() => themeStyle.conf?.['light@highlight.background.color']),
-  '--dark-primary-color': computed(() => themeStyle.conf?.['dark@primary.color']),
-  '--dark-bg-color': computed(() => themeStyle.conf?.['dark@base.background.color']),
-  '--dark-footer-bg-color': computed(() => themeStyle.conf?.['dark@footer.background.color']),
-  '--dark-hover-bg-color': computed(() => themeStyle.conf?.['dark@highlight.background.color']),
+const themeStyle = computed(() => {
+  const conf = configStore.config.theme?._final
+  return {
+    '--light-primary-color': conf?.['light@primary.color'],
+    '--light-bg-color': conf?.['light@base.background.color'],
+    '--light-footer-bg-color': conf?.['light@footer.background.color'],
+    '--light-hover-bg-color': conf?.['light@highlight.background.color'],
+    '--dark-primary-color': conf?.['dark@primary.color'],
+    '--dark-bg-color': conf?.['dark@base.background.color'],
+    '--dark-footer-bg-color': conf?.['dark@footer.background.color'],
+    '--dark-hover-bg-color': conf?.['dark@highlight.background.color'],
+  }
 })
 
 // 配色方案
@@ -86,6 +88,7 @@ configStore.update()
 
 <style>
 .vue-app {
+  /* 颜色变量 */
   --light-color: rgba(0, 0, 0, 0.86);
   --light-bg-color: #f5f5f5;
   --light-primary-color: #c3c3c3;
@@ -102,7 +105,12 @@ configStore.update()
   --primary-color: var(--light-primary-color);
   --footer-bg-color: var(--light-footer-bg-color);
   --hover-bg-color: var(--light-hover-bg-color);
-  
+  --logo-color: #fff;
+
+  /* 暗色模式控制变量 */
+  --light-display: block;
+  --dark-display: none;
+
   color: var(--color);
   background-color: var(--primary-color);
   -webkit-tap-highlight-color: transparent;
@@ -174,12 +182,18 @@ configStore.update()
 /* 暗色模式 */
 @media (prefers-color-scheme: dark) {
 	.vue-app[scheme=auto] {
+    /* 颜色变量 */
     --color: var(--dark-color);
     --bg-color: var(--dark-bg-color);
     --primary-color: var(--dark-primary-color);
     --footer-bg-color: var(--dark-footer-bg-color);
     --hover-bg-color: var(--dark-hover-bg-color);
+    --logo-color: #000;
     background-color: #2B2D30;
+
+    /* 暗色模式控制变量 */
+    --light-display: none;
+    --dark-display: block;
 	}
 
 	.vue-app[scheme=auto] ::selection {
@@ -203,12 +217,18 @@ configStore.update()
 /******** 强制暗色模式 ********/
 
 .vue-app[scheme=dark] {
+    /* 颜色变量 */
   --color: var(--dark-color);
   --bg-color: var(--dark-bg-color);
   --primary-color: var(--dark-primary-color);
   --footer-bg-color: var(--dark-footer-bg-color);
   --hover-bg-color: var(--dark-hover-bg-color);
+  --logo-color: #000;
 	background-color: #2B2D30;
+
+  /* 暗色模式控制变量 */
+  --light-display: none;
+  --dark-display: block;
 }
 .vue-app[scheme=dark] ::selection {
 	background-color: rgba(255, 255, 255, 0.2);

@@ -13,11 +13,11 @@ function complete(wd, callback) {
       q: wd,
     },
     adapter: jsonpAdapter,
-  }).then(resposnse => {
+  }).then(response => {
     callback({
       eng: 'google',
-      wd: resposnse.data[0],
-      list: resposnse.data[1].map(a => a[0]),
+      wd: response.data[0],
+      list: response.data[1].map(a => a[0]),
     })
   }).catch(error => console.error(error))
 }

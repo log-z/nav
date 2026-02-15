@@ -22,7 +22,8 @@
       />
     </nav-icon>
     <!-- 气泡 -->
-    <div class="nav-search-engine-selector__popover"
+    <div
+      class="nav-search-engine-selector__popover"
       :class="{peeking: status.peekPopover}"
     >
       <div class="nav-search-engine-selector__popover-wrapper nav-card-2">
