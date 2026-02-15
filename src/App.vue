@@ -27,7 +27,7 @@
       </header>
     </div>
     <div class="vue-app__favorites-warppar">
-      <nav-favorte-list />
+      <nav-favorites />
     </div>
     <nav-foot />
   </div>
@@ -37,7 +37,7 @@
 import { computed, reactive } from 'vue'
 import NavLogo from '@/components/nav-logo'
 import NavSearch from '@/components/nav-search'
-import NavFavorteList from '@/components/nav-favorites'
+import NavFavorites from '@/components/nav-favorites'
 import NavFoot from '@/components/nav-foot'
 import { useConfigStore } from '@/stores/config'
 import { usePrefersStore } from '@/stores/prefers'
