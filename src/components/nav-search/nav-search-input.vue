@@ -36,7 +36,7 @@ export default {
 }
 </script>
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useConfigStore } from '@/stores/config'
 
 const configStore = useConfigStore()
@@ -66,11 +66,19 @@ const hasFocus = () => inputRef.value == document.activeElement
 // 监听快捷键
 const SHORTCUT_KEYS = ['Escape', '/']
 const IGNORE_ELEMENT = ['INPUT', 'TEXTAREA']
-document.addEventListener('keydown', (event) => {
+const keydownHandler = (event) => {
   if (SHORTCUT_KEYS.includes(event.key) && !IGNORE_ELEMENT.includes(event.target.nodeName)) {
     focus()
     event.preventDefault()
   }
+}
+
+onMounted(() => {
+  document.addEventListener('keydown', keydownHandler)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('keydown', keydownHandler)
 })
 
 defineExpose({

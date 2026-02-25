@@ -1,4 +1,4 @@
-const SEARCH_ENGINE_MATEDATA = {
+const SEARCH_ENGINE_METADATA = {
   properties: {
     list: {
       type: Array,
@@ -8,7 +8,7 @@ const SEARCH_ENGINE_MATEDATA = {
     placeholder: { type: String, default: '您来点什么？' },
   }
 };
-const FAVORITES_WEBSITES_MATEDATA = {
+const FAVORITES_WEBSITES_METADATA = {
   type: Array,
   element: {
     title: { type: String, required: true },
@@ -17,25 +17,25 @@ const FAVORITES_WEBSITES_MATEDATA = {
     url: { type: String, required: true },
   },
 };
-const FAVORITES_GROUPS_MATEDATA = {
+const FAVORITES_GROUPS_METADATA = {
   type: Array,
   element: {
     name: { type: String, required: true },
-    websites: FAVORITES_WEBSITES_MATEDATA,
+    websites: FAVORITES_WEBSITES_METADATA,
   },
 };
-const FAVORITES_MATEDATA = {
+const FAVORITES_METADATA = {
   properties: {
     iconPrefix: { type: String, default: '' },
-    groups: FAVORITES_GROUPS_MATEDATA,
+    groups: FAVORITES_GROUPS_METADATA,
   },
 };
-const ROOT_MATEDATA = {
+const ROOT_METADATA = {
   properties: {
     name: { type: String },
     description: { type: String },
-    searchEngine: SEARCH_ENGINE_MATEDATA,
-    favorites: FAVORITES_MATEDATA,
+    searchEngine: SEARCH_ENGINE_METADATA,
+    favorites: FAVORITES_METADATA,
   }
 };
 
@@ -62,6 +62,6 @@ async function convertToV2 (rootConfig) {
 }
 
 export async function load(obj) {
-  let rootConfig = await parser(ROOT_MATEDATA, obj ? obj : {});
+  let rootConfig = await parser(ROOT_METADATA, obj ? obj : {});
   return await convertToV2(rootConfig)
 }

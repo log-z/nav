@@ -23,7 +23,7 @@ export default {
 .nav-logo__svg {
   width: 10rem;
   display: block;
-  fill: #fff;
+  fill: var(--logo-color);
   opacity: 0.7;
   transition: transform 30s, fill 0.3s;
 }
@@ -43,17 +43,5 @@ export default {
 	.nav-logo__svg {
 		width: 6rem;
 	}
-}
-
-/* 暗色模式 */
-@media (prefers-color-scheme: dark) {
-	.vue-app[scheme=auto] .nav-logo__svg {
-		fill: #000;
-	}
-}
-
-/* 强制暗色模式 */
-.vue-app[scheme=dark] .nav-logo__svg {
-	fill: #000;
 }
 </style>

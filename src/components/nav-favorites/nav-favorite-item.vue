@@ -12,9 +12,9 @@
     <!-- 图标部分 -->
     <div class="nav-favorite-item__icon_wrapper">
       <div v-if="website.icon">
-        <!-- 常规图标 -->
+        <!-- 亮色模式图标 -->
         <img
-          class="nav-favorite-item__icon on-normal"
+          class="nav-favorite-item__icon on-light"
           :src="checkNotBase64(iconUrl) ? iconUrl : state.iconB64"
           alt=""
         >
@@ -71,8 +71,7 @@ import { computed, onMounted, reactive, watch } from 'vue'
 import $_ from 'lodash'
 import { useConfigStore } from '@/stores/config'
 import { httpAbsPath } from '@/utils/common'
-import { imgApi, ghCli, isGithubUrl } from '@/utils/request'
-import loadingIcon from '@/assets/img/none.svg'
+import { imgApi } from '@/utils/request'
 
 const configStore = useConfigStore()
 
@@ -102,7 +101,7 @@ const iconUrl = computed(() => {
   const baseUrl = configStore.baseUrl
   const prefix = configStore.config.favorites.iconPrefix
   const url = httpAbsPath(path, baseUrl + prefix)
-  return fetchIconUrl(url, false)
+  return url
 })
 // 图标URL（暗色模式）
 const iconUrlOnDark = computed(() => {
@@ -121,45 +120,8 @@ const iconUrlOnDark = computed(() => {
   const baseUrl = configStore.baseUrl
   const prefix = configStore.config.favorites.iconPrefix
   const url = httpAbsPath(path, baseUrl + prefix)
-  return fetchIconUrl(url, true)
-})
-
-// 对某些站点特殊处理图标URL
-const ghIconCache = {}
-function fetchIconUrl(url, onDark) {
-
-  // 特殊处理 GitHub URL
-  // 避免 GitHub 阻止使用中文语言的浏览器请求
-  // 先通过 XHR 请求图标，然后转换为 BlobUrl 进行展示
-  if (isGithubUrl(url) && checkNotBase64(url)) {
-    const cacheUrl = ghIconCache[url]
-    if (cacheUrl) {
-      return cacheUrl
-    }
-
-    ghCli.get(url)
-      .then(resp => {
-        const blob = new Blob([resp.data], { type: resp.headers['content-type'] })
-        const blobUrl = URL.createObjectURL(blob)
-        ghIconCache[url] = blobUrl
-        if (onDark) {
-          state.iconBlobUrlOnDark = blobUrl
-        } else {
-          state.iconBlobUrl = blobUrl
-        }
-      })
-      .catch(() => {
-        if (onDark) {
-          state.iconBlobUrlOnDark = DEFAULT_ICON_URL
-        } else {
-          state.iconBlobUrl = DEFAULT_ICON_URL
-        }
-      })
-    return loadingIcon
-  }
-
   return url
-}
+})
 
 // 图标Base64探测
 // 检查图标是否为Base64扩展名的文件
@@ -240,8 +202,11 @@ const cancel = () => {
   height: 100%;
   width: 100%;
 }
+.nav-favorite-item__icon.on-light {
+  display: var(--light-display);
+}
 .nav-favorite-item__icon.on-dark {
-  display: none;
+  display: var(--dark-display);
 }
 
 /* 收藏卡片的文本部分 */
@@ -282,26 +247,4 @@ const cancel = () => {
 		--icon-size: 2.2rem;
 	}
 }
-
-/* 暗色模式 */
-@media (prefers-color-scheme: dark) {
-  .vue-app[scheme=auto] .nav-favorite-item__icon.on-normal {
-    display: none;
-	}
-	.vue-app[scheme=auto] .nav-favorite-item__icon.on-dark {
-    display: block;
-	}
-}
-
-
-
-/******** 强制暗色模式 ********/
-
-.vue-app[scheme=dark] .nav-favorite-item__icon.on-normal {
-  display: none;
-}
-.vue-app[scheme=dark] .nav-favorite-item__icon.on-dark {
-  display: block;
-}
-
 </style>

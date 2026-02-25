@@ -15,11 +15,11 @@ function complete(wd, callback) {
       search: wd,
     },
     adapter: jsonpAdapter,
-  }).then(resposnse => {
+  }).then(response => {
     callback({
       eng: 'wikipedia',
-      wd: resposnse.data[0],
-      list: resposnse.data[1],
+      wd: response.data[0],
+      list: response.data[1],
     })
   }).catch(error => console.error(error))
 }

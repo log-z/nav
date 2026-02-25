@@ -1,5 +1,5 @@
 // 根元数据
-function root_matedata() {
+function root_metadata() {
   return {
     type: Object,
     properties: {
@@ -7,24 +7,24 @@ function root_matedata() {
       name: { type: String },
       description: { type: String },
       theme: { loader: loadTheme },
-      search: search_matedata(),
-      favorites: favorites_matedata(),
+      search: search_metadata(),
+      favorites: favorites_metadata(),
     }
   }
 }
 
 // 元数据：搜索
-function search_matedata() {
+function search_metadata() {
   return {
     type: Object,
     properties: {
-      engine: search_engin_matedata(),
+      engine: search_engin_metadata(),
       placeholder: { type: String, default: '您来点什么？' },
     }
   }
 }
 // 元数据：搜索-引擎
-function search_engin_matedata() {
+function search_engin_metadata() {
   return {
     type: Object,
     properties: {
@@ -38,27 +38,27 @@ function search_engin_matedata() {
 }
 
 // 元数据：收藏
-function favorites_matedata() {
+function favorites_metadata() {
   return {
     type: Object,
     properties: {
       iconPrefix: { type: String, default: '' },
-      groups: favorites_groups_matedata(),
+      groups: favorites_groups_metadata(),
     }
   }
 }
 // 元数据：收藏-分组
-function favorites_groups_matedata() {
+function favorites_groups_metadata() {
   return {
     type: Array,
     element: {
       name: { type: String, required: true },
-      websites: favorites_websites_matedata(),
+      websites: favorites_websites_metadata(),
     }
   }
 }
 // 元数据：收藏-分组-站点
-function favorites_websites_matedata() {
+function favorites_websites_metadata() {
   return {
     type: Array,
     element: {
@@ -76,5 +76,5 @@ import { parser } from './common'
 import { load as loadTheme } from './loader-v2-theme'
 
 export async function load(obj) {
-  return await parser(root_matedata(), obj ? obj : {})
+  return await parser(root_metadata(), obj ? obj : {})
 }
