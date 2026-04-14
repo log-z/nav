@@ -23,7 +23,7 @@
     "@vitejs/plugin-vue": "^5.2.4",
     "eslint": "^9.35.0",
     "eslint-plugin-vue": "^9.33.0",
-    "happy-dom": "^20.0.2",
+    "happy-dom": "^20.9.0",
     "msw": "^2.11.2",
     "vite": "^6.4.2",
     "vitest": "^3.2.4"
