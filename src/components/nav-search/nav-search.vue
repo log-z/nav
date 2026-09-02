@@ -46,7 +46,7 @@ export default {
 </script>
 <script setup>
 import { computed, reactive, ref } from 'vue';
-import debounce from 'lodash/debounce'
+import $_ from 'lodash'
 import NavSearchInput from './nav-search-input.vue';
 import NavSearchEngineSelector from './nav-search-engine-selector.vue';
 import NavSearchComplete from './nav-search-complete.vue';
@@ -70,7 +70,7 @@ const fromClass = computed(() => data.isFocus ? 'nav-card-2' : 'nav-card-1')
 const engine = computed(() => prefersStore.searchEngine)
 const featureGlassmorphism = computed(() => prefersStore.feature.glassmorphism)
 
-let input = debounce((val) => {
+let input = $_.debounce((val) => {
   if (!val) {
     data.complete = []
     return
