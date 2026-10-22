@@ -14,11 +14,6 @@
   </footer>
 </template>
 
-<script>
-export default {
-  name: 'NavFoot'
-}
-</script>
 <script setup>
 import { computed } from 'vue';
 import { useConfigStore } from '@/stores/config'

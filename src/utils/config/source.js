@@ -1,19 +1,8 @@
-import axios from 'axios';
 import YAML from 'yaml'
+import { fetchText } from '@/utils/request'
 
-// 请求实例
-const request = axios.create({
-  headers: {
-    get: {
-      'Accept': 'text/plain',
-      'Accept-Language': '',  // 避免 GitHub 阻止使用中文语言的浏览器请求
-    }
-  },
-  transformResponse: httpTransformResponse,
-})
-
-// 响应体转换
-function httpTransformResponse(data) {
+// 解析响应体（自动识别JSON或YAML）
+function parseContent(data) {
   if (data === null) {
     return null
   }
@@ -22,10 +11,9 @@ function httpTransformResponse(data) {
   if (data.startsWith('{') || data.startsWith('[')) {
     // 识别为JSON
     return JSON.parse(data)
-  } else {
-    // 识别为YAML
-    return YAML.parse(data)
   }
+  // 识别为YAML
+  return YAML.parse(data)
 }
 
 /**
@@ -33,13 +21,12 @@ function httpTransformResponse(data) {
  * @param {string} url
  */
 async function fromUrl(url) {
-  const resp = await request.get(url)
-  return resp.data
+  return parseContent(await fetchText(url))
 }
 
 /**
  * 以YAML文本作为来源
- * @param {string} url
+ * @param {string} yaml
  */
 function fromYaml(yaml) {
   return YAML.parse(yaml)
@@ -47,5 +34,5 @@ function fromYaml(yaml) {
 
 export default {
   fromUrl,
-  fromYaml
+  fromYaml,
 }

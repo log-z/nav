@@ -39,19 +39,15 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'NavSearch'
-}
-</script>
 <script setup>
 import { computed, reactive, ref } from 'vue';
-import $_ from 'lodash'
+import { NavIcon, CheveronRight } from '@/icons-vue'
 import NavSearchInput from './nav-search-input.vue';
 import NavSearchEngineSelector from './nav-search-engine-selector.vue';
 import NavSearchComplete from './nav-search-complete.vue';
 import { usePrefersStore } from '@/stores/prefers'
-import searchEngine from '@/utils/search-engine';
+import { debounce } from '@/utils/common'
+import { target as engineTarget, complete as engineComplete } from '@/utils/search-engine';
 
 const prefersStore = usePrefersStore()
 
@@ -66,17 +62,18 @@ const data = reactive({
 })
 
 const rootClass = computed(() => featureGlassmorphism.value ? 'glassmorphism' : null)
-const fromClass = computed(() => data.isFocus ? 'nav-card-2' : 'nav-card-1')
+const fromClass = computed(() => data.isFocus ? 'nav-card-1' : 'nav-card-2')
 const engine = computed(() => prefersStore.searchEngine)
 const featureGlassmorphism = computed(() => prefersStore.feature.glassmorphism)
 
-let input = $_.debounce((val) => {
+const input = debounce(async (val) => {
   if (!val) {
     data.complete = []
     return
   }
 
-  searchEngine.complete(engine.value, val, (res) => {
+  try {
+    const res = await engineComplete(engine.value, val)
     if (
       res.wd?.toLowerCase() === data.searchWord.toLowerCase() &&
       res.eng === engine.value &&
@@ -84,10 +81,12 @@ let input = $_.debounce((val) => {
     ) {
       data.complete = [
         data.searchWord,
-        ...res.list.filter(v => Boolean(v))
+        ...res.list.filter(v => Boolean(v)),
       ];
     }
-  })
+  } catch (error) {
+    console.error(error)
+  }
 }, 100)
 const focus = () => {
   data.isFocus = true;
@@ -98,7 +97,7 @@ const blur = () => {
   data.complete = [data.searchWord];
 }
 const submit = () => {
-  let url = searchEngine.target(engine.value, data.searchWord);
+  const url = engineTarget(engine.value, data.searchWord);
   window.open(url)?.focus();
 }
 const engineNext = () => {

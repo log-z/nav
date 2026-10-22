@@ -12,15 +12,10 @@ const ENGINES = {
   wikipedia: engWikipedia,
 }
 
-function target(eng, wd) {
-  return ENGINES[eng].target(wd);
+export function target(eng, wd) {
+  return ENGINES[eng].target(wd)
 }
 
-function complete(eng, wd, callback) {
-  return ENGINES[eng].complete(wd, callback);
-}
-
-export default {
-  target,
-  complete,
+export async function complete(eng, wd) {
+  return ENGINES[eng].complete(wd)
 }

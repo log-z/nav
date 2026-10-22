@@ -1,27 +1,24 @@
-import axios from 'axios';
-import jsonpAdapter from 'axios-jsonp';
+import { jsonp } from '@/utils/jsonp'
 
 function target(wd) {
-  return 'https://zh.wikipedia.org/w/index.php?search=' + encodeURIComponent(wd)
+  const url = new URL('https://zh.wikipedia.org/w/index.php')
+  url.searchParams.set('search', wd)
+  return url
 }
 
-function complete(wd, callback) {
-  axios.get('https://zh.wikipedia.org/w/api.php', {
-    params: {
-      action: 'opensearch',
-      format: 'json',
-      formatversion: 2,
-      limit: 10,
-      search: wd,
-    },
-    adapter: jsonpAdapter,
-  }).then(response => {
-    callback({
-      eng: 'wikipedia',
-      wd: response.data[0],
-      list: response.data[1],
-    })
-  }).catch(error => console.error(error))
+async function complete(wd) {
+  const api = new URL('https://zh.wikipedia.org/w/api.php')
+  api.searchParams.set('action', 'opensearch')
+  api.searchParams.set('format', 'json')
+  api.searchParams.set('formatversion', '2')
+  api.searchParams.set('limit', '10')
+  api.searchParams.set('search', wd)
+  const data = await jsonp(api)
+  return {
+    eng: 'wikipedia',
+    wd: data[0],
+    list: data[1],
+  }
 }
 
 export default {
