@@ -14,18 +14,18 @@
     "axios": "^1.20.0",
     "axios-jsonp": "^1.0.4",
     "lodash": "^4.18.1",
-    "pinia": "^4.0.3",
+    "pinia": "^4.1.0",
     "pinia-plugin-persistedstate": "^4.7.1",
-    "vue": "^3.5.42",
-    "yaml": "^2.9.0"
+    "vue": "^3.5.44",
+    "yaml": "^2.9.1"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^6.0.8",
-    "eslint": "^10.9.1",
-    "eslint-plugin-vue": "^10.10.0",
-    "happy-dom": "^20.13.1",
-    "msw": "^2.15.0",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "eslint": "^10.13.0",
+    "eslint-plugin-vue": "^10.11.1",
+    "happy-dom": "^21.0.4",
+    "msw": "^3.0.3",
     "vite": "^8.3.5",
-    "vitest": "^4.1.12"
+    "vitest": "^5.0.5"
   }
 }
