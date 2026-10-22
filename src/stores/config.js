@@ -7,7 +7,7 @@ export const useConfigStore = defineStore('config', () => {
   const config = ref({})
   // 配置所在URL
   const url = ref(import.meta.env.VITE_DEFAULT_CONFIG_URL)
-  // 配置所在BaseURL（URL中最后一级路径之前的部分）
+  // 配置所在BaseURL
   const baseUrl = computed(() => url.value.slice(0, url.value.lastIndexOf('/') + 1))
 
   /**

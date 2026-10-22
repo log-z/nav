@@ -38,11 +38,16 @@ const emit = defineEmits([ 'selecte', 'change' ])
 
 // 首项为搜索词本身，不参与展示
 const items = computed(() => props.list.slice(IDX_BEGIN))
-const rootClass = computed(() => ({ hidden: isHidden() }))
-const rootStyle = computed(() => ({
-  height: isHidden() ? '0' : listWarpper.value?.offsetHeight + 'px',
-}))
 const isHidden = () => props.list.length <= IDX_BEGIN
+// 注意：rootClass/rootStyle需保持reactive对象按引用传入模板，
+// Vue在DOM更新后的patch阶段才读取其中的computed，
+// 此时列表项已渲染，offsetHeight测量才是准确的
+const rootClass = reactive({
+  hidden: computed(isHidden)
+})
+const rootStyle = reactive({
+  height: computed(() => isHidden() ? '0' : listWarpper.value?.offsetHeight + 'px')
+})
 
 const status = reactive({
   active: 0
