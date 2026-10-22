@@ -51,6 +51,8 @@ import { target as engineTarget, complete as engineComplete } from '@/utils/sear
 
 const prefersStore = usePrefersStore()
 
+const MAX_COMPLETE_SUGGESTIONS = 10
+
 const inputRef = ref()
 const engineSelectorRef = ref()
 const completeRef = ref()
@@ -81,7 +83,7 @@ const input = debounce(async (val) => {
     ) {
       data.complete = [
         data.searchWord,
-        ...res.list.filter(v => Boolean(v)),
+        ...res.list.filter(v => Boolean(v)).slice(0, MAX_COMPLETE_SUGGESTIONS),
       ];
     }
   } catch (error) {
