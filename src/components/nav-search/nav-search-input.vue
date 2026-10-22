@@ -22,19 +22,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'NavSearchInput',
-  props: {
-    modelValue: {
-      type: String,
-      default: function() {
-        return ''
-      }
-    },
-  }
-}
-</script>
 <script setup>
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useConfigStore } from '@/stores/config'
@@ -42,6 +29,12 @@ import { useConfigStore } from '@/stores/config'
 const configStore = useConfigStore()
 
 const inputRef = ref()
+const props = defineProps({
+  modelValue: {
+    type: String,
+    default: '',
+  },
+})
 const emit = defineEmits([
   'input',
   'focus',
@@ -61,7 +54,7 @@ const input = (event) => {
   emit('input', val)
 }
 const focus = () => inputRef.value.focus()
-const hasFocus = () => inputRef.value == document.activeElement
+const hasFocus = () => inputRef.value === document.activeElement
 
 // 监听快捷键
 const SHORTCUT_KEYS = ['Escape', '/']

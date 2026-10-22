@@ -2,7 +2,7 @@
   <div
     class="vue-app"
     :style="themeStyle"
-    :scheme="scheme.current"
+    :scheme="currentScheme"
   >
     <div class="vue-app__header-warrpar">
       <header>
@@ -10,9 +10,9 @@
           <!-- 配色方案提示器 -->
           <div
             class="vue-app__scheme-hint"
-            :class="{show: scheme.showHint}"
+            :class="{show: showSchemeHint}"
           >
-            {{ scheme.current.toUpperCase() }}
+            {{ currentScheme.toUpperCase() }}
           </div>
           <!-- LOGO -->
           <nav-logo
@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import { computed, reactive } from 'vue'
+import { computed, ref } from 'vue'
 import NavLogo from '@/components/nav-logo'
 import NavSearch from '@/components/nav-search'
 import NavFavorites from '@/components/nav-favorites'
@@ -62,24 +62,23 @@ const themeStyle = computed(() => {
 
 // 配色方案
 const schemes = ['auto', 'light', 'dark']
-const scheme = reactive({
-  current: computed(() => prefersStore.colorScheme),
-  showHint: false,
-})
+const currentScheme = computed(() => prefersStore.colorScheme)
+const showSchemeHint = ref(false)
 // 切换配色方案
-let timeoutScheme = null
+let schemeTimer = null
+let hintTimer = null
 const toggleScheme = () => {
-  timeoutScheme = setTimeout(() => {
-    let nextIdx = schemes.findIndex(s => s === scheme.current) + 1
-    const nextScheme = schemes[nextIdx % schemes.length]
-    prefersStore.colorScheme = nextScheme
+  schemeTimer = setTimeout(() => {
+    const nextIdx = schemes.indexOf(currentScheme.value) + 1
+    prefersStore.colorScheme = schemes[nextIdx % schemes.length]
 
-    scheme.showHint = true
-    setTimeout(() => {scheme.showHint = false}, 800)
+    showSchemeHint.value = true
+    clearTimeout(hintTimer)
+    hintTimer = setTimeout(() => { showSchemeHint.value = false }, 800)
   }, 1000)
 }
 const clearToggleScheme = () => {
-  clearTimeout(timeoutScheme);
+  clearTimeout(schemeTimer);
 }
 
 // 拉取最新配置

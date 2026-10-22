@@ -10,7 +10,7 @@
     >
       <ol>
         <li
-          v-for="(item, index) in $_.drop(list)"
+          v-for="(item, index) in items"
           :key="index + IDX_BEGIN"
           :class="{'active': isActive(index + IDX_BEGIN)}"
           @mousedown.left="selecte(index + IDX_BEGIN)"
@@ -22,14 +22,8 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'NavSearchComplete',
-}
-</script>
 <script setup>
 import { computed, reactive, ref, watch } from 'vue';
-import $_ from 'lodash'
 
 const IDX_BEGIN = 1
 
@@ -37,33 +31,31 @@ const listWarpper = ref();
 const props = defineProps({
   list: {
     type: Array,
-    default: function() {
-      return []
-    }
+    default: () => [],
   },
 })
 const emit = defineEmits([ 'selecte', 'change' ])
 
+// 首项为搜索词本身，不参与展示
+const items = computed(() => props.list.slice(IDX_BEGIN))
+const rootClass = computed(() => ({ hidden: isHidden() }))
+const rootStyle = computed(() => ({
+  height: isHidden() ? '0' : listWarpper.value?.offsetHeight + 'px',
+}))
 const isHidden = () => props.list.length <= IDX_BEGIN
-const rootClass = reactive({
-  hidden: computed(isHidden)
-})
-const rootStyle = reactive({
-  height: computed(() => isHidden() ? '0' : listWarpper.value?.offsetHeight + 'px')
-})
 
 const status = reactive({
   active: 0
 })
 
-watch(props, () => status.active = 0)
+watch(() => props.list, () => status.active = 0)
 
 const selecte = (index) => {
   status.active = index;
   emit('selecte', props.list[status.active]);
 }
 const isActive = (index) => {
-  return status.active == index;
+  return status.active === index;
 }
 const next = () => {
   status.active = (status.active += 1) % props.list.length;

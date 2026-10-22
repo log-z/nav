@@ -76,5 +76,5 @@ import { parser } from './common'
 import { load as loadTheme } from './loader-v2-theme'
 
 export async function load(obj) {
-  return await parser(root_metadata(), obj ? obj : {})
+  return await parser(root_metadata(), obj ?? {})
 }

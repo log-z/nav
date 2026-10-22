@@ -1,42 +1,31 @@
-import axios from 'axios';
-import jsonpAdapter from 'axios-jsonp';
+import { jsonp } from '@/utils/jsonp'
 
 function target(wd) {
-  return 'https://www.bing.com/search?mkt=zh-cn&q=' + encodeURIComponent(wd)
+  const url = new URL('https://www.bing.com/search')
+  url.searchParams.set('mkt', 'zh-cn')
+  url.searchParams.set('q', wd)
+  return url
 }
 
-function complete(wd, callback) {
-  axios.get('https://api.bing.com/qsonhs.aspx', {
-    params: {
-      type: 'cb',
-      mkt: 'zh-cn',
-      q: wd,
-    },
-    adapter: jsonpAdapter,
-    callbackParamName: 'cb'
-  }).then(resp => {
-    const asRes = resp.data.AS.Results
-    let list
-    if (!asRes) {
-      list = []
-    } else {
-      list = asRes.map(r => r.Suggests)
-        .reduce(
-          (sa1, sa2) => sa1.concat(sa2),
-          []
-        )
-        .sort(
-          (s1, s2) => (s1.Sk > s2.Sk) ? 1 : -1
-        )
-        .map(s => s.Txt)
-    }
+async function complete(wd) {
+  const api = new URL('https://api.bing.com/qsonhs.aspx')
+  api.searchParams.set('type', 'cb')
+  api.searchParams.set('mkt', 'zh-cn')
+  api.searchParams.set('q', wd)
+  const data = await jsonp(api, { callbackParamName: 'cb' })
 
-    callback({
-      eng: 'bing',
-      wd: resp.data.AS.Query,
-      list: list,
-    })
-  }).catch(error => console.error(error))
+  const asRes = data.AS.Results
+  const list = asRes
+    ? asRes.flatMap(r => r.Suggests)
+        .sort((s1, s2) => (s1.Sk > s2.Sk) ? 1 : -1)
+        .map(s => s.Txt)
+    : []
+
+  return {
+    eng: 'bing',
+    wd: data.AS.Query,
+    list,
+  }
 }
 
 export default {

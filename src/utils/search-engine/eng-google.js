@@ -1,25 +1,22 @@
-import axios from 'axios';
-import jsonpAdapter from 'axios-jsonp';
+import { jsonp } from '@/utils/jsonp'
 
 function target(wd) {
-  return 'https://www.google.com/search?q=' + encodeURIComponent(wd)
+  const url = new URL('https://www.google.com/search')
+  url.searchParams.set('q', wd)
+  return url
 }
 
-function complete(wd, callback) {
-  axios.get('https://www.google.com/complete/search', {
-    params: {
-      client: 'psy-ab',
-      hl: 'zh-CN',
-      q: wd,
-    },
-    adapter: jsonpAdapter,
-  }).then(response => {
-    callback({
-      eng: 'google',
-      wd: response.data[0],
-      list: response.data[1].map(a => a[0]),
-    })
-  }).catch(error => console.error(error))
+async function complete(wd) {
+  const api = new URL('https://www.google.com/complete/search')
+  api.searchParams.set('client', 'psy-ab')
+  api.searchParams.set('hl', 'zh-CN')
+  api.searchParams.set('q', wd)
+  const data = await jsonp(api)
+  return {
+    eng: 'google',
+    wd: data[0],
+    list: data[1].map(a => a[0]),
+  }
 }
 
 export default {

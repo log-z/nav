@@ -48,41 +48,30 @@
   </a>
 </template>
 
-<script>
-export default {
-  name: 'NavFavoriteItem',
-  props: {
-    website: {
-      type: Object,
-      default: function() {
-        return {
-          title: 'Title',
-          subtitle: 'subtitle',
-          icon: null,
-          url: '#',
-        }
-      }
-    }
-  },
-}
-</script>
 <script setup>
-import { computed, onMounted, reactive, watch } from 'vue'
-import $_ from 'lodash'
+import { computed, reactive, watch } from 'vue'
 import { useConfigStore } from '@/stores/config'
 import { httpAbsPath } from '@/utils/common'
-import { imgApi } from '@/utils/request'
+import { fetchText } from '@/utils/request'
 
 const configStore = useConfigStore()
 
-const props = defineProps()
+const props = defineProps({
+  website: {
+    type: Object,
+    default: () => ({
+      title: 'Title',
+      subtitle: 'subtitle',
+      icon: null,
+      url: '#',
+    }),
+  },
+})
 
 const state = reactive({
   isActive: false,
   iconB64: null,
   iconB64OnDark: null,
-  iconBlobUrl: null,
-  iconBlobUrlOnDark: null,
 })
 
 // 图标URL
@@ -90,37 +79,20 @@ const state = reactive({
 const DEFAULT_ICON_URL = '#'
 // 图标URL（常规）
 const iconUrl = computed(() => {
-  const path = state.iconBlobUrl || props.website.icon;
-  if ($_.isEmpty(path) || path === DEFAULT_ICON_URL) {
+  const path = props.website.icon;
+  if (!path || path === DEFAULT_ICON_URL) {
     return DEFAULT_ICON_URL
   }
-  if (path.startsWith('blob:')) {
-    return path
-  }
-  
-  const baseUrl = configStore.baseUrl
-  const prefix = configStore.config.favorites.iconPrefix
-  const url = httpAbsPath(path, baseUrl + prefix)
-  return url
+  return httpAbsPath(path, configStore.baseUrl + configStore.config.favorites.iconPrefix)
 })
 // 图标URL（暗色模式）
 const iconUrlOnDark = computed(() => {
-  let path = state.iconBlobUrlOnDark || props.website.iconOnDark;
-  if ($_.isEmpty(path) || path === DEFAULT_ICON_URL) {
-    // 降级到正常图标
-    path = state.iconBlobUrl || props.website.icon;
-    if ($_.isEmpty(path)) {
-      return DEFAULT_ICON_URL
-    }
+  // 降级到正常图标
+  const path = props.website.iconOnDark || props.website.icon;
+  if (!path) {
+    return DEFAULT_ICON_URL
   }
-  if (path.startsWith('blob:')) {
-    return path
-  }
-
-  const baseUrl = configStore.baseUrl
-  const prefix = configStore.config.favorites.iconPrefix
-  const url = httpAbsPath(path, baseUrl + prefix)
-  return url
+  return httpAbsPath(path, configStore.baseUrl + configStore.config.favorites.iconPrefix)
 })
 
 // 图标Base64探测
@@ -130,35 +102,21 @@ function checkNotBase64(url) {
   const path = url.split('?')[0]
   return !path.endsWith(BASE64_FILE_EXTENSION)
 }
-// 刷新图标Base64（常规）
-const refreshIconB64 = (url) => {
+// 加载图标Base64内容
+const loadIconB64 = async (url, field) => {
   if (checkNotBase64(url)) {
-    state.iconB64 = null
+    state[field] = null
     return
   }
-  imgApi(url)
-    .then(resp => {
-      state.iconB64 = resp.data
-    })
-}
-// 刷新图标Base64（暗色模式）
-const refreshIconB64OnDark = (url) => {
-  if (checkNotBase64(url)) {
-    state.iconB64OnDark = null
-    return
+  try {
+    state[field] = await fetchText(url)
+  } catch (error) {
+    console.error(error)
   }
-  imgApi(url)
-    .then(resp => {
-      state.iconB64OnDark = resp.data
-    })
 }
 // 持续探测及初始化
-watch(iconUrl, refreshIconB64)
-watch(iconUrlOnDark, refreshIconB64OnDark)
-onMounted(() => {
-  refreshIconB64(iconUrl.value)
-  refreshIconB64OnDark(iconUrlOnDark.value)
-})
+watch(iconUrl, url => loadIconB64(url, 'iconB64'), { immediate: true })
+watch(iconUrlOnDark, url => loadIconB64(url, 'iconB64OnDark'), { immediate: true })
 
 const active = () => {
   state.isActive = true
