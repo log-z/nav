@@ -58,11 +58,7 @@ describe('Test config loader', () => {
         "light@primary.color": "#000",
         "light@base.background.color": "#000",
         "light@footer.background.color": "#000",
-        "light@highlight.background.color": "#000",
-        "dark@primary.color": "#000",
-        "dark@base.background.color": "#000",
-        "dark@footer.background.color": "#000",
-        "dark@highlight.background.color": "#000"
+        "light@highlight.background.color": "#000"
       }
     },
     "search": {
@@ -94,6 +90,9 @@ describe('Test config loader', () => {
   test('simple loader V2 [JSON]', async () => {
     const conf = await loader.load(confDataV2)
     expect(conf).toMatchObject(confDataV2)
+    // 订阅主题生效，且自定义项覆盖同名订阅项
+    expect(conf.theme._final['light@primary.color']).toBe('#000')
+    expect(conf.theme._final['dark@primary.color']).toBe('#eb7366')
   })
 
   // V2版本主配置加载测试 [YAML]
@@ -110,10 +109,6 @@ describe('Test config loader', () => {
         light@base.background.color: '#000'
         light@footer.background.color: '#000'
         light@highlight.background.color: '#000'
-        dark@primary.color: '#000'
-        dark@base.background.color: '#000'
-        dark@footer.background.color: '#000'
-        dark@highlight.background.color: '#000'
     search:
       placeholder: 👴 来点什么？
       engine:
@@ -140,6 +135,9 @@ describe('Test config loader', () => {
   test('simple loader V2 [YAML]', async () => {
     const conf = await loader.loadFromYaml(confYamlV2)
     expect(conf).toMatchObject(confDataV2)
+    // 订阅主题生效，且自定义项覆盖同名订阅项
+    expect(conf.theme._final['light@primary.color']).toBe('#000')
+    expect(conf.theme._final['dark@primary.color']).toBe('#eb7366')
   })
 })
 
@@ -227,16 +225,35 @@ describe('Test theme subscribe loader', () => {
  */
 
 const httpHandlers = [
+  // CORS预检（happy-dom会先行发出）
+  http.options(import.meta.env.VITE_DEFAULT_THEME_URL, () => {
+    return new HttpResponse(null, {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, OPTIONS',
+      },
+    })
+  }),
   http.get(import.meta.env.VITE_DEFAULT_THEME_URL, () => {
-    return HttpResponse.json(themeSubscribeData)
+    return HttpResponse.json(themeSubscribeData, {
+      headers: { 'Access-Control-Allow-Origin': '*' },
+    })
   }),
 ]
 
 const server = setupServer(...httpHandlers)
 
-beforeAll(() => server.listen({}))
+beforeAll(() => server.listen({ onUnhandledRequest: 'error' }))
 afterAll(() => server.close())
 afterEach(() => server.resetHandlers())
+
+describe('Test config source', () => {
+  // URL来源加载测试（经由MSW拦截）
+  test('load source from URL [mocked]', async () => {
+    const data = await source.fromUrl(import.meta.env.VITE_DEFAULT_THEME_URL)
+    expect(data).toMatchObject(themeSubscribeData)
+  })
+})
 
 
 /*

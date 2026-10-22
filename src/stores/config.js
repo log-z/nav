@@ -8,19 +8,19 @@ export const useConfigStore = defineStore('config', () => {
   // 配置所在URL
   const url = ref(import.meta.env.VITE_DEFAULT_CONFIG_URL)
   // 配置所在BaseURL
-  const baseUrl = computed(() => url.value.match(/^.*\//))
+  const baseUrl = computed(() => url.value.slice(0, url.value.lastIndexOf('/') + 1))
 
   /**
    * 更新配置
    */
-  function update() {
+  async function update() {
     const newUrl = import.meta.env.VITE_DEFAULT_CONFIG_URL
-    loader.loadFromUrl(newUrl)
-      .then(newConfig => {
-        config.value = newConfig
-        url.value = newUrl
-      })
-      .catch(error => console.error(error))
+    try {
+      config.value = await loader.loadFromUrl(newUrl)
+      url.value = newUrl
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return { config, url, baseUrl, update }

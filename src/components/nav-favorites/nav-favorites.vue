@@ -8,11 +8,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'NavFavorites'
-}
-</script>
 <script setup>
 import { computed } from 'vue';
 import NavFavoriteGroup from './nav-favorite-group.vue';
@@ -20,10 +15,7 @@ import { useConfigStore } from '@/stores/config'
 
 const configStore = useConfigStore()
 
-const groups = computed(() => {
-  let favorites = configStore.config.favorites
-  return favorites === undefined ? [] : favorites.groups
-})
+const groups = computed(() => configStore.config.favorites?.groups ?? [])
 </script>
 
 <style>

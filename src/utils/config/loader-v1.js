@@ -62,6 +62,6 @@ async function convertToV2 (rootConfig) {
 }
 
 export async function load(obj) {
-  let rootConfig = await parser(ROOT_METADATA, obj ? obj : {});
+  const rootConfig = await parser(ROOT_METADATA, obj ?? {});
   return await convertToV2(rootConfig)
 }
