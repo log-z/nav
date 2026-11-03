@@ -14,24 +14,18 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'NavFavoriteGroup',
-  props: {
-    info: {
-      type: Object,
-      default: function() {
-        return {
-          name: 'Group',
-          websites: [],
-        }
-      }
-    }
-  },
-}
-</script>
 <script setup>
 import NavFavoriteItem from "./nav-favorite-item.vue";
+
+const props = defineProps({
+  info: {
+    type: Object,
+    default: () => ({
+      name: 'Group',
+      websites: [],
+    }),
+  },
+})
 </script>
 
 <style>
@@ -42,27 +36,27 @@ import NavFavoriteItem from "./nav-favorite-item.vue";
 }
 
 .nav-favorite-group__title {
-  --text-color: var(--primary-color);
-  margin: 1.4rem 0;
-  color: var(--text-color);
-  font-size: 1.8rem;
-  font-weight: normal;
-  font-family: 'smiley-sans';
-  letter-spacing: 0.2rem;
-  display: flex;
-  align-items: center;
+	--text-color: var(--primary-color);
+	margin: 1.4rem 0;
+	color: var(--text-color);
+	font-size: 1.8rem;
+	font-weight: normal;
+	font-family: 'smiley-sans';
+	letter-spacing: 0.2rem;
+	display: flex;
+	align-items: center;
 }
 
 /* 收藏组标题 */
 .nav-favorite-group__title:before {
-  width: 0.4rem;
-  height: 0.4rem;
-  content: "";
-  display: block;
-  margin-right: 0.5rem;
-  background: var(--text-color);
-  border-radius: 999px;
-  opacity: 0.3;
+	width: 0.4rem;
+	height: 0.4rem;
+	content: "";
+	display: block;
+	margin-right: 0.5rem;
+	background: var(--text-color);
+	border-radius: 999px;
+	opacity: 0.3;
 }
 
 /* 收藏列表 */

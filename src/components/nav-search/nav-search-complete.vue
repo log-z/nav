@@ -10,7 +10,7 @@
     >
       <ol>
         <li
-          v-for="(item, index) in $_.drop(list)"
+          v-for="(item, index) in items"
           :key="index + IDX_BEGIN"
           :class="{'active': isActive(index + IDX_BEGIN)}"
           @mousedown.left="selecte(index + IDX_BEGIN)"
@@ -22,14 +22,8 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'NavSearchComplete',
-}
-</script>
 <script setup>
 import { computed, reactive, ref, watch } from 'vue';
-import $_ from 'lodash'
 
 const IDX_BEGIN = 1
 
@@ -37,14 +31,17 @@ const listWarpper = ref();
 const props = defineProps({
   list: {
     type: Array,
-    default: function() {
-      return []
-    }
+    default: () => [],
   },
 })
 const emit = defineEmits([ 'selecte', 'change' ])
 
+// 首项为搜索词本身，不参与展示
+const items = computed(() => props.list.slice(IDX_BEGIN))
 const isHidden = () => props.list.length <= IDX_BEGIN
+// 注意：rootClass/rootStyle需保持reactive对象按引用传入模板，
+// Vue在DOM更新后的patch阶段才读取其中的computed，
+// 此时列表项已渲染，offsetHeight测量才是准确的
 const rootClass = reactive({
   hidden: computed(isHidden)
 })
@@ -56,14 +53,14 @@ const status = reactive({
   active: 0
 })
 
-watch(props, () => status.active = 0)
+watch(() => props.list, () => status.active = 0)
 
 const selecte = (index) => {
   status.active = index;
   emit('selecte', props.list[status.active]);
 }
 const isActive = (index) => {
-  return status.active == index;
+  return status.active === index;
 }
 const next = () => {
   status.active = (status.active += 1) % props.list.length;

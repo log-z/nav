@@ -13,12 +13,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'NavLogo'
-}
-</script>
-
 <style>
 .nav-logo__svg {
   width: 10rem;

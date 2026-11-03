@@ -65,7 +65,6 @@ function theme_subscribe_contents_matedata() {
 }
 
 
-import $_ from 'lodash'
 import source from './source';
 import { parser } from './common'
 import { useConfigStore } from '@/stores/config'
@@ -73,21 +72,20 @@ import { httpAbsPath } from '@/utils/common'
 
 // 加载订阅的主题
 async function loadActiveSubscribe(config) {
-  let [ subscribe_name, theme_name ] = config.active.split(NAMESPACE_DELIMITER, 2)
+  const [subscribe_name, theme_name] = config.active.split(NAMESPACE_DELIMITER, 2)
   let subscribe_path = config.subscribe[subscribe_name]
-  
+
   // 相对路径转为绝对路径
   const configStore = useConfigStore()
-  let base_url = configStore.baseUrl
-  subscribe_path = httpAbsPath(subscribe_path, base_url)
+  subscribe_path = httpAbsPath(subscribe_path, configStore.baseUrl)
 
   try {
     // 获取订阅
-    let data = await source.fromUrl(subscribe_path)
-    let subscribe = await loadSubscribe(data)
-    let subscribe_contents = subscribe.contents
-    let subscribe_content = $_.find(subscribe_contents, sc => sc.name === theme_name)
-    
+    const data = await source.fromUrl(subscribe_path)
+    const subscribe = await loadSubscribe(data)
+    const subscribe_content = subscribe.contents
+      .find(sc => sc.name === theme_name)
+
     // 检查订阅内容
     let subscribe_custom
     if (subscribe_content === undefined) {
@@ -96,9 +94,9 @@ async function loadActiveSubscribe(config) {
     } else {
       subscribe_custom = subscribe_content.custom
     }
-    
+
     // 优先使用自定义
-    return Object.assign(subscribe_custom, config.custom)
+    return { ...subscribe_custom, ...config.custom }
   } catch (error) {
     // 获取订阅失败，回落到自定义
     console.error(`Failed to download theme subscribe "${subscribe_name}" of ${subscribe_path}`, error)
@@ -111,7 +109,7 @@ export async function loadSubscribe(config) {
 }
 
 export async function load(obj) {
-  let config = await parser(root_matedata(), obj ? obj : {})
+  const config = await parser(root_matedata(), obj ?? {})
   config._final = await loadActiveSubscribe(config)
   return config
 }

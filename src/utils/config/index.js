@@ -3,11 +3,10 @@ import { load as loadV1 } from './loader-v1'
 import { load as loadV2 } from './loader-v2'
 
 async function load(obj) {
-  if (obj && obj['version'] == '2') {
+  if (obj && Number(obj['version']) === 2) {
     return await loadV2(obj)
-  } else {
-    return await loadV1(obj)
   }
+  return await loadV1(obj)
 }
 
 async function loadFromUrl(url) {

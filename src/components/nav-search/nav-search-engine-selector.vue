@@ -5,21 +5,7 @@
       class="nav-search-engine-selector__action"
       @click="next"
     >
-      <Baidu
-        v-if="status.eng == 'baidu'"
-      />
-      <Google
-        v-if="status.eng == 'google'"
-      />
-      <Bing
-        v-if="status.eng == 'bing'"
-      />
-      <Qiuwenbaike
-        v-if="status.eng == 'qiuwenbaike'"
-      />
-      <Wikipedia
-        v-if="status.eng == 'wikipedia'"
-      />
+      <component :is="ICONS[status.eng]" />
     </nav-icon>
     <!-- 气泡 -->
     <div
@@ -31,23 +17,11 @@
           v-for="eng in engineList"
           :key="eng"
           class="nav-search-engine-selector__popover_item"
-          :class="{active: eng == status.eng}"
+          :class="{active: eng === status.eng}"
           @click="select(eng)"
         >
-          <nav-icon v-if="eng == 'baidu'">
-            <CLBaidu />
-          </nav-icon>
-          <nav-icon v-if="eng == 'google'">
-            <CLGoogle />
-          </nav-icon>
-          <nav-icon v-if="eng == 'bing'">
-            <CLBing />
-          </nav-icon>
-          <nav-icon v-if="eng == 'qiuwenbaike'">
-            <CLQiuwenbaike />
-          </nav-icon>
-          <nav-icon v-if="eng == 'wikipedia'">
-            <CLWikipedia />
+          <nav-icon>
+            <component :is="CL_ICONS[eng]" />
           </nav-icon>
         </div>
       </div>
@@ -55,15 +29,31 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'NavSearchEngineSelector'
-}
-</script>
-
 <script setup>
 import { computed, reactive } from 'vue';
+import {
+  NavIcon,
+  Baidu, Google, Bing, Qiuwenbaike, Wikipedia,
+  CLBaidu, CLGoogle, CLBing, CLQiuwenbaike, CLWikipedia,
+} from '@/icons-vue'
 import { useConfigStore } from '@/stores/config'
+
+// 单色图标映射
+const ICONS = {
+  baidu: Baidu,
+  google: Google,
+  bing: Bing,
+  qiuwenbaike: Qiuwenbaike,
+  wikipedia: Wikipedia,
+}
+// 彩色图标映射
+const CL_ICONS = {
+  baidu: CLBaidu,
+  google: CLGoogle,
+  bing: CLBing,
+  qiuwenbaike: CLQiuwenbaike,
+  wikipedia: CLWikipedia,
+}
 
 const configStore = useConfigStore()
 
@@ -71,9 +61,7 @@ const emit = defineEmits([ 'change' ])
 const props = defineProps({
   engine: {
     type: String,
-    default: function() {
-      return 'baidu'
-    }
+    default: 'baidu',
   },
 })
 
@@ -82,21 +70,16 @@ const status = reactive({
   peekPopover: false,
 })
 
-const engineList = computed(() => {
-  let searchConfig = configStore.config.search
-  return searchConfig?.engine?.active === undefined ? [] : searchConfig.engine.active
-})
+const engineList = computed(() => configStore.config.search?.engine?.active ?? [])
 const next = () => {
-  let i = (engineList.value.indexOf(status.eng) + 1) % engineList.value.length;
-  if (i < 0) i = 0;
-  status.eng = engineList.value[i];
+  const i = (engineList.value.indexOf(status.eng) + 1) % engineList.value.length;
+  status.eng = engineList.value[i === -1 ? 0 : i];
   notify();
   peekPopover()
 }
 const prev = () => {
-  let i = (engineList.value.indexOf(status.eng) - 1) % engineList.value.length;
-  if (i < 0) i = engineList.value.length - 1;
-  status.eng = engineList.value[i];
+  const i = (engineList.value.indexOf(status.eng) - 1) % engineList.value.length;
+  status.eng = engineList.value[i < 0 ? engineList.value.length - 1 : i];
   notify();
   peekPopover()
 }
